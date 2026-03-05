@@ -3,7 +3,11 @@
 Este proyecto es una herramienta automatizada de Análisis Exploratorio de Datos (EDA) e Inteligencia Comercial, diseñada para procesar y extraer *insights* estratégicos del registro de importaciones de la ciudad de Bogotá, Colombia.
 
 A partir de datos crudos, el script limpia, procesa y genera un **Dashboard interactivo en HTML** junto con **12 visualizaciones clave** sobre productos, logística, geopolítica y niveles tecnológicos.
+## 🤖 Enfoque de Desarrollo: Productividad y Criterio Técnico
 
+Escribir scripts con IA es una gran ventaja competitiva, pero la IA no entiende el contexto del mundo real por sí sola. Para que un análisis no colapse al enfrentarse a un dataset sucio de aduanas, hace falta aplicar fundamentos de ciencia de datos.
+
+Este proyecto refleja mi forma de trabajar: **uso la inteligencia artificial para acelerar el desarrollo**, mientras aplico mi propio criterio técnico para guiar la herramienta. Al delegar la escritura mecánica del código, puedo centrarme en estructurar soluciones robustas y escalables, pensadas para generar valor real en entornos B2B. Es el balance perfecto entre velocidad automatizada y dirección humana.
 ## 🚀 Características Principales
 
 El pipeline de datos (`analisis_importaciones.py`) ejecuta de forma automática:
