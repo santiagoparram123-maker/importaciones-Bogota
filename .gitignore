@@ -1,0 +1,34 @@
+.aider*
+# ==========================================
+# .gitignore para Proyecto de Importaciones
+# ==========================================
+
+# 1. Datasets y archivos de datos (¡Evita que GitHub bloquee tu subida!)
+*.csv
+*.xlsx
+*.xlsb
+conjunto-importaciones-bogota-21102025.csv
+
+# 2. Historial y configuración de la IA local (Aider)
+.aider*
+.aider.input.history
+.aider.chat.history.md
+.aider.tags.cache.v3
+
+# 3. Entornos virtuales y secretos
+.env
+.venv
+venv/
+env/
+
+# 4. Archivos temporales y caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 5. Directorios del sistema operativo
+.DS_Store
+Thumbs.db
+# 6. Otros Asistentes de IA
+.claude
