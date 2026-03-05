@@ -1,0 +1,277 @@
+================================================================================
+  REPORTE COMPLETO DE IMPORTACIONES — BOGOTÁ
+  Generado: 05/03/2026 00:02
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  📋 RESUMEN EJECUTIVO (KPIs)
+────────────────────────────────────────────────────────────────────────────────
+  Registros totales............. 65,535
+  Productos únicos.............. 1,116
+  Países de origen.............. 176
+  Total FOB..................... USD 10,062,240,070
+  Total CIF..................... USD 10,689,870,845
+  Costo logístico total......... USD 627,630,776
+  Peso total.................... 7,115,580,960 Kg
+
+
+================================================================================
+  📦 BLOQUE A: ANÁLISIS DE PRODUCTOS
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 15 Bienes Más Importados (Cantidad)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                  Nombre partida     Cantidad
+Mecanismos para encuadernación de hojas intercambiables o para clasificadores, sujetadores, cantoneras, clips, índices de señal y artículos similares de oficina, de metal común; grapas en tiras (por ejemplo: de oficina, tapicería o envase), de metal común. 1.610211e+09
+                                                                                                                                                                                                                                                           Maíz. 1.167928e+09
+                                                                                                                                     Artículos para el transporte o envasado, de plástico; tapones, tapas, cápsulas y demás dispositivos de cierre, de plástico. 8.757002e+08
+                                                                                                                                                          Las demás manufacturas de plástico y manufacturas de las demás materias de las partidas 39.01 a 39.14. 5.593825e+08
+                                                                                                                                               Cigarros (puros) (incluso despuntados), cigarritos (puritos) y cigarrillos, de tabaco o de sucedáneos del tabaco. 4.912217e+08
+                                                                                                                                                                                                                                  Trigo y morcajo (tranquillón). 3.455059e+08
+                                                                                                                                                     Tortas y demás residuos s olidos de la extracción del aceite de soja(soya), incluso molidos o en «pellets». 3.125461e+08
+                                                                          Instrumentos y aparatos de medicina, cirugía, odontología o veterinaria, incluidos los de centellografía y demás aparatos electromédicos, así como los aparatos para pruebas visuales. 2.448352e+08
+                                                                                                                                                                                      Tela sin tejer, incluso impregnada, recubierta, revestida o estratificada. 2.165649e+08
+                                                                                                                                                                      Vajilla y demás  artículos de uso doméstico y artículos de higiene o tocador, de plástico. 1.951044e+08
+                                                                                                                                                                                                                               Las demás manufacturas de madera. 1.849392e+08
+                                                                                                                                                                                                                       Abonos minerales o químicos nitrogenados. 1.761911e+08
+                                                                                                           Prendas de vestir, guantes, mitones y manoplas y demás complementos (accesorios), de vestir, para cualquier uso, de caucho vulcanizado sin endurecer. 1.584573e+08
+                   Abonos minerales o químicos, con dos o tres de los elementos fertilizantes: nitrógeno, fósforo y potasio; los demás abonos; productos de este Capítulo en tabletas o formas similares o en envases de un peso bruto inferior o igual a 10 kg. 1.333244e+08
+                                                                                                                                                                                                                          Abonos minerales o químicos potásicos. 1.300952e+08
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 15 Bienes Menos Importados (Cantidad)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                                                 Nombre partida  Cantidad
+                                                                                                                                                                                                                                                            Aceites crudos de petróleo o de mineral bituminoso.      0.04
+                                                                                                                                                                                                    Aceite de cacahuate (cacahuete, maní)* y sus fracciones, incluso refinado, pero sin modificar químicamente.      0.05
+                                                                                                                                                                                                                                            Tantalio y sus manufacturas, incluidos los desperdicios y desechos.      0.06
+                                                                                               Perlas finas (naturales)* o cultivadas, incluso trabajadas o clasificadas, pero sin ensartar, montar ni engarzar; perlas finas (naturales)* o cultivadas, ensartadas temporalmente para facilitar el transporte.      0.15
+                                                                                                                                                                                                                 Derivados halogenados, sulfonados, nitrados o nitrosados de los productos de la partida 29.12.      0.25
+                                         Ámbar gris, castóreo, algalia y almizcle; cantáridas; bilis, incluso desecada; glándulas y demás sustancias de origen animal utilizadas para la preparación de productos farmacéuticos, frescas, refrigeradas, congeladas o conservadas provisionalmente de otra forma      0.30
+                                                                                                                                                                                                                                                               Las demás locomotoras y locotractores; ténderes.      1.00
+                                 Objetos de arte o colección y antigüedades clasificados por el capítulo 97 del Arancel de Aduanas, de valor cultural nacional o internacional que importen entidades públicas, o privadas sin fines de lucro dedicadas exclusivamente a la prestación de servicios culturales.      1.00
+                                                                                                                                                                                                                                Peletería facticia o artificial y artículos de peletería facticia o artificial.      1.00
+                                                                                                                                                                                                                                                                             Remolcadores y barcos empujadores.      1.00
+                                                                                                                                                                                                                                              Oro (incluido el oro platinado) en bruto, semilabrado o en polvo.      1.21
+                                                          Depósitos, cisternas, cubas y recipientes similares para cualquier materia (excepto gas comprimido o licuado), de aluminio, de  capacidad superior a 300 l, sin dispositivos mecánicos ni térmicos,  incluso con revestimiento interior o calorífugo.      2.00
+                                                                                                                                                                                             Gas de hulla, gas de agua, gas pobre y gases similares, excepto el gas de petróleo y demás hidrocarburos gaseosos.      2.00
+                                                                                                                                                                                                                      Locomotoras y locotractores, de fuente externa de electricidad o acumuladores eléctricos.      2.00
+Las demás armas de fuego y artefactos similares que utilicen la deflagración de pólvora (por ejemplo: armas de caza, armas de avancarga, pistolas lanzacohete y demás artefactos concebidos únicamente para lanzar cohetes de señal, pistolas y revólveres de fogueo, pistolas de matarife, cañones lanzacabo).      4.00
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 10 Productos Más Valiosos (USD FOB)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                                                                                     Nombre partida  Dolares FOB
+                                  Aceites de petróleo o de mineral bituminoso, excepto los aceites crudos; preparaciones no expresadas ni comprendidas en otra parte, con un contenido de aceites de petróleo o de mineral bituminoso superior o igual al 70 % en peso, en las que estos aceites constituyan el elemento base; desechos de aceites. 848284670.77
+                                                                                                                    Automóviles de turismo y demás vehículos automóviles concebidos principalmente para el transporte de personas (excepto los de la partida 87.02), incluidos los del tipo familiar («break» o «station wagon») y los de carreras. 451572983.52
+                                                                                                    Aparatos eléctricos de telefonía o telegrafía con hilos, incluidos los teléfonos de usuario de auricular inalámbrico combinado con micrófono y los aparatos de telecomunicación por corriente portadora o telecomunicación digital; videófonos. 407282427.31
+                                                      Medicamentos (excepto los productos de las partidas 30.02, 30.05 ó 30.06) constituidos por productos mezclados o sin mezclar, preparados para usos terapéuticos o profilácticos, dosificados (incluidos los administrados por vía trans-dérmica) o acondicionados para la venta al por menor. 364379762.60
+                                                           Máquinas automáticas para tratamiento o procesamiento de datos y sus unidades; lectores magnéticos u ópticos, máquinas para registro de datos sobre soporte en forma codificada y máquinas para tratamiento o procesamiento de estos datos, no expresados ni comprendidos en otra parte. 272724642.28
+                                                                                                                                                                                                                                                                                                                                              Maíz. 255247471.33
+Sangre humana; sangre animal preparada para usos terapéuticos, profilácticos o de diagnóstico; antisueros (sueros con anticuerpos), demás fracciones de la sangre y productos inmunológicos modificados, incluso obtenidos por proceso biotecnológico; vacunas, toxinas, cultivos de microorganismos (excepto las levaduras) y productos similares. 170630157.63
+                                                                                                                                                                                                                                                   Motocicletas (incluso con pedales) y ciclos con motor auxiliar, con sidecar o sin él; sidecares. 142212577.44
+                                                                                                                                                                                                                                                                                                    Gas de petróleo y demás hidrocarburos gaseosos. 139626698.25
+                                                                                                                                                                                                                                                                                                  Neumáticos (llantas neumáticas) nuevos de caucho. 112318998.05
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 10 Productos Menos Valiosos (FOB > 0)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                Nombre partida  Dolares FOB
+                                                                                                                                                                                               Peletería facticia o artificial y artículos de peletería facticia o artificial.         1.00
+                                                                                                                                                                   Aceite de cacahuate (cacahuete, maní)* y sus fracciones, incluso refinado, pero sin modificar químicamente.        28.27
+                                                                                                                                                                                Derivados halogenados, sulfonados, nitrados o nitrosados de los productos de la partida 29.12.        38.94
+                                                                                                                                                                                                                                                                      Monedas.       120.00
+        Ámbar gris, castóreo, algalia y almizcle; cantáridas; bilis, incluso desecada; glándulas y demás sustancias de origen animal utilizadas para la preparación de productos farmacéuticos, frescas, refrigeradas, congeladas o conservadas provisionalmente de otra forma       158.11
+                                                                                                                                                                                               Cajas y envolturas similares para los demás aparatos de relojería y sus partes.       199.09
+                                                                                                                                                                                    Placas, películas, papel, cartón y textiles, fotográficos, impresionados pero sin revelar.       201.83
+                                                                                                                                                                                                           Polvo de piedras preciosas o semipreciosas, naturales o sintéticas.       288.00
+                                                              Perlas finas (naturales)* o cultivadas, incluso trabajadas o clasificadas, pero sin ensartar, montar ni engarzar; perlas finas (naturales)* o cultivadas, ensartadas temporalmente para facilitar el transporte.       346.70
+Objetos de arte o colección y antigüedades clasificados por el capítulo 97 del Arancel de Aduanas, de valor cultural nacional o internacional que importen entidades públicas, o privadas sin fines de lucro dedicadas exclusivamente a la prestación de servicios culturales.       360.00
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 10 Más Pesados (Kg)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                                                   Nombre partida  Kilogramos netos
+                                                                                                                                                                                                                                                                                                            Maíz.      1.167928e+09
+Aceites de petróleo o de mineral bituminoso, excepto los aceites crudos; preparaciones no expresadas ni comprendidas en otra parte, con un contenido de aceites de petróleo o de mineral bituminoso superior o igual al 70 % en peso, en las que estos aceites constituyan el elemento base; desechos de aceites.      1.165836e+09
+                                                                                                                                                                                                                                                                                   Trigo y morcajo (tranquillón).      3.455059e+08
+                                                                                                                                                                                                      Tortas y demás residuos s olidos de la extracción del aceite de soja(soya), incluso molidos o en «pellets».      3.125461e+08
+                                                                                                                                                                                                                                                                  Gas de petróleo y demás hidrocarburos gaseosos.      2.065862e+08
+                                                                                                                                                                                                                                                                        Abonos minerales o químicos nitrogenados.      1.761911e+08
+                                                                    Abonos minerales o químicos, con dos o tres de los elementos fertilizantes: nitrógeno, fósforo y potasio; los demás abonos; productos de este Capítulo en tabletas o formas similares o en envases de un peso bruto inferior o igual a 10 kg.      1.333244e+08
+                                                                                                                                                                                                                                                                           Abonos minerales o químicos potásicos.      1.300952e+08
+                                                                                                                                                                                                                 Cementos hidráulicos (comprendidos los cementos sin pulverizar o «clinker»), incluso coloreados.      1.229493e+08
+                                                                                                     Placas y baldosas, de cerámica, sin barnizar ni esmaltar, para pavimentación o revestimiento; cubos, dados y artículos similares, de cerámica, para mosaicos, sin barnizar ni esmaltar, incluso con soporte.      1.106223e+08
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 10 Menos Pesados (Kg)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                        Nombre partida  Kilogramos netos
+                                                                                                                                                           Aceite de cacahuate (cacahuete, maní)* y sus fracciones, incluso refinado, pero sin modificar químicamente.              0.05
+                                                                                                                                                                                                   Tantalio y sus manufacturas, incluidos los desperdicios y desechos.              0.06
+                                                      Perlas finas (naturales)* o cultivadas, incluso trabajadas o clasificadas, pero sin ensartar, montar ni engarzar; perlas finas (naturales)* o cultivadas, ensartadas temporalmente para facilitar el transporte.              0.15
+                                                                                                                                                                        Derivados halogenados, sulfonados, nitrados o nitrosados de los productos de la partida 29.12.              0.25
+Ámbar gris, castóreo, algalia y almizcle; cantáridas; bilis, incluso desecada; glándulas y demás sustancias de origen animal utilizadas para la preparación de productos farmacéuticos, frescas, refrigeradas, congeladas o conservadas provisionalmente de otra forma              0.30
+                                                                                                        Cueros preparados después del curtido o del secado y cueros y  pieles apergaminados, de ovino, depilados, incluso divididos,  excepto los de la partida 41.14.              0.72
+                                                                                                                                                                                                     Oro (incluido el oro platinado) en bruto, semilabrado o en polvo.              1.21
+                                                                                                                                                                                       Peletería facticia o artificial y artículos de peletería facticia o artificial.              1.80
+                                                                                                                                                                                                                Pequeños mecanismos de relojería completos y montados.              1.80
+                                                                                                                                                    Gas de hulla, gas de agua, gas pobre y gases similares, excepto el gas de petróleo y demás hidrocarburos gaseosos.              2.00
+
+────────────────────────────────────────────────────────────────────────────────
+  Más Caros por Kg (Mediana USD/Kg)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                 Nombre partida  Precio_Unitario_Peso
+                                                                                                                                                                         Diamantes, incluso trabajados, sin montar ni engarzar.         117010.108696
+                                                                                                                                                                         Pequeños mecanismos de relojería completos y montados.          15161.277778
+                                 Elementos químicos radiactivos e isótopos radiactivos (incluidos los elementos químicos e isótopos fisionables o fértiles) y sus compuestos; mezclas y residuos que contengan estos productos.          12881.124567
+                                                                                                                                                            Tantalio y sus manufacturas, incluidos los desperdicios y desechos.          11536.666667
+                                                                                                                                                              Oro (incluido el oro platinado) en bruto, semilabrado o en polvo.           4182.066667
+                                                                                            Isótopos, excepto los de la partida 28.44; sus compuestos inorgánicos u orgánicos, aunque no sean de constitución química definida.           2978.400000
+                                                                                                                                                               Cajas de los relojes de las partidas 91.01 ó 91.02 y sus partes.           2941.750000
+Hormonas, prostaglandinas, tromboxanos y leucotrienos, naturales o reproducidos por síntesis; sus derivados y análogos estructurales, incluidos los polipéptidos de cadena modificada, utilizados principalmente como hormonas.           2830.751244
+                                                                                                                                  Artículos de joyería y sus partes, de metal precioso o de chapado de metal precioso (plaqué).           2676.333333
+                                                                                          Manufacturas de perlas finas (naturales) o cultivadas, de piedras preciosas o semipreciosas (naturales, sintéticas o reconstituidas).           2190.666667
+
+────────────────────────────────────────────────────────────────────────────────
+  Más Baratos por Kg (Mediana USD/Kg)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                   Nombre partida  Precio_Unitario_Peso
+                                                                                                                                                                        Escorias granuladas (arena de escorias) de la siderurgia.              0.010100
+                                                                                                                                            Ladrillos de construcción, bovedillas, cubrevigas y artículos similares, de cerámica.              0.058846
+                                                                                                                                                                                              Bananas o plátanos, frescos o secos              0.106422
+                                                                                                                                                   Azufre de cualquier clase, excepto el sublimado, el precipitado y el coloidal.              0.135764
+                                                                                                                        Desperdicios y desechos (chatarra), de fundición, hierro o acero; lingotes de chatarra de hierro o acero.              0.161870
+                                                                                                                                                                               Desperdicios y desechos de vidrio; vidrio en masa.              0.185382
+                                                                          Las demás escorias y cenizas, incluidas las cenizas de algas; cenizas y residuos procedentes de la incineración de desechos y desperdicios municipales.              0.194698
+                                                                                                                                              Hullas; briquetas, ovoides y combustibles sólidos similares, obtenidos de la hulla.              0.216870
+                                                                                                                                              Escorias (excepto las granuladas), batiduras y demás desperdicios de la siderurgia.              0.227000
+Residuos de la industria del almidón y residuos similares, pulpa de remolacha, bagazo de caña de azúcar y demás desperdicios de la industria azucarera, heces y desperdicios de cervecería o de destilería, incluso en «pellets».              0.232055
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 10 Mayor Costo Unitario (FOB/Cantidad)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                                                              Nombre partida  Precio_Unitario_Cant
+                                                                                                                                                            Las demás aeronaves (por ejemplo: helicópteros, aviones); vehículos espaciales (incluidos los satélites) y sus vehículos de anzamiento y vehículos suborbitales.          2.550000e+06
+Vehículos automóviles para usos especiales, excepto los concebidos principalmente para transporte de personas o mercancías (por ejemplo: coches para reparaciones (auxilio mecánico), camiones grúa, camiones de bomberos, camiones hormigonera, coches barredera, coches esparcidores, coches taller, coches radiológicos).          1.495800e+05
+                                                                                                                                                                                                                                      Chasis de vehículos automóviles de las partidas 87.01 a 87.05, equipados con su motor.          7.193621e+04
+                                                                                                                                                                                                                                                                                          Remolcadores y barcos empujadores.          6.400000e+04
+                                                                                                                                                                                                                                                                            Las demás locomotoras y locotractores; ténderes.          5.339000e+04
+                                                                                                                                                                                                                                        Vehículos automóviles para transporte de diez o más personas, incluido el conductor.          4.701477e+04
+                                                                                                                                                                                                                                                            Tractores (excepto las carretillas tractor de la partida 87.09).          4.036264e+04
+                                                                                       Topadoras frontales («bulldozers»), topadoras angulares («angledozers»), niveladoras, traíllas («scrapers»), palas mecánicas, excavadoras, cargadoras, palas cargadoras, compactadoras y apisonadoras (aplanadoras), autopropulsadas.          3.482000e+04
+                                                                                                                                                                                                                        Centros de mecanizado, máquinas de puesto fijo y máquinas de puestos múltiples, para trabajar metal.          2.875000e+04
+                                                                                  Las demás máquinas y aparatos para explanar, nivelar, traillar («scraping»), excavar, compactar, apisonar (aplanar), extraer o perforar tierra o minerales; martinetes y máquinas para arrancar pilotes, estacas o similares; quitanieves.          2.739125e+04
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 10 Menor Costo Unitario (FOB/Cantidad)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                  Nombre partida  Precio_Unitario_Cant
+                                                                                                                                                                                                       Escorias granuladas (arena de escorias) de la siderurgia.              0.010100
+                                                                                                                                               Cigarros (puros) (incluso despuntados), cigarritos (puritos) y cigarrillos, de tabaco o de sucedáneos del tabaco.              0.014189
+Mecanismos para encuadernación de hojas intercambiables o para clasificadores, sujetadores, cantoneras, clips, índices de señal y artículos similares de oficina, de metal común; grapas en tiras (por ejemplo: de oficina, tapicería o envase), de metal común.              0.028669
+                                                                                                                                              Máquinas y aparatos para preparar o elaborar tabaco, no expresados ni comprendidos en otra parte de este Capítulo.              0.030851
+                                                                                                                                                                      Placas, películas, papel, cartón y textiles, fotográficos, impresionados pero sin revelar.              0.033638
+                                                                                                                                                                   Pipas (incluidas las cazoletas), boquillas para cigarros (puros) o cigarrillos, y sus partes.              0.046433
+                          Tejidos de hilos de metal y tejidos de hilados metálicos o de hilados textiles metalizados de la partida 56.05, de los tipos utilizados en prendas de vestir, tapicería o usos similares, no expresados ni comprendidos en otra parte.              0.050875
+                                                                                                                                                              Artículos para fiestas, carnaval u otras diversiones, incluidos los de magia y artículos sorpresa.              0.054425
+                                                                            Mecanismos de relojería completos, sin montar o parcialmente montados («chablons»); mecanismos de relojería incompletos, montados; mecanismos de relojería «en blanco» («ebauches»).              0.066228
+                                                 Sellos (estampillas) de correo, timbres fiscales, marcas postales, sobres primer día, enteros postales, demás artículos franqueados y análogos, incluso obliterados, excepto los artículos de la partida 49.07.              0.084907
+
+================================================================================
+  🏷️ BLOQUE B: CATEGORÍAS ESTRATÉGICAS
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  Resumen por Nivel Tecnológico
+────────────────────────────────────────────────────────────────────────────────
+                         Nivel tecnologico    Total_FOB  Mediana_FOB  Registros  Pct_Total
+          Manufacturas de tecnología media 3.141588e+09    12244.000      19955       31.2
+Manufacturas basadas en recursos naturales 2.338735e+09    14953.995      11480       23.2
+           Manufacturas de alta tecnología 1.937697e+09     5325.575       9382       19.3
+           Manufacturas de baja tecnología 1.283452e+09     4370.770      18087       12.8
+                          Bienes primarios 1.141869e+09    45130.000       2635       11.3
+                           Sin información 1.962005e+08     6317.005       3124        1.9
+                       Otras transacciones 2.269848e+07      834.770        872        0.2
+
+────────────────────────────────────────────────────────────────────────────────
+  Total Importado por Uso Económico
+────────────────────────────────────────────────────────────────────────────────
+    Uso economico  Dolares FOB  Pct_Total
+  Materias primas 4.974990e+09       49.4
+Bienes de capital 2.598904e+09       25.8
+Bienes de consumo 2.487166e+09       24.7
+  Sin Información 1.180773e+06        0.0
+
+================================================================================
+  🚢 BLOQUE C: ANÁLISIS LOGÍSTICO
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                                  Nombre partida  Impacto_Logistico_Pct
+                                                                                                                                                                                                                                             Aceites crudos de petróleo o de mineral bituminoso.            4022.851562
+                                                                                                                                                                                                                                                                        Los demás animales vivos             500.150000
+                                                                                                                                                                  Harina, polvo y «pellets» de pescado, crustáceos, moluscos y demás invertebrados acuáticos, aptos para la alimentación humana.             485.488299
+                                                                                                                                                                                                                                       Escorias granuladas (arena de escorias) de la siderurgia.             210.040446
+Planos y dibujos originales hechos a mano, de arquitectura, ingeniería, industriales, comerciales, topográficos o similares; textos manuscritos; reproducciones fotográficas sobre papel sensibilizado y copias con papel carbón (carbónico), de los planos, dibujos o textos antes mencionados.             168.470696
+                                                                                                                                                                Zanahorias, nabos, remolachas para ensalada, salsifíes, apionabos,rábanos y raíces comestibles similares, frescos o refrigerados             167.801319
+                                                                                                                                                                                                      Placas, películas, papel, cartón y textiles, fotográficos, impresionados pero sin revelar.             123.301789
+                          Ámbar gris, castóreo, algalia y almizcle; cantáridas; bilis, incluso desecada; glándulas y demás sustancias de origen animal utilizadas para la preparación de productos farmacéuticos, frescas, refrigeradas, congeladas o conservadas provisionalmente de otra forma             111.732264
+                  Cueros preparados después del curtido o del secado y cueros y  pieles apergaminados, de los demás animales, depilados; cueros  preparados después del curtido y cueros y pieles apergaminados,  de animales sin pelo, incluso los divididos, excepto los de la  partida 41.14.             105.722901
+                                                                                                                                                                                                             Escorias (excepto las granuladas), batiduras y demás desperdicios de la siderurgia.              87.488987
+
+────────────────────────────────────────────────────────────────────────────────
+  ✈️ Top 10 Menor Impacto Logístico (% sobre FOB)
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                      Nombre partida  Impacto_Logistico_Pct
+                                                                                                                           Energía eléctrica (partida discrecional).               0.060816
+Transatlánticos, barcos para excursiones (de cruceros), transbordadores, cargueros, gabarras (barcazas) y barcos similares para transporte de personas o mercancías.               0.099997
+                                                                                                                                 Pasta de cacao, incluso desgrasada.               0.250962
+                                                  Gas de hulla, gas de agua, gas pobre y gases similares, excepto el gas de petróleo y demás hidrocarburos gaseosos.               0.430375
+                                                                                                                        Tejidos de lana cardada o pelo fino cardado.               0.442452
+                                                                      Derivados halogenados, sulfonados, nitrados o nitrosados de los productos de la partida 29.12.               0.564972
+                                                                                                                    Las demás locomotoras y locotractores; ténderes.               0.577037
+    Las demás aeronaves (por ejemplo: helicópteros, aviones); vehículos espaciales (incluidos los satélites) y sus vehículos de anzamiento y vehículos suborbitales.               0.577500
+                        Ferrocerio y demás aleaciones pirofóricas en cualquier forma; artículos de materias inflamables a que se refiere la Nota 2 de este Capítulo.               0.607912
+      Cueros preparados después del curtido o del secado y cueros y  pieles apergaminados, de ovino, depilados, incluso divididos,  excepto los de la partida 41.14.               0.646739
+
+================================================================================
+  🌍 BLOQUE D: ANÁLISIS GEOPOLÍTICO
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  🌍 Top 10 Países Proveedores (USD FOB)
+────────────────────────────────────────────────────────────────────────────────
+Pais de origen  Dolares FOB
+         China 2.732600e+09
+Estados Unidos 2.478900e+09
+        México 4.689584e+08
+        Brasil 4.403436e+08
+      Alemania 3.208189e+08
+         India 2.556221e+08
+         Japón 2.187256e+08
+ Corea del Sur 1.928050e+08
+        Italia 1.853635e+08
+        España 1.665864e+08
+
+────────────────────────────────────────────────────────────────────────────────
+  💸 Top 10 Países Flete Más Caro (% sobre FOB)
+────────────────────────────────────────────────────────────────────────────────
+              Pais de origen  Impacto_Logistico_Pct
+                     Hungría            1424.968887
+                       Rusia             658.890843
+                Países Bajos             499.322031
+                    Colombia             259.001131
+                    Lituania             233.645689
+                   Guatemala             171.393039
+                Burkina Faso             164.900667
+                       Kenia             132.455237
+San Vicente Y Las Granadinas             117.920193
+      Emiratos Árabes Unidos             116.773517
+
+================================================================================
+  FIN DEL REPORTE · 05/03/2026 00:02
+================================================================================

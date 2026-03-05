@@ -1,0 +1,86 @@
+{
+  "paises_fob": [
+    {
+      "Pais de origen": "China",
+      "Dolares FOB": 2732600019.7599998
+    },
+    {
+      "Pais de origen": "Estados Unidos",
+      "Dolares FOB": 2478900316.55
+    },
+    {
+      "Pais de origen": "México",
+      "Dolares FOB": 468958432.65999997
+    },
+    {
+      "Pais de origen": "Brasil",
+      "Dolares FOB": 440343561.03999996
+    },
+    {
+      "Pais de origen": "Alemania",
+      "Dolares FOB": 320818880.78000003
+    },
+    {
+      "Pais de origen": "India",
+      "Dolares FOB": 255622097.82
+    },
+    {
+      "Pais de origen": "Japón",
+      "Dolares FOB": 218725561.12
+    },
+    {
+      "Pais de origen": "Corea del Sur",
+      "Dolares FOB": 192804997.86
+    },
+    {
+      "Pais de origen": "Italia",
+      "Dolares FOB": 185363531.85
+    },
+    {
+      "Pais de origen": "España",
+      "Dolares FOB": 166586436.85999998
+    }
+  ],
+  "paises_flete_caro": [
+    {
+      "Pais de origen": "Hungría",
+      "Impacto_Logistico_Pct": 1424.9688867481
+    },
+    {
+      "Pais de origen": "Rusia",
+      "Impacto_Logistico_Pct": 658.8908434732
+    },
+    {
+      "Pais de origen": "Países Bajos",
+      "Impacto_Logistico_Pct": 499.3220314006
+    },
+    {
+      "Pais de origen": "Colombia",
+      "Impacto_Logistico_Pct": 259.0011310267
+    },
+    {
+      "Pais de origen": "Lituania",
+      "Impacto_Logistico_Pct": 233.6456893821
+    },
+    {
+      "Pais de origen": "Guatemala",
+      "Impacto_Logistico_Pct": 171.3930392142
+    },
+    {
+      "Pais de origen": "Burkina Faso",
+      "Impacto_Logistico_Pct": 164.9006666667
+    },
+    {
+      "Pais de origen": "Kenia",
+      "Impacto_Logistico_Pct": 132.4552374003
+    },
+    {
+      "Pais de origen": "San Vicente Y Las Granadinas",
+      "Impacto_Logistico_Pct": 117.9201933601
+    },
+    {
+      "Pais de origen": "Emiratos Árabes Unidos",
+      "Impacto_Logistico_Pct": 116.7735170483
+    }
+  ]
+}

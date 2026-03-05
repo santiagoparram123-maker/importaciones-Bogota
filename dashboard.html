@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Intelligence — Importaciones Bogotá</title>
+    <meta name="description"
+        content="Dashboard de inteligencia comercial para análisis de importaciones en Bogotá, Colombia. Visualización de productos, logística y geopolítica.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           DESIGN TOKENS
+           ═══════════════════════════════════════════ */
+        :root {
+            --bg: #0a0f1e;
+            --bg-gradient: linear-gradient(135deg, #0a0f1e 0%, #111827 100%);
+            --surface: #151c2f;
+            --surface-hover: #1c2540;
+            --surface-border: rgba(255, 255, 255, 0.06);
+            --accent: #38bdf8;
+            --accent2: #818cf8;
+            --accent3: #a78bfa;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --text: #e8ecf4;
+            --text-dim: #8b95a8;
+            --text-muted: #5a6478;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════
+           HERO HEADER
+           ═══════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            padding: 80px 40px 60px;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0f1e 0%, #1a1f3a 40%, #0d1a2d 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 30% 50%, rgba(56, 189, 248, 0.12), transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(129, 140, 248, 0.08), transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.06), transparent 40%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-2%, 2%) scale(1.05);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .hero .subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════
+           STICKY NAV
+           ═══════════════════════════════════════════ */
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 12px 40px;
+            background: rgba(21, 28, 47, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--surface-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+        }
+
+        /* ═══════════════════════════════════════════
+           KPI GRID
+           ═══════════════════════════════════════════ */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            padding: 32px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .kpi-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.15);
+        }
+
+        .kpi-card:hover::after {
+            opacity: 1;
+        }
+
+        .kpi-icon {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .kpi-label {
+            color: var(--text-dim);
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ═══════════════════════════════════════════
+           CONTAINER + CARDS
+           ═══════════════════════════════════════════ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 48px 0 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .section-header .badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge-blue {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+        }
+
+        .badge-purple {
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--accent2);
+        }
+
+        .badge-green {
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--success);
+        }
+
+        .badge-orange {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--warning);
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--surface-border);
+            color: var(--accent);
+        }
+
+        .card-description {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .chart-wrapper {
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .chart-wrapper img {
+            width: 100%;
+            max-width: 880px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            transition: var(--transition);
+        }
+
+        .chart-wrapper img:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+            transform: scale(1.01);
+        }
+
+        /* ═══════════════════════════════════════════
+           DATA TABLES
+           ═══════════════════════════════════════════ */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--surface-border);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .data-table th {
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--accent);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(56, 189, 248, 0.04);
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .data-table tr:nth-child(even):hover td {
+            background: rgba(56, 189, 248, 0.04);
+        }
+
+        /* ═══════════════════════════════════════════
+           LOADING STATE
+           ═══════════════════════════════════════════ */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 40px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--surface-border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-msg {
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            color: var(--danger);
+            font-size: 0.88rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════ */
+        .footer {
+            text-align: center;
+            padding: 48px 40px;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            border-top: 1px solid var(--surface-border);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer strong {
+            color: var(--text-dim);
+        }
+
+        /* ═══════════════════════════════════════════
+           SCROLLBAR + SMOOTH
+           ═══════════════════════════════════════════ */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a3350;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a4560;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 48px 20px 40px;
+            }
+
+            .nav {
+                padding: 10px 16px;
+            }
+
+            .kpi-grid {
+                padding: 20px 16px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 12px 16px 40px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .section-header {
+                margin: 32px 0 16px;
+            }
+        }
+
+        /* ═══════════════════════════════════════════
+           TOOLTIPS
+           ═══════════════════════════════════════════ */
+        .kpi-card[data-tooltip] {
+            cursor: help;
+            position: relative;
+        }
+
+        .kpi-card[data-tooltip]::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 1.5;
+            width: max-content;
+            max-width: 280px;
+            white-space: normal;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        .kpi-card[data-tooltip]::after {
+            content: '';
+            position: absolute;
+            bottom: calc(100% + 4px);
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #1e293b;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 200;
+        }
+
+        .kpi-card[data-tooltip]:hover::before,
+        .kpi-card[data-tooltip]:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">📡 Market Intelligence</div>
+            <h1>Importaciones Bogotá</h1>
+            <p class="subtitle">Dashboard de Inteligencia Comercial · Generado el <strong id="fecha-reporte">—</strong>
+            </p>
+        </div>
+    </header>
+
+    <!-- ═══════════════ NAV ═══════════════ -->
+    <nav class="nav" id="main-nav">
+        <a href="#kpis" class="nav-link">📊 KPIs</a>
+        <a href="#bloque-a" class="nav-link">📦 Productos</a>
+        <a href="#bloque-b" class="nav-link">🏷️ Categorías</a>
+        <a href="#bloque-c" class="nav-link">🚢 Logística</a>
+        <a href="#bloque-d" class="nav-link">🌍 Geopolítica</a>
+    </nav>
+
+    <!-- ═══════════════ KPIs ═══════════════ -->
+    <section id="kpis">
+        <div class="kpi-grid" id="kpi-grid">
+            <div class="loading">
+                <div class="spinner"></div> Cargando KPIs...
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <div class="container">
+
+        <!-- ── BLOQUE A: PRODUCTOS ── -->
+        <div id="bloque-a">
+            <div class="section-header">
+                <h2>📦 Bloque A: Análisis de Productos</h2>
+                <span class="badge badge-blue">10 gráficos</span>
+            </div>
+
+            <div class="card" id="top-importados-chart">
+                <h3>0a. Top 15 Bienes Más Importados (por Cantidad)</h3>
+                <p class="card-description">Los 15 bienes con mayor volumen total importado por cantidad de mercancía
+                    embarcada en la unidad comercial definida.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/00a_top15_mas_importados.png" alt="Top 15 más importados" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-top-importados"></div>
+            </div>
+
+            <div class="card" id="bottom-importados-chart">
+                <h3>0b. Top 15 Bienes Menos Importados (por Cantidad)</h3>
+                <p class="card-description">Los 15 bienes con menor volumen total importado por cantidad. Mercados de
+                    nicho o productos especializados con baja demanda.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/00b_top15_menos_importados.png" alt="Top 15 menos importados"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-bottom-importados"></div>
+            </div>
+
+            <div class="card" id="top-valiosos-chart">
+                <h3>1. Top 10 Productos Más Valiosos (FOB)</h3>
+                <p class="card-description">Productos con mayor volumen total importado en dólares FOB.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/01_top10_productos_valiosos.png" alt="Top 10 productos más valiosos"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-top-valiosos"></div>
+            </div>
+
+            <div class="card" id="bottom-valiosos-chart">
+                <h3>2. Top 10 Productos Menos Valiosos (FOB > 0)</h3>
+                <p class="card-description">Productos con menor participación en valor, posibles oportunidades de nicho.
+                </p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/02_bottom10_productos_valiosos.png" alt="Top 10 productos menos valiosos"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-bottom-valiosos"></div>
+            </div>
+
+            <div class="card" id="top-pesados-chart">
+                <h3>3a. Top 10 Productos Más Pesados (Kg Netos)</h3>
+                <p class="card-description">Productos con mayor peso total en kilogramos netos. Indicador de tipo de
+                    mercancía pesada como materias primas y commodities.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/03a_top10_mas_pesados.png" alt="Top 10 más pesados" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-top-pesados"></div>
+            </div>
+
+            <div class="card" id="bottom-pesados-chart">
+                <h3>3b. Top 10 Productos Menos Pesados (Kg Netos)</h3>
+                <p class="card-description">Productos con menor peso total. Suelen ser bienes de alto valor agregado
+                    como joyería, electrónica de precisión o productos farmacéuticos.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/03b_top10_menos_pesados.png" alt="Top 10 menos pesados" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-bottom-pesados"></div>
+            </div>
+
+            <div class="card" id="diamantes-chart">
+                <h3>4. Más Caros por Kg</h3>
+                <p class="card-description">Productos con mayor precio unitario por kilogramo (mediana). Alto valor
+                    agregado.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/04_top10_diamantes.png" alt="Más caros por kg" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-diamantes"></div>
+            </div>
+
+            <div class="card" id="arena-chart">
+                <h3>5. Más Baratos por Kg</h3>
+                <p class="card-description">Commodities y materias primas con bajo valor por peso. Ganancias por
+                    volumen.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/05_top10_arena.png" alt="Más baratos por kg" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-arena"></div>
+            </div>
+
+
+            <div class="card" id="costo-unitario-alto-chart">
+                <h3>7a. Mayor Costo Unitario por Cantidad (FOB / Cantidad)</h3>
+                <p class="card-description">Productos con mayor costo mediano por unidad de bien importada. Calculado
+                    como Dólares FOB ÷ Cantidad.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/07a_costo_unitario_alto.png" alt="Mayor costo unitario" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-costo-unitario-alto"></div>
+            </div>
+
+            <div class="card" id="costo-unitario-bajo-chart">
+                <h3>7b. Menor Costo Unitario por Cantidad (FOB / Cantidad)</h3>
+                <p class="card-description">Productos con menor costo mediano por unidad. Estos bienes se importan en
+                    grandes volúmenes con bajo precio individual.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/07b_costo_unitario_bajo.png" alt="Menor costo unitario" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-costo-unitario-bajo"></div>
+            </div>
+        </div>
+
+        <!-- ── BLOQUE B: CATEGORÍAS ── -->
+        <div id="bloque-b">
+            <div class="section-header">
+                <h2>🏷️ Bloque B: Categorías Estratégicas</h2>
+                <span class="badge badge-purple">3 gráficos</span>
+            </div>
+
+            <div class="card" id="nivel-tecnologico-chart">
+                <h3>8. Distribución FOB por Nivel Tecnológico</h3>
+                <p class="card-description">Boxplot de la distribución de valores FOB segmentada por nivel tecnológico
+                    incorporado en el proceso de producción.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/08_boxplot_nivel_tecnologico.png" alt="Boxplot nivel tecnológico"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-nivel-tecnologico"></div>
+            </div>
+
+            <div class="card" id="nivel-tecnologico-pct-chart">
+                <h3>8b. Total FOB por Nivel Tecnológico (con %)</h3>
+                <p class="card-description">Barplot horizontal con porcentajes del total. Muestra cómo se distribuye la
+                    inversión según el nivel tecnológico.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/08b_nivel_tecnologico_pct.png" alt="Nivel tecnológico con porcentajes"
+                        loading="lazy">
+                </div>
+            </div>
+
+            <div class="card" id="uso-economico-chart">
+                <h3>9. Total FOB por Uso Económico</h3>
+                <p class="card-description">Clasificación según el fin económico al cual serán destinadas las
+                    importaciones: materias primas, bienes de capital o bienes de consumo. Incluye porcentaje del total.
+                </p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/09_uso_economico.png" alt="Uso económico" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-uso-economico"></div>
+            </div>
+        </div>
+
+        <!-- ── BLOQUE C: LOGÍSTICA ── -->
+        <div id="bloque-c">
+            <div class="section-header">
+                <h2>🚢 Bloque C: Análisis Logístico</h2>
+                <span class="badge badge-green">2 gráficos</span>
+            </div>
+
+            <div class="card" id="mayor-impacto-chart">
+                <h3>10. 🚢 Donde el Flete Duele Más</h3>
+                <p class="card-description">Productos con mayor porcentaje de costo logístico sobre el valor FOB.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/10_top10_mayor_impacto_logistico.png" alt="Mayor impacto logístico"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-mayor-impacto"></div>
+            </div>
+
+            <div class="card" id="menor-impacto-chart">
+                <h3>11. ✈️ Donde el Flete es Mínimo</h3>
+                <p class="card-description">Productos con menor sobrecosto logístico. Candidatos a maximizar margen.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/11_top10_menor_impacto_logistico.png" alt="Menor impacto logístico"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-menor-impacto"></div>
+            </div>
+        </div>
+
+        <!-- ── BLOQUE D: GEOPOLÍTICA ── -->
+        <div id="bloque-d">
+            <div class="section-header">
+                <h2>🌍 Bloque D: Análisis Geopolítico</h2>
+                <span class="badge badge-orange">2 gráficos</span>
+            </div>
+
+            <div class="card" id="paises-fob-chart">
+                <h3>12. 🌍 Top 10 Países Proveedores</h3>
+                <p class="card-description">Países con mayor volumen total de importaciones en USD FOB hacia Bogotá.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/12_top10_paises_fob.png" alt="Top 10 países proveedores" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-paises-fob"></div>
+            </div>
+
+            <div class="card" id="paises-flete-chart">
+                <h3>13. 💸 Países con Fletes Más Caros</h3>
+                <p class="card-description">Países de origen cuyo costo logístico promedio representa mayor porcentaje
+                    del valor FOB.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/13_paises_flete_caro.png" alt="Países flete caro" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-paises-flete"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <p>Generado automáticamente por <strong>analisis_importaciones.py</strong> · Dashboard de Inteligencia Comercial
+        </p>
+        <p style="margin-top:8px;">Datos fuente: <a
+                href="https://www.datos.gov.co/dataset/Importaciones-Bogot-/vdw8-sjw6/about_data" target="_blank">Portal
+                de Datos Abiertos — Importaciones Bogotá 🇨🇴</a></p>
+    </footer>
+
+    <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // ── Utilidades ──
+            function formatNumber(value) {
+                if (typeof value === 'number') {
+                    return value >= 1 ? value.toLocaleString('es-CO', { maximumFractionDigits: 2 })
+                        : value.toFixed(4);
+                }
+                return value;
+            }
+
+            function renderTable(containerId, data, columns) {
+                const container = document.getElementById(containerId);
+                if (!container || !data || data.length === 0) return;
+
+                const cols = columns || Object.keys(data[0]);
+                let html = '<table class="data-table"><thead><tr>';
+                cols.forEach(col => {
+                    const label = col.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    html += `<th>${label}</th>`;
+                });
+                html += '</tr></thead><tbody>';
+
+                data.forEach(row => {
+                    html += '<tr>';
+                    cols.forEach(col => {
+                        html += `<td>${formatNumber(row[col])}</td>`;
+                    });
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            }
+
+            function showError(containerId, msg) {
+                const el = document.getElementById(containerId);
+                if (el) el.innerHTML = `<div class="error-msg">⚠️ ${msg}</div>`;
+            }
+
+            // ── Cargar JSON ──
+            async function loadJSON(path) {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error(`HTTP ${res.status}: ${path}`);
+                return res.json();
+            }
+
+            // ── KPIs ──
+            async function loadKPIs() {
+                try {
+                    const kpis = await loadJSON('static/data/kpis.json');
+
+                    document.getElementById('fecha-reporte').textContent = kpis.generado || '—';
+
+                    const kpiConfig = [
+                        { key: 'registros', icon: '📋', label: 'Registros', tooltip: 'Número total de registros de importación en el dataset.' },
+                        { key: 'productos_unicos', icon: '📦', label: 'Productos Únicos', tooltip: 'Cantidad de partidas arancelarias únicas según el Código del Sistema Armonizado.' },
+                        { key: 'paises_origen', icon: '🌍', label: 'Países de Origen', tooltip: 'País de origen: Nombre del país de origen de las importaciones.' },
+                        { key: 'total_fob', icon: '💵', label: 'Total FOB', tooltip: 'Dólares FOB: Precio de venta en dólares sin incluir valor de seguro y fletes.' },
+                        { key: 'total_cif', icon: '💰', label: 'Total CIF', tooltip: 'Dólares CIF: Precio de venta en dólares incluyendo valor de seguro y fletes.' },
+                        { key: 'costo_logistico', icon: '🚢', label: 'Costo Logístico', tooltip: 'Diferencia entre CIF y FOB. Representa el costo de seguro y fletes marítimos/aéreos.' },
+                        { key: 'peso_total', icon: '⚖️', label: 'Peso Total', tooltip: 'Kilogramos netos: Peso en kilogramos excluyendo empaques.' },
+                    ];
+
+                    let html = '';
+                    kpiConfig.forEach(kpi => {
+                        const value = kpis[kpi.key] || '—';
+                        html += `
+                        <div class="kpi-card" data-tooltip="${kpi.tooltip}">
+                            <div class="kpi-icon">${kpi.icon}</div>
+                            <div class="kpi-value">${value}</div>
+                            <div class="kpi-label">${kpi.label}</div>
+                        </div>`;
+                    });
+
+                    document.getElementById('kpi-grid').innerHTML = html;
+                } catch (e) {
+                    document.getElementById('kpi-grid').innerHTML =
+                        '<div class="error-msg" style="grid-column:1/-1;">⚠️ No se pudieron cargar los KPIs. Asegúrate de ejecutar <code>python analisis_importaciones.py</code> primero y servir con un servidor HTTP.</div>';
+                }
+            }
+
+            // ── Bloque A ──
+            async function loadBloqueA() {
+                try {
+                    const data = await loadJSON('static/data/bloque_a_productos.json');
+                    if (data.top_importados) renderTable('tabla-top-importados', data.top_importados);
+                    if (data.bottom_importados) renderTable('tabla-bottom-importados', data.bottom_importados);
+                    if (data.top_valiosos) renderTable('tabla-top-valiosos', data.top_valiosos);
+                    if (data.bottom_valiosos) renderTable('tabla-bottom-valiosos', data.bottom_valiosos);
+                    if (data.top_pesados) renderTable('tabla-top-pesados', data.top_pesados);
+                    if (data.bottom_pesados) renderTable('tabla-bottom-pesados', data.bottom_pesados);
+                    if (data.diamantes) renderTable('tabla-diamantes', data.diamantes);
+                    if (data.arena) renderTable('tabla-arena', data.arena);
+                    if (data.costo_unitario_alto) renderTable('tabla-costo-unitario-alto', data.costo_unitario_alto);
+                    if (data.costo_unitario_bajo) renderTable('tabla-costo-unitario-bajo', data.costo_unitario_bajo);
+                } catch (e) {
+                    console.warn('Bloque A data not available:', e.message);
+                }
+            }
+
+            // ── Bloque B ──
+            async function loadBloqueB() {
+                try {
+                    const data = await loadJSON('static/data/bloque_b_categorias.json');
+                    if (data.nivel_tecnologico) renderTable('tabla-nivel-tecnologico', data.nivel_tecnologico);
+                    if (data.uso_economico) renderTable('tabla-uso-economico', data.uso_economico);
+                } catch (e) {
+                    console.warn('Bloque B data not available:', e.message);
+                }
+            }
+
+            // ── Bloque C ──
+            async function loadBloqueC() {
+                try {
+                    const data = await loadJSON('static/data/bloque_c_logistica.json');
+                    if (data.mayor_impacto) renderTable('tabla-mayor-impacto', data.mayor_impacto);
+                    if (data.menor_impacto) renderTable('tabla-menor-impacto', data.menor_impacto);
+                } catch (e) {
+                    console.warn('Bloque C data not available:', e.message);
+                }
+            }
+
+            // ── Bloque D ──
+            async function loadBloqueD() {
+                try {
+                    const data = await loadJSON('static/data/bloque_d_paises.json');
+                    if (data.paises_fob) renderTable('tabla-paises-fob', data.paises_fob);
+                    if (data.paises_flete_caro) renderTable('tabla-paises-flete', data.paises_flete_caro);
+                } catch (e) {
+                    console.warn('Bloque D data not available:', e.message);
+                }
+            }
+
+            // ── Active nav on scroll ──
+            function setupScrollSpy() {
+                const sections = ['kpis', 'bloque-a', 'bloque-b', 'bloque-c', 'bloque-d'];
+                const links = document.querySelectorAll('.nav-link');
+
+                window.addEventListener('scroll', () => {
+                    let current = '';
+                    sections.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el && el.getBoundingClientRect().top <= 120) {
+                            current = id;
+                        }
+                    });
+                    links.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+                    });
+                });
+            }
+
+            // ── Init ──
+            document.addEventListener('DOMContentLoaded', () => {
+                loadKPIs();
+                loadBloqueA();
+                loadBloqueB();
+                loadBloqueC();
+                loadBloqueD();
+                setupScrollSpy();
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+{
+  "nivel_tecnologico": [
+    {
+      "Nivel tecnologico": "Manufacturas de tecnología media",
+      "Total_FOB": 3141588348.17,
+      "Mediana_FOB": 12244.0,
+      "Registros": 19955,
+      "Pct_Total": 31.2
+    },
+    {
+      "Nivel tecnologico": "Manufacturas basadas en recursos naturales",
+      "Total_FOB": 2338734809.4900002,
+      "Mediana_FOB": 14953.995,
+      "Registros": 11480,
+      "Pct_Total": 23.2
+    },
+    {
+      "Nivel tecnologico": "Manufacturas de alta tecnología",
+      "Total_FOB": 1937696949.24,
+      "Mediana_FOB": 5325.575,
+      "Registros": 9382,
+      "Pct_Total": 19.3
+    },
+    {
+      "Nivel tecnologico": "Manufacturas de baja tecnología",
+      "Total_FOB": 1283452433.07,
+      "Mediana_FOB": 4370.77,
+      "Registros": 18087,
+      "Pct_Total": 12.8
+    },
+    {
+      "Nivel tecnologico": "Bienes primarios",
+      "Total_FOB": 1141868557.6699998,
+      "Mediana_FOB": 45130.0,
+      "Registros": 2635,
+      "Pct_Total": 11.3
+    },
+    {
+      "Nivel tecnologico": "Sin información",
+      "Total_FOB": 196200495.79999998,
+      "Mediana_FOB": 6317.005,
+      "Registros": 3124,
+      "Pct_Total": 1.9
+    },
+    {
+      "Nivel tecnologico": "Otras transacciones",
+      "Total_FOB": 22698476.13,
+      "Mediana_FOB": 834.77,
+      "Registros": 872,
+      "Pct_Total": 0.2
+    }
+  ],
+  "uso_economico": [
+    {
+      "Uso economico": "Materias primas",
+      "Dolares FOB": 4974989993.82,
+      "Pct_Total": 49.4
+    },
+    {
+      "Uso economico": "Bienes de capital",
+      "Dolares FOB": 2598903753.33,
+      "Pct_Total": 25.8
+    },
+    {
+      "Uso economico": "Bienes de consumo",
+      "Dolares FOB": 2487165549.15,
+      "Pct_Total": 24.7
+    },
+    {
+      "Uso economico": "Sin Información",
+      "Dolares FOB": 1180773.27,
+      "Pct_Total": 0.0
+    }
+  ]
+}

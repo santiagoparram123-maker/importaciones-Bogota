@@ -1,0 +1,86 @@
+{
+  "mayor_impacto": [
+    {
+      "Nombre partida": "Aceites crudos de petróleo o de mineral bituminoso.",
+      "Impacto_Logistico_Pct": 4022.8515625
+    },
+    {
+      "Nombre partida": "Los demás animales vivos",
+      "Impacto_Logistico_Pct": 500.15
+    },
+    {
+      "Nombre partida": "Harina, polvo y «pellets» de pescado, crustáceos, moluscos y demás invertebrados acuáticos, aptos para la alimentación humana.",
+      "Impacto_Logistico_Pct": 485.4882994787
+    },
+    {
+      "Nombre partida": "Escorias granuladas (arena de escorias) de la siderurgia.",
+      "Impacto_Logistico_Pct": 210.0404455446
+    },
+    {
+      "Nombre partida": "Planos y dibujos originales hechos a mano, de arquitectura, ingeniería, industriales, comerciales, topográficos o similares; textos manuscritos; reproducciones fotográficas sobre papel sensibilizado y copias con papel carbón (carbónico), de los planos, dibujos o textos antes mencionados.",
+      "Impacto_Logistico_Pct": 168.4706959707
+    },
+    {
+      "Nombre partida": "Zanahorias, nabos, remolachas para ensalada, salsifíes, apionabos,rábanos y raíces comestibles similares, frescos o refrigerados",
+      "Impacto_Logistico_Pct": 167.8013187597
+    },
+    {
+      "Nombre partida": "Placas, películas, papel, cartón y textiles, fotográficos, impresionados pero sin revelar.",
+      "Impacto_Logistico_Pct": 123.301788634
+    },
+    {
+      "Nombre partida": "Ámbar gris, castóreo, algalia y almizcle; cantáridas; bilis, incluso desecada; glándulas y demás sustancias de origen animal utilizadas para la preparación de productos farmacéuticos, frescas, refrigeradas, congeladas o conservadas provisionalmente de otra forma",
+      "Impacto_Logistico_Pct": 111.7322636078
+    },
+    {
+      "Nombre partida": "Cueros preparados después del curtido o del secado y cueros y  pieles apergaminados, de los demás animales, depilados; cueros  preparados después del curtido y cueros y pieles apergaminados,  de animales sin pelo, incluso los divididos, excepto los de la  partida 41.14.",
+      "Impacto_Logistico_Pct": 105.7229010927
+    },
+    {
+      "Nombre partida": "Escorias (excepto las granuladas), batiduras y demás desperdicios de la siderurgia.",
+      "Impacto_Logistico_Pct": 87.4889867841
+    }
+  ],
+  "menor_impacto": [
+    {
+      "Nombre partida": "Energía eléctrica (partida discrecional).",
+      "Impacto_Logistico_Pct": 0.0608164257
+    },
+    {
+      "Nombre partida": "Transatlánticos, barcos para excursiones (de cruceros), transbordadores, cargueros, gabarras (barcazas) y barcos similares para transporte de personas o mercancías.",
+      "Impacto_Logistico_Pct": 0.0999974982
+    },
+    {
+      "Nombre partida": "Pasta de cacao, incluso desgrasada.",
+      "Impacto_Logistico_Pct": 0.250962074
+    },
+    {
+      "Nombre partida": "Gas de hulla, gas de agua, gas pobre y gases similares, excepto el gas de petróleo y demás hidrocarburos gaseosos.",
+      "Impacto_Logistico_Pct": 0.4303745086
+    },
+    {
+      "Nombre partida": "Tejidos de lana cardada o pelo fino cardado.",
+      "Impacto_Logistico_Pct": 0.4424524993
+    },
+    {
+      "Nombre partida": "Derivados halogenados, sulfonados, nitrados o nitrosados de los productos de la partida 29.12.",
+      "Impacto_Logistico_Pct": 0.5649717514
+    },
+    {
+      "Nombre partida": "Las demás locomotoras y locotractores; ténderes.",
+      "Impacto_Logistico_Pct": 0.5770368983
+    },
+    {
+      "Nombre partida": "Las demás aeronaves (por ejemplo: helicópteros, aviones); vehículos espaciales (incluidos los satélites) y sus vehículos de anzamiento y vehículos suborbitales.",
+      "Impacto_Logistico_Pct": 0.5775
+    },
+    {
+      "Nombre partida": "Ferrocerio y demás aleaciones pirofóricas en cualquier forma; artículos de materias inflamables a que se refiere la Nota 2 de este Capítulo.",
+      "Impacto_Logistico_Pct": 0.6079122543
+    },
+    {
+      "Nombre partida": "Cueros preparados después del curtido o del secado y cueros y  pieles apergaminados, de ovino, depilados, incluso divididos,  excepto los de la partida 41.14.",
+      "Impacto_Logistico_Pct": 0.646738565
+    }
+  ]
+}

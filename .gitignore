@@ -1,34 +1,51 @@
-.aider*
 # ==========================================
-# .gitignore para Proyecto de Importaciones
+# .gitignore — Proyecto SaaS: Importaciones Bogotá
 # ==========================================
 
-# 1. Datasets y archivos de datos (¡Evita que GitHub bloquee tu subida!)
+# ── 1. Datasets y archivos de datos pesados ──
 *.csv
 *.xlsx
 *.xlsb
-conjunto-importaciones-bogota-21102025.csv
+*.xls
 
-# 2. Historial y configuración de la IA local (Aider)
-.aider*
-.aider.input.history
-.aider.chat.history.md
-.aider.tags.cache.v3
+# ── 2. Outputs generados (legacy) ──
+graficos_output/
+reporte_importaciones.html
 
-# 3. Entornos virtuales y secretos
+# ── 3. Entornos virtuales y secretos ──
 .env
-.venv
+.env.*
+.venv/
 venv/
 env/
 
-# 4. Archivos temporales y caché de Python
+# ── 4. Caché y bytecode de Python ──
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# 5. Directorios del sistema operativo
+# ── 5. Asistentes de IA y herramientas ──
+.aider*
+.claude/
+.gemini/
+.cursor/
+.copilot/
+
+# ── 6. Experimentos y pruebas pasadas ──
+*baloto*
+*prueba*
+*test_scratch*
+experiments/
+
+# ── 7. Sistema operativo ──
 .DS_Store
 Thumbs.db
-# 6. Otros Asistentes de IA
-.claude
+desktop.ini
+
+# ── 8. IDEs y editores ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

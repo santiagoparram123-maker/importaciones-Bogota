@@ -1,28 +1,28 @@
 # =============================================================================
-# analisis_importaciones.py — Análisis de Importaciones Bogotá
+# analisis_importaciones.py — Motor de Datos: Importaciones Bogotá
 # Autor: Santiago (asistido por IA)
-# Genera 12 gráficos profesionales + Reporte HTML interactivo
+# Genera 12 gráficos PNG + datos JSON para el Dashboard
 # =============================================================================
 
 import pandas as pd
 import matplotlib
-matplotlib.use('Agg')  # Backend sin GUI para evitar problemas
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
-import base64
+import json
 import warnings
-from io import BytesIO
 from datetime import datetime
 
 warnings.filterwarnings('ignore')
 
 # ─────────────────────────────────────────────
-# CONFIG
+# CONFIG — rutas relativas al directorio del script
 # ─────────────────────────────────────────────
-ARCHIVO = r'C:\Users\santi\Documents\Santiago\CD\proyectos\Exportaciones e importaciones Colombia\conjunto-importaciones-bogota-21102025.csv'
-OUTPUT_DIR = r'C:\Users\santi\Documents\Santiago\CD\proyectos\Exportaciones e importaciones Colombia\graficos_output'
-HTML_OUTPUT = r'C:\Users\santi\Documents\Santiago\CD\proyectos\Exportaciones e importaciones Colombia\reporte_importaciones.html'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ARCHIVO = os.path.join(BASE_DIR, 'conjunto-importaciones-bogota-21102025.csv')
+CHARTS_DIR = os.path.join(BASE_DIR, 'static', 'charts')
+DATA_DIR = os.path.join(BASE_DIR, 'static', 'data')
 
 PALETTE = 'viridis'
 TOP_N = 10
@@ -43,264 +43,53 @@ sns.set_theme(
     }
 )
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
 
 # =============================================================================
-# COLECTOR HTML — almacena secciones para el reporte final
+# UTILIDADES
 # =============================================================================
-class ReporteHTML:
-    """Acumula secciones HTML y las renderiza al final."""
-
-    def __init__(self):
-        self.secciones = []
-        self.resumen = {}
-
-    def agregar_seccion(self, titulo, contenido_html, icono='📊'):
-        self.secciones.append({'titulo': titulo, 'html': contenido_html, 'icono': icono})
-
-    def fig_a_base64(self, fig) -> str:
-        buf = BytesIO()
-        fig.savefig(buf, format='png', bbox_inches='tight', facecolor='white', dpi=150)
-        buf.seek(0)
-        b64 = base64.b64encode(buf.read()).decode('utf-8')
-        buf.close()
-        return b64
-
-    def img_tag(self, fig) -> str:
-        b64 = self.fig_a_base64(fig)
-        return f'<img src="data:image/png;base64,{b64}" style="width:100%;max-width:900px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.12);margin:16px 0;">'
-
-    def tabla_html(self, df, max_rows=15) -> str:
-        return df.head(max_rows).to_html(
-            index=False, border=0,
-            classes='data-table',
-            float_format=lambda x: f'{x:,.2f}' if abs(x) > 1 else f'{x:.4f}'
-        )
-
-    def generar(self, ruta_salida: str):
-        ahora = datetime.now().strftime('%d/%m/%Y %H:%M')
-        nav_items = ''.join(
-            f'<a href="#seccion-{i}" class="nav-link">{s["icono"]} {s["titulo"]}</a>'
-            for i, s in enumerate(self.secciones)
-        )
-        secciones_html = ''
-        for i, s in enumerate(self.secciones):
-            secciones_html += f'''
-            <section id="seccion-{i}" class="card">
-                <h2>{s["icono"]} {s["titulo"]}</h2>
-                {s["html"]}
-            </section>'''
-
-        resumen_kpi = ''
-        if self.resumen:
-            cards = ''
-            for label, valor in self.resumen.items():
-                cards += f'''
-                <div class="kpi-card">
-                    <div class="kpi-value">{valor}</div>
-                    <div class="kpi-label">{label}</div>
-                </div>'''
-            resumen_kpi = f'<div class="kpi-grid">{cards}</div>'
-
-        html = f'''<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reporte de Importaciones — Bogotá</title>
-<style>
-    :root {{
-        --bg: #0f172a;
-        --surface: #1e293b;
-        --surface2: #334155;
-        --accent: #38bdf8;
-        --accent2: #818cf8;
-        --text: #e2e8f0;
-        --text-dim: #94a3b8;
-        --success: #34d399;
-        --warning: #fbbf24;
-        --danger: #f87171;
-        --radius: 16px;
-    }}
-    * {{ box-sizing:border-box; margin:0; padding:0; }}
-    body {{
-        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.7;
-    }}
-    /* ── HEADER ── */
-    .hero {{
-        background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
-        padding: 60px 40px 40px;
-        text-align: center;
-        border-bottom: 1px solid var(--surface2);
-        position: relative;
-        overflow: hidden;
-    }}
-    .hero::before {{
-        content: '';
-        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at 30% 40%, rgba(56,189,248,.15), transparent 60%),
-                    radial-gradient(circle at 70% 60%, rgba(129,140,248,.1), transparent 50%);
-    }}
-    .hero h1 {{
-        font-size: 2.4rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        position: relative;
-    }}
-    .hero .subtitle {{
-        color: var(--text-dim);
-        font-size: 1rem;
-        margin-top: 8px;
-        position: relative;
-    }}
-    /* ── NAV ── */
-    .nav {{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        padding: 16px 40px;
-        background: var(--surface);
-        border-bottom: 1px solid var(--surface2);
-        position: sticky; top: 0; z-index: 100;
-        backdrop-filter: blur(12px);
-    }}
-    .nav-link {{
-        color: var(--text-dim);
-        text-decoration: none;
-        padding: 6px 14px;
-        border-radius: 8px;
-        font-size: .85rem;
-        transition: all .2s;
-    }}
-    .nav-link:hover {{
-        background: var(--surface2);
-        color: var(--accent);
-    }}
-    /* ── KPI ── */
-    .kpi-grid {{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 16px;
-        padding: 30px 40px;
-    }}
-    .kpi-card {{
-        background: var(--surface);
-        border: 1px solid var(--surface2);
-        border-radius: var(--radius);
-        padding: 24px;
-        text-align: center;
-        transition: transform .2s, box-shadow .2s;
-    }}
-    .kpi-card:hover {{
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(56,189,248,.1);
-    }}
-    .kpi-value {{
-        font-size: 1.6rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }}
-    .kpi-label {{
-        color: var(--text-dim);
-        font-size: .85rem;
-        margin-top: 6px;
-    }}
-    /* ── CARDS ── */
-    .container {{
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 30px 20px;
-    }}
-    .card {{
-        background: var(--surface);
-        border: 1px solid var(--surface2);
-        border-radius: var(--radius);
-        padding: 32px;
-        margin-bottom: 28px;
-        transition: box-shadow .3s;
-    }}
-    .card:hover {{
-        box-shadow: 0 4px 24px rgba(0,0,0,.25);
-    }}
-    .card h2 {{
-        font-size: 1.35rem;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 2px solid var(--surface2);
-        color: var(--accent);
-    }}
-    .card img {{
-        display: block;
-        margin: 0 auto;
-    }}
-    /* ── TABLAS ── */
-    .data-table {{
-        width: 100%;
-        border-collapse: collapse;
-        margin: 16px 0;
-        font-size: .88rem;
-    }}
-    .data-table th {{
-        background: var(--surface2);
-        color: var(--accent);
-        padding: 10px 14px;
-        text-align: left;
-        font-weight: 600;
-        position: sticky; top: 0;
-    }}
-    .data-table td {{
-        padding: 8px 14px;
-        border-bottom: 1px solid rgba(255,255,255,.06);
-    }}
-    .data-table tr:hover td {{
-        background: rgba(56,189,248,.05);
-    }}
-    .data-table tr:nth-child(even) td {{
-        background: rgba(255,255,255,.02);
-    }}
-    /* ── FOOTER ── */
-    .footer {{
-        text-align: center;
-        padding: 40px;
-        color: var(--text-dim);
-        font-size: .8rem;
-        border-top: 1px solid var(--surface2);
-    }}
-    /* ── SCROLL ── */
-    html {{ scroll-behavior: smooth; }}
-    ::-webkit-scrollbar {{ width: 8px; }}
-    ::-webkit-scrollbar-track {{ background: var(--bg); }}
-    ::-webkit-scrollbar-thumb {{ background: var(--surface2); border-radius: 4px; }}
-</style>
-</head>
-<body>
-    <div class="hero">
-        <h1>📦 Reporte de Importaciones — Bogotá</h1>
-        <p class="subtitle">Generado el {ahora} · Análisis de inteligencia comercial</p>
-    </div>
-    <nav class="nav">{nav_items}</nav>
-    {resumen_kpi}
-    <div class="container">
-        {secciones_html}
-    </div>
-    <div class="footer">
-        Generado automáticamente por <strong>analisis_importaciones.py</strong> · {ahora}
-    </div>
-</body>
-</html>'''
-        with open(ruta_salida, 'w', encoding='utf-8') as f:
-            f.write(html)
-        print(f'\n  🌐 Reporte HTML guardado en: {ruta_salida}')
+def setup_dirs():
+    """Crea los directorios de salida si no existen."""
+    os.makedirs(CHARTS_DIR, exist_ok=True)
+    os.makedirs(DATA_DIR, exist_ok=True)
+    print(f'  📁 Directorio de gráficos: {CHARTS_DIR}')
+    print(f'  📁 Directorio de datos:    {DATA_DIR}')
 
 
-# Instancia global del reporte
-reporte = ReporteHTML()
+def guardar_chart(fig, nombre: str):
+    """Guarda un gráfico PNG en static/charts/ y cierra la figura."""
+    ruta = os.path.join(CHARTS_DIR, f'{nombre}.png')
+    fig.savefig(ruta, bbox_inches='tight', facecolor='white', dpi=150)
+    plt.close(fig)
+    print(f'  💾 {nombre}.png guardado')
+
+
+def guardar_json(data, nombre: str):
+    """Guarda un diccionario/lista como JSON en static/data/."""
+    ruta = os.path.join(DATA_DIR, f'{nombre}.json')
+    with open(ruta, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print(f'  📄 {nombre}.json guardado')
+
+
+def df_to_records(df: pd.DataFrame) -> list:
+    """Convierte un DataFrame a lista de dicts limpia para JSON."""
+    return json.loads(df.to_json(orient='records', force_ascii=False))
+
+
+def barplot_horizontal(data, x, y, titulo, nombre_archivo, color_palette=PALETTE, fmt=',.0f'):
+    """Crea un barplot horizontal, lo guarda como PNG y retorna los datos."""
+    fig, ax = plt.subplots(figsize=(12, 7))
+    sns.barplot(data=data, x=x, y=y, palette=color_palette, ax=ax, hue=y, legend=False)
+    ax.set_title(titulo, fontweight='bold', pad=15)
+    ax.set_xlabel(x)
+    ax.set_ylabel('')
+    for bar in ax.patches:
+        width = bar.get_width()
+        if width > 0:
+            ax.text(width, bar.get_y() + bar.get_height() / 2,
+                    f'  {width:{fmt}}', va='center', fontsize=9, color='#333')
+    plt.tight_layout()
+    guardar_chart(fig, nombre_archivo)
 
 
 # =============================================================================
@@ -310,9 +99,19 @@ def cargar_datos(ruta: str) -> pd.DataFrame:
     print('=' * 60)
     print('  CARGANDO DATOS')
     print('=' * 60)
+
+    # Intentar con calamine (Excel binario), luego openpyxl, luego CSV
     try:
-        df = pd.read_excel(ruta, engine='calamine')
-        print(f'  ✅ Archivo cargado: {df.shape[0]:,} filas × {df.shape[1]} columnas')
+        try:
+            df = pd.read_excel(ruta, engine='calamine')
+            print(f'  ✅ Cargado con calamine: {df.shape[0]:,} filas × {df.shape[1]} columnas')
+        except Exception:
+            try:
+                df = pd.read_excel(ruta, engine='openpyxl')
+                print(f'  ✅ Cargado con openpyxl: {df.shape[0]:,} filas × {df.shape[1]} columnas')
+            except Exception:
+                df = pd.read_csv(ruta, encoding='latin-1', sep=';', low_memory=False)
+                print(f'  ✅ Cargado como CSV: {df.shape[0]:,} filas × {df.shape[1]} columnas')
     except Exception as e:
         print(f'  ❌ Error al cargar: {e}')
         raise
@@ -384,56 +183,39 @@ def crear_metricas(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # =============================================================================
-# UTILIDADES
-# =============================================================================
-def guardar(fig, nombre: str):
-    ruta = os.path.join(OUTPUT_DIR, f'{nombre}.png')
-    fig.savefig(ruta, bbox_inches='tight', facecolor='white')
-    plt.close(fig)
-    print(f'  💾 {nombre}.png guardado')
-
-
-def barplot_horizontal(data, x, y, titulo, nombre_archivo, color_palette=PALETTE, fmt=',.0f'):
-    fig, ax = plt.subplots(figsize=(12, 7))
-    sns.barplot(data=data, x=x, y=y, palette=color_palette, ax=ax, hue=y, legend=False)
-    ax.set_title(titulo, fontweight='bold', pad=15)
-    ax.set_xlabel(x)
-    ax.set_ylabel('')
-    for bar in ax.patches:
-        width = bar.get_width()
-        if width > 0:
-            ax.text(width, bar.get_y() + bar.get_height() / 2,
-                    f'  {width:{fmt}}', va='center', fontsize=9, color='#333')
-    plt.tight_layout()
-    guardar(fig, nombre_archivo)
-    return fig
-
-
-def barplot_horizontal_fig(data, x, y, titulo, color_palette=PALETTE, fmt=',.0f'):
-    """Igual que barplot_horizontal pero retorna el fig sin cerrar."""
-    fig, ax = plt.subplots(figsize=(12, 7))
-    sns.barplot(data=data, x=x, y=y, palette=color_palette, ax=ax, hue=y, legend=False)
-    ax.set_title(titulo, fontweight='bold', pad=15)
-    ax.set_xlabel(x)
-    ax.set_ylabel('')
-    for bar in ax.patches:
-        width = bar.get_width()
-        if width > 0:
-            ax.text(width, bar.get_y() + bar.get_height() / 2,
-                    f'  {width:{fmt}}', va='center', fontsize=9, color='#333')
-    plt.tight_layout()
-    return fig
-
-
-# =============================================================================
 # 4. BLOQUE A — PRODUCTOS
 # =============================================================================
-def bloque_a_productos(df: pd.DataFrame):
+def bloque_a_productos(df: pd.DataFrame) -> dict:
     print('\n' + '=' * 60)
     print('  BLOQUE A: ANÁLISIS DE PRODUCTOS')
     print('=' * 60)
 
-    html_partes = []
+    tablas = {}
+    dataframes = {}  # DataFrames para el reporte de texto
+    TOP_N_IMPORT = 15  # Para el análisis de bienes más/menos importados
+
+    # ── Gráfico 0a: Top 15 Bienes Más Importados (por Cantidad) ──
+    if 'Cantidad' in df.columns:
+        cant_grupo = df.groupby('Nombre partida', as_index=False)['Cantidad'].sum()
+        top_importados = cant_grupo.nlargest(TOP_N_IMPORT, 'Cantidad').sort_values('Cantidad')
+        print('\n📊 Top 15 Bienes Más Importados (Cantidad):')
+        print(top_importados.to_string(index=False))
+        barplot_horizontal(top_importados, 'Cantidad', 'Nombre partida',
+                           f'Top {TOP_N_IMPORT} Bienes Más Importados (por Cantidad)',
+                           '00a_top15_mas_importados', color_palette='viridis')
+        tablas['top_importados'] = df_to_records(top_importados.sort_values('Cantidad', ascending=False))
+        dataframes[f'Top {TOP_N_IMPORT} Bienes Más Importados (Cantidad)'] = top_importados.sort_values('Cantidad', ascending=False)
+
+    # ── Gráfico 0b: Top 15 Bienes Menos Importados (por Cantidad) ──
+    if 'Cantidad' in df.columns:
+        bottom_importados = cant_grupo[cant_grupo['Cantidad'] > 0].nsmallest(TOP_N_IMPORT, 'Cantidad').sort_values('Cantidad')
+        print(f'\n📊 Top {TOP_N_IMPORT} Bienes Menos Importados (Cantidad):')
+        print(bottom_importados.to_string(index=False))
+        barplot_horizontal(bottom_importados, 'Cantidad', 'Nombre partida',
+                           f'Top {TOP_N_IMPORT} Bienes Menos Importados (por Cantidad)',
+                           '00b_top15_menos_importados', color_palette='rocket')
+        tablas['bottom_importados'] = df_to_records(bottom_importados.sort_values('Cantidad'))
+        dataframes[f'Top {TOP_N_IMPORT} Bienes Menos Importados (Cantidad)'] = bottom_importados.sort_values('Cantidad')
 
     # ── Gráfico 1: Top 10 más valiosos ──
     top_fob = (
@@ -442,16 +224,11 @@ def bloque_a_productos(df: pd.DataFrame):
     )
     print('\n📊 Top 10 Productos Más Valiosos (USD FOB):')
     print(top_fob.to_string(index=False))
-
-    fig = barplot_horizontal_fig(top_fob, 'Dolares FOB', 'Nombre partida',
-                                 'Top 10 Productos Más Valiosos (Total USD FOB)')
-    guardar(fig, '01_top10_productos_valiosos')
-    # Re-crear para el HTML (guardar cierra el fig)
-    fig = barplot_horizontal_fig(top_fob, 'Dolares FOB', 'Nombre partida',
-                                 'Top 10 Productos Más Valiosos (Total USD FOB)')
-    html_partes.append(f'<h3>1. Top 10 Más Valiosos (FOB)</h3>{reporte.img_tag(fig)}')
-    html_partes.append(reporte.tabla_html(top_fob.sort_values('Dolares FOB', ascending=False)))
-    plt.close(fig)
+    barplot_horizontal(top_fob, 'Dolares FOB', 'Nombre partida',
+                       'Top 10 Productos Más Valiosos (Total USD FOB)',
+                       '01_top10_productos_valiosos')
+    tablas['top_valiosos'] = df_to_records(top_fob.sort_values('Dolares FOB', ascending=False))
+    dataframes['Top 10 Productos Más Valiosos (USD FOB)'] = top_fob.sort_values('Dolares FOB', ascending=False)
 
     # ── Gráfico 2: Bottom 10 ──
     bottom_fob = (
@@ -461,41 +238,28 @@ def bloque_a_productos(df: pd.DataFrame):
     )
     print('\n📊 Top 10 Productos Menos Valiosos:')
     print(bottom_fob.to_string(index=False))
+    barplot_horizontal(bottom_fob, 'Dolares FOB', 'Nombre partida',
+                       'Top 10 Productos Menos Valiosos (Total USD FOB)',
+                       '02_bottom10_productos_valiosos', color_palette='rocket')
+    tablas['bottom_valiosos'] = df_to_records(bottom_fob.sort_values('Dolares FOB'))
+    dataframes['Top 10 Productos Menos Valiosos (FOB > 0)'] = bottom_fob.sort_values('Dolares FOB')
 
-    fig = barplot_horizontal_fig(bottom_fob, 'Dolares FOB', 'Nombre partida',
-                                 'Top 10 Productos Menos Valiosos (Total USD FOB)',
-                                 color_palette='rocket')
-    guardar(fig, '02_bottom10_productos_valiosos')
-    fig = barplot_horizontal_fig(bottom_fob, 'Dolares FOB', 'Nombre partida',
-                                 'Top 10 Productos Menos Valiosos (Total USD FOB)',
-                                 color_palette='rocket')
-    html_partes.append(f'<h3>2. Top 10 Menos Valiosos (FOB &gt; 0)</h3>{reporte.img_tag(fig)}')
-    html_partes.append(reporte.tabla_html(bottom_fob.sort_values('Dolares FOB')))
-    plt.close(fig)
-
-    # ── Gráfico 3: Peso extremos ──
+    # ── Gráfico 3a: Top 10 Más Pesados ──
     peso_grupo = df.groupby('Nombre partida', as_index=False)['Kilogramos netos'].sum()
     top_peso = peso_grupo.nlargest(TOP_N, 'Kilogramos netos').sort_values('Kilogramos netos')
+    barplot_horizontal(top_peso, 'Kilogramos netos', 'Nombre partida',
+                       'Top 10 Productos Más Pesados (Kg Netos)',
+                       '03a_top10_mas_pesados', color_palette='mako')
+    tablas['top_pesados'] = df_to_records(top_peso.sort_values('Kilogramos netos', ascending=False))
+    dataframes['Top 10 Más Pesados (Kg)'] = top_peso.sort_values('Kilogramos netos', ascending=False)
+
+    # ── Gráfico 3b: Top 10 Menos Pesados ──
     bottom_peso = peso_grupo[peso_grupo['Kilogramos netos'] > 0].nsmallest(TOP_N, 'Kilogramos netos').sort_values('Kilogramos netos')
-
-    fig, axes = plt.subplots(1, 2, figsize=(18, 8))
-    sns.barplot(data=top_peso, x='Kilogramos netos', y='Nombre partida', palette='mako', ax=axes[0], hue='Nombre partida', legend=False)
-    axes[0].set_title('Top 10 Más Pesados (Kg)', fontweight='bold'); axes[0].set_ylabel('')
-    sns.barplot(data=bottom_peso, x='Kilogramos netos', y='Nombre partida', palette='flare', ax=axes[1], hue='Nombre partida', legend=False)
-    axes[1].set_title('Top 10 Menos Pesados (Kg)', fontweight='bold'); axes[1].set_ylabel('')
-    plt.suptitle('Comparativa de Peso: Extremos', fontsize=15, fontweight='bold', y=1.02)
-    plt.tight_layout()
-    guardar(fig, '03_peso_extremos')
-
-    fig, axes = plt.subplots(1, 2, figsize=(18, 8))
-    sns.barplot(data=top_peso, x='Kilogramos netos', y='Nombre partida', palette='mako', ax=axes[0], hue='Nombre partida', legend=False)
-    axes[0].set_title('Top 10 Más Pesados (Kg)', fontweight='bold'); axes[0].set_ylabel('')
-    sns.barplot(data=bottom_peso, x='Kilogramos netos', y='Nombre partida', palette='flare', ax=axes[1], hue='Nombre partida', legend=False)
-    axes[1].set_title('Top 10 Menos Pesados (Kg)', fontweight='bold'); axes[1].set_ylabel('')
-    plt.suptitle('Comparativa de Peso: Extremos', fontsize=15, fontweight='bold', y=1.02)
-    plt.tight_layout()
-    html_partes.append(f'<h3>3. Extremos de Peso (Kg Netos)</h3>{reporte.img_tag(fig)}')
-    plt.close(fig)
+    barplot_horizontal(bottom_peso, 'Kilogramos netos', 'Nombre partida',
+                       'Top 10 Productos Menos Pesados (Kg Netos)',
+                       '03b_top10_menos_pesados', color_palette='flare')
+    tablas['bottom_pesados'] = df_to_records(bottom_peso.sort_values('Kilogramos netos'))
+    dataframes['Top 10 Menos Pesados (Kg)'] = bottom_peso.sort_values('Kilogramos netos')
 
     # ── Gráfico 4: Diamantes (más caros por kg) ──
     if 'Precio_Unitario_Peso' in df.columns:
@@ -504,17 +268,13 @@ def bloque_a_productos(df: pd.DataFrame):
             .groupby('Nombre partida', as_index=False)['Precio_Unitario_Peso']
             .median().nlargest(TOP_N, 'Precio_Unitario_Peso').sort_values('Precio_Unitario_Peso')
         )
-        print('\n💎 Top 10 Más Caros por Kg:')
+        print('\nTop 10 Más Caros por Kg:')
         print(precio_kg.to_string(index=False))
-
-        fig = barplot_horizontal_fig(precio_kg, 'Precio_Unitario_Peso', 'Nombre partida',
-                                     '💎 Top 10 Más Caros por Kg (Mediana USD/Kg)', fmt=',.2f')
-        guardar(fig, '04_top10_diamantes')
-        fig = barplot_horizontal_fig(precio_kg, 'Precio_Unitario_Peso', 'Nombre partida',
-                                     '💎 Top 10 Más Caros por Kg (Mediana USD/Kg)', fmt=',.2f')
-        html_partes.append(f'<h3>4. 💎 "Los Diamantes" — Más Caros por Kg</h3>{reporte.img_tag(fig)}')
-        html_partes.append(reporte.tabla_html(precio_kg.sort_values('Precio_Unitario_Peso', ascending=False)))
-        plt.close(fig)
+        barplot_horizontal(precio_kg, 'Precio_Unitario_Peso', 'Nombre partida',
+                           'Más Caros por Kg (Mediana USD/Kg)',
+                           '04_top10_diamantes', fmt=',.2f')
+        tablas['diamantes'] = df_to_records(precio_kg.sort_values('Precio_Unitario_Peso', ascending=False))
+        dataframes['Más Caros por Kg (Mediana USD/Kg)'] = precio_kg.sort_values('Precio_Unitario_Peso', ascending=False)
 
     # ── Gráfico 5: Arena (más baratos por kg) ──
     if 'Precio_Unitario_Peso' in df.columns:
@@ -523,61 +283,58 @@ def bloque_a_productos(df: pd.DataFrame):
             .groupby('Nombre partida', as_index=False)['Precio_Unitario_Peso']
             .median().nsmallest(TOP_N, 'Precio_Unitario_Peso').sort_values('Precio_Unitario_Peso')
         )
-        print('\n🏖️ Top 10 Más Baratos por Kg:')
+        print('\nTop 10 Más Baratos por Kg:')
         print(precio_kg_bajo.to_string(index=False))
+        barplot_horizontal(precio_kg_bajo, 'Precio_Unitario_Peso', 'Nombre partida',
+                           'Más Baratos por Kg (Mediana USD/Kg)',
+                           '05_top10_arena', color_palette='crest', fmt=',.4f')
+        tablas['arena'] = df_to_records(precio_kg_bajo.sort_values('Precio_Unitario_Peso'))
+        dataframes['Más Baratos por Kg (Mediana USD/Kg)'] = precio_kg_bajo.sort_values('Precio_Unitario_Peso')
 
-        fig = barplot_horizontal_fig(precio_kg_bajo, 'Precio_Unitario_Peso', 'Nombre partida',
-                                     '🏖️ Top 10 Más Baratos por Kg (Mediana USD/Kg)',
-                                     color_palette='crest', fmt=',.4f')
-        guardar(fig, '05_top10_arena')
-        fig = barplot_horizontal_fig(precio_kg_bajo, 'Precio_Unitario_Peso', 'Nombre partida',
-                                     '🏖️ Top 10 Más Baratos por Kg (Mediana USD/Kg)',
-                                     color_palette='crest', fmt=',.4f')
-        html_partes.append(f'<h3>5. 🏖️ "La Arena" — Más Baratos por Kg</h3>{reporte.img_tag(fig)}')
-        html_partes.append(reporte.tabla_html(precio_kg_bajo.sort_values('Precio_Unitario_Peso')))
-        plt.close(fig)
 
-    # ── Gráfico 6: Extremos precio/cantidad ──
+
+    # ── Gráfico 7: Costo Unitario por Cantidad (FOB / Cantidad) ──
     if 'Precio_Unitario_Cant' in df.columns:
-        puc = (
+        cuc = (
             df[df['Precio_Unitario_Cant'].notna() & (df['Precio_Unitario_Cant'] > 0)]
             .groupby('Nombre partida', as_index=False)['Precio_Unitario_Cant'].median()
         )
-        top_puc = puc.nlargest(TOP_N, 'Precio_Unitario_Cant').assign(Tipo='Más Caros')
-        bottom_puc = puc.nsmallest(TOP_N, 'Precio_Unitario_Cant').assign(Tipo='Más Baratos')
-        extremos = pd.concat([top_puc, bottom_puc])
+        top_cuc = cuc.nlargest(TOP_N, 'Precio_Unitario_Cant').sort_values('Precio_Unitario_Cant')
+        bottom_cuc = cuc.nsmallest(TOP_N, 'Precio_Unitario_Cant').sort_values('Precio_Unitario_Cant')
 
-        fig, ax = plt.subplots(figsize=(14, 8))
-        sns.barplot(data=extremos, x='Precio_Unitario_Cant', y='Nombre partida',
-                    hue='Tipo', palette={'Más Caros': '#e74c3c', 'Más Baratos': '#2ecc71'}, ax=ax)
-        ax.set_title('Extremos de Precio por Unidad (Mediana USD/Unidad)', fontweight='bold', pad=15)
-        ax.set_xlabel('USD / Unidad'); ax.set_ylabel(''); ax.legend(title='Categoría')
-        plt.tight_layout()
-        guardar(fig, '06_extremos_precio_cantidad')
+        print('\n💲 Top 10 Mayor Costo Unitario por Cantidad:')
+        print(top_cuc.to_string(index=False))
+        barplot_horizontal(top_cuc, 'Precio_Unitario_Cant', 'Nombre partida',
+                           'Top 10 Mayor Costo Unitario (FOB / Cantidad)',
+                           '07a_costo_unitario_alto', fmt=',.0f')
 
-        fig, ax = plt.subplots(figsize=(14, 8))
-        sns.barplot(data=extremos, x='Precio_Unitario_Cant', y='Nombre partida',
-                    hue='Tipo', palette={'Más Caros': '#e74c3c', 'Más Baratos': '#2ecc71'}, ax=ax)
-        ax.set_title('Extremos de Precio por Unidad (Mediana USD/Unidad)', fontweight='bold', pad=15)
-        ax.set_xlabel('USD / Unidad'); ax.set_ylabel(''); ax.legend(title='Categoría')
-        plt.tight_layout()
-        html_partes.append(f'<h3>6. Extremos de Precio por Unidad</h3>{reporte.img_tag(fig)}')
-        plt.close(fig)
+        print('\n💲 Top 10 Menor Costo Unitario por Cantidad:')
+        print(bottom_cuc.to_string(index=False))
+        barplot_horizontal(bottom_cuc, 'Precio_Unitario_Cant', 'Nombre partida',
+                           'Top 10 Menor Costo Unitario (FOB / Cantidad)',
+                           '07b_costo_unitario_bajo', color_palette='crest', fmt=',.4f')
 
-    reporte.agregar_seccion('Bloque A: Análisis de Productos', '\n'.join(html_partes), '📦')
+        tablas['costo_unitario_alto'] = df_to_records(top_cuc.sort_values('Precio_Unitario_Cant', ascending=False))
+        tablas['costo_unitario_bajo'] = df_to_records(bottom_cuc.sort_values('Precio_Unitario_Cant'))
+        dataframes['Top 10 Mayor Costo Unitario (FOB/Cantidad)'] = top_cuc.sort_values('Precio_Unitario_Cant', ascending=False)
+        dataframes['Top 10 Menor Costo Unitario (FOB/Cantidad)'] = bottom_cuc.sort_values('Precio_Unitario_Cant')
+
+    guardar_json(tablas, 'bloque_a_productos')
+    return dataframes
 
 
 # =============================================================================
 # 5. BLOQUE B — CATEGORÍAS ESTRATÉGICAS
 # =============================================================================
-def bloque_b_categorias(df: pd.DataFrame):
+def bloque_b_categorias(df: pd.DataFrame) -> dict:
     print('\n' + '=' * 60)
     print('  BLOQUE B: CATEGORÍAS ESTRATÉGICAS')
     print('=' * 60)
 
-    html_partes = []
+    tablas = {}
+    dataframes = {}
 
-    # ── Gráfico 7: Boxplot Nivel Tecnológico ──
+    # ── Gráfico 8: Nivel Tecnológico con % ──
     if 'Nivel tecnologico' in df.columns:
         df_box = df[df['Dolares FOB'] > 0].copy()
         fig, ax = plt.subplots(figsize=(14, 8))
@@ -586,27 +343,40 @@ def bloque_b_categorias(df: pd.DataFrame):
         ax.set_title('Distribución de USD FOB según Nivel Tecnológico', fontweight='bold', pad=15)
         ax.set_ylabel('Dolares FOB (USD)'); ax.set_xlabel('Nivel Tecnológico')
         plt.xticks(rotation=30, ha='right'); plt.tight_layout()
-        guardar(fig, '07_boxplot_nivel_tecnologico')
-
-        fig, ax = plt.subplots(figsize=(14, 8))
-        sns.boxplot(data=df_box, x='Nivel tecnologico', y='Dolares FOB',
-                    palette='Set2', showfliers=False, ax=ax)
-        ax.set_title('Distribución de USD FOB según Nivel Tecnológico', fontweight='bold', pad=15)
-        ax.set_ylabel('Dolares FOB (USD)'); ax.set_xlabel('Nivel Tecnológico')
-        plt.xticks(rotation=30, ha='right'); plt.tight_layout()
-        html_partes.append(f'<h3>7. Boxplot — Nivel Tecnológico</h3>{reporte.img_tag(fig)}')
-        plt.close(fig)
+        guardar_chart(fig, '08_boxplot_nivel_tecnologico')
 
         resumen = df.groupby('Nivel tecnologico')['Dolares FOB'].agg(['sum', 'median', 'count'])
         resumen.columns = ['Total_FOB', 'Mediana_FOB', 'Registros']
         resumen = resumen.sort_values('Total_FOB', ascending=False).reset_index()
+        total_fob_sum = resumen['Total_FOB'].sum()
+        resumen['Pct_Total'] = (resumen['Total_FOB'] / total_fob_sum * 100).round(1)
+
+        # Barplot horizontal con etiquetas de %
+        fig2, ax2 = plt.subplots(figsize=(12, 7))
+        resumen_sorted = resumen.sort_values('Total_FOB')
+        sns.barplot(data=resumen_sorted, x='Total_FOB', y='Nivel tecnologico',
+                    palette='Set2', ax=ax2, hue='Nivel tecnologico', legend=False)
+        ax2.set_title('Total FOB por Nivel Tecnológico (con %)', fontweight='bold', pad=15)
+        ax2.set_xlabel('Total FOB (USD)'); ax2.set_ylabel('')
+        for i, bar in enumerate(ax2.patches):
+            w = bar.get_width()
+            if w > 0:
+                pct = resumen_sorted.iloc[i]['Pct_Total']
+                ax2.text(w, bar.get_y() + bar.get_height() / 2,
+                         f'  {pct:.1f}%', va='center', fontsize=10, fontweight='bold', color='#333')
+        plt.tight_layout()
+        guardar_chart(fig2, '08b_nivel_tecnologico_pct')
+
         print('\n📊 Resumen por Nivel Tecnológico:')
         print(resumen.to_string(index=False))
-        html_partes.append(reporte.tabla_html(resumen))
+        tablas['nivel_tecnologico'] = df_to_records(resumen)
+        dataframes['Resumen por Nivel Tecnológico'] = resumen
 
-    # ── Gráfico 8: Uso Económico ──
+    # ── Gráfico 9: Uso Económico con % ──
     if 'Uso economico' in df.columns:
         uso = df.groupby('Uso economico', as_index=False)['Dolares FOB'].sum().sort_values('Dolares FOB')
+        total_uso_sum = uso['Dolares FOB'].sum()
+        uso['Pct_Total'] = (uso['Dolares FOB'] / total_uso_sum * 100).round(1)
         print('\n📊 Total por Uso Económico:')
         print(uso.to_string(index=False))
 
@@ -614,34 +384,35 @@ def bloque_b_categorias(df: pd.DataFrame):
         sns.barplot(data=uso, x='Dolares FOB', y='Uso economico', palette='coolwarm', ax=ax, hue='Uso economico', legend=False)
         ax.set_title('Total Importado (USD FOB) por Uso Económico', fontweight='bold', pad=15)
         ax.set_xlabel('Dolares FOB (USD)'); ax.set_ylabel('')
+        for i, bar in enumerate(ax.patches):
+            w = bar.get_width()
+            if w > 0:
+                pct = uso.iloc[i]['Pct_Total']
+                ax.text(w, bar.get_y() + bar.get_height() / 2,
+                         f'  {pct:.1f}%', va='center', fontsize=10, fontweight='bold', color='#333')
         plt.tight_layout()
-        guardar(fig, '08_uso_economico')
+        guardar_chart(fig, '09_uso_economico')
+        tablas['uso_economico'] = df_to_records(uso.sort_values('Dolares FOB', ascending=False))
+        dataframes['Total Importado por Uso Económico'] = uso.sort_values('Dolares FOB', ascending=False)
 
-        fig, ax = plt.subplots(figsize=(12, 7))
-        sns.barplot(data=uso, x='Dolares FOB', y='Uso economico', palette='coolwarm', ax=ax, hue='Uso economico', legend=False)
-        ax.set_title('Total Importado (USD FOB) por Uso Económico', fontweight='bold', pad=15)
-        ax.set_xlabel('Dolares FOB (USD)'); ax.set_ylabel('')
-        plt.tight_layout()
-        html_partes.append(f'<h3>8. Total FOB por Uso Económico</h3>{reporte.img_tag(fig)}')
-        html_partes.append(reporte.tabla_html(uso.sort_values('Dolares FOB', ascending=False)))
-        plt.close(fig)
-
-    reporte.agregar_seccion('Bloque B: Categorías Estratégicas', '\n'.join(html_partes), '🏷️')
+    guardar_json(tablas, 'bloque_b_categorias')
+    return dataframes
 
 
 # =============================================================================
 # 6. BLOQUE C — LOGÍSTICA
 # =============================================================================
-def bloque_c_logistica(df: pd.DataFrame):
+def bloque_c_logistica(df: pd.DataFrame) -> dict:
     print('\n' + '=' * 60)
     print('  BLOQUE C: ANÁLISIS LOGÍSTICO')
     print('=' * 60)
 
     if 'Impacto_Logistico_Pct' not in df.columns:
         print('  ❌ Impacto_Logistico_Pct no disponible')
-        return
+        return {}
 
-    html_partes = []
+    tablas = {}
+    dataframes = {}
     logistica = (
         df[df['Impacto_Logistico_Pct'].notna() & (df['Impacto_Logistico_Pct'] > 0)]
         .groupby('Nombre partida', as_index=False)['Impacto_Logistico_Pct'].median()
@@ -651,50 +422,40 @@ def bloque_c_logistica(df: pd.DataFrame):
     top_log = logistica.nlargest(TOP_N, 'Impacto_Logistico_Pct').sort_values('Impacto_Logistico_Pct')
     print('\n🚢 Top 10 Mayor Impacto Logístico:')
     print(top_log.to_string(index=False))
-
-    fig = barplot_horizontal_fig(top_log, 'Impacto_Logistico_Pct', 'Nombre partida',
-                                 '🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)',
-                                 color_palette='Reds_r', fmt='.1f')
-    guardar(fig, '09_top10_mayor_impacto_logistico')
-    fig = barplot_horizontal_fig(top_log, 'Impacto_Logistico_Pct', 'Nombre partida',
-                                 '🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)',
-                                 color_palette='Reds_r', fmt='.1f')
-    html_partes.append(f'<h3>9. 🚢 Donde el Flete Duele Más</h3>{reporte.img_tag(fig)}')
-    html_partes.append(reporte.tabla_html(top_log.sort_values('Impacto_Logistico_Pct', ascending=False)))
-    plt.close(fig)
+    barplot_horizontal(top_log, 'Impacto_Logistico_Pct', 'Nombre partida',
+                       '🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)',
+                       '10_top10_mayor_impacto_logistico', color_palette='Reds_r', fmt='.1f')
+    tablas['mayor_impacto'] = df_to_records(top_log.sort_values('Impacto_Logistico_Pct', ascending=False))
+    dataframes['🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)'] = top_log.sort_values('Impacto_Logistico_Pct', ascending=False)
 
     # ── Gráfico 10: Menor impacto ──
     bot_log = logistica.nsmallest(TOP_N, 'Impacto_Logistico_Pct').sort_values('Impacto_Logistico_Pct')
     print('\n✈️ Top 10 Menor Impacto Logístico:')
     print(bot_log.to_string(index=False))
+    barplot_horizontal(bot_log, 'Impacto_Logistico_Pct', 'Nombre partida',
+                       '✈️ Top 10 Menor Impacto Logístico (% sobre FOB)',
+                       '11_top10_menor_impacto_logistico', color_palette='Greens_r', fmt='.2f')
+    tablas['menor_impacto'] = df_to_records(bot_log.sort_values('Impacto_Logistico_Pct'))
+    dataframes['✈️ Top 10 Menor Impacto Logístico (% sobre FOB)'] = bot_log.sort_values('Impacto_Logistico_Pct')
 
-    fig = barplot_horizontal_fig(bot_log, 'Impacto_Logistico_Pct', 'Nombre partida',
-                                 '✈️ Top 10 Menor Impacto Logístico (% sobre FOB)',
-                                 color_palette='Greens_r', fmt='.2f')
-    guardar(fig, '10_top10_menor_impacto_logistico')
-    fig = barplot_horizontal_fig(bot_log, 'Impacto_Logistico_Pct', 'Nombre partida',
-                                 '✈️ Top 10 Menor Impacto Logístico (% sobre FOB)',
-                                 color_palette='Greens_r', fmt='.2f')
-    html_partes.append(f'<h3>10. ✈️ Donde el Flete es Mínimo</h3>{reporte.img_tag(fig)}')
-    html_partes.append(reporte.tabla_html(bot_log.sort_values('Impacto_Logistico_Pct')))
-    plt.close(fig)
-
-    reporte.agregar_seccion('Bloque C: Análisis Logístico', '\n'.join(html_partes), '🚢')
+    guardar_json(tablas, 'bloque_c_logistica')
+    return dataframes
 
 
 # =============================================================================
 # 7. BLOQUE D — GEOPOLÍTICO
 # =============================================================================
-def bloque_d_paises(df: pd.DataFrame):
+def bloque_d_paises(df: pd.DataFrame) -> dict:
     print('\n' + '=' * 60)
     print('  BLOQUE D: ANÁLISIS GEOPOLÍTICO')
     print('=' * 60)
 
     if 'Pais de origen' not in df.columns:
         print('  ❌ Columna «Pais de origen» no encontrada')
-        return
+        return {}
 
-    html_partes = []
+    tablas = {}
+    dataframes = {}
 
     # ── Gráfico 11: Top 10 países FOB ──
     paises_fob = (
@@ -703,15 +464,11 @@ def bloque_d_paises(df: pd.DataFrame):
     )
     print('\n🌍 Top 10 Países Proveedores:')
     print(paises_fob.to_string(index=False))
-
-    fig = barplot_horizontal_fig(paises_fob, 'Dolares FOB', 'Pais de origen',
-                                 '🌍 Top 10 Países Proveedores (USD FOB)')
-    guardar(fig, '11_top10_paises_fob')
-    fig = barplot_horizontal_fig(paises_fob, 'Dolares FOB', 'Pais de origen',
-                                 '🌍 Top 10 Países Proveedores (USD FOB)')
-    html_partes.append(f'<h3>11. 🌍 Top 10 Países Proveedores</h3>{reporte.img_tag(fig)}')
-    html_partes.append(reporte.tabla_html(paises_fob.sort_values('Dolares FOB', ascending=False)))
-    plt.close(fig)
+    barplot_horizontal(paises_fob, 'Dolares FOB', 'Pais de origen',
+                       '🌍 Top 10 Países Proveedores (USD FOB)',
+                       '12_top10_paises_fob')
+    tablas['paises_fob'] = df_to_records(paises_fob.sort_values('Dolares FOB', ascending=False))
+    dataframes['🌍 Top 10 Países Proveedores (USD FOB)'] = paises_fob.sort_values('Dolares FOB', ascending=False)
 
     # ── Gráfico 12: Países flete caro ──
     if 'Impacto_Logistico_Pct' in df.columns:
@@ -734,83 +491,153 @@ def bloque_d_paises(df: pd.DataFrame):
             if w > 0:
                 ax.text(w, bar.get_y() + bar.get_height() / 2, f'  {w:.1f}%', va='center', fontsize=9, color='#333')
         plt.tight_layout()
-        guardar(fig, '12_paises_flete_caro')
+        guardar_chart(fig, '13_paises_flete_caro')
+        tablas['paises_flete_caro'] = df_to_records(paises_flete.sort_values('Impacto_Logistico_Pct', ascending=False))
+        dataframes['💸 Top 10 Países Flete Más Caro (% sobre FOB)'] = paises_flete.sort_values('Impacto_Logistico_Pct', ascending=False)
 
-        fig, ax = plt.subplots(figsize=(12, 7))
-        sns.barplot(data=paises_flete, x='Impacto_Logistico_Pct', y='Pais de origen',
-                    palette='OrRd', ax=ax, hue='Pais de origen', legend=False)
-        ax.set_title('💸 Top 10 Países con Mayor Costo Logístico (% sobre FOB)', fontweight='bold', pad=15)
-        ax.set_xlabel('Impacto Logístico Promedio (%)'); ax.set_ylabel('')
-        for bar in ax.patches:
-            w = bar.get_width()
-            if w > 0:
-                ax.text(w, bar.get_y() + bar.get_height() / 2, f'  {w:.1f}%', va='center', fontsize=9, color='#333')
-        plt.tight_layout()
-        html_partes.append(f'<h3>12. 💸 Países con Fletes Más Caros</h3>{reporte.img_tag(fig)}')
-        html_partes.append(reporte.tabla_html(paises_flete.sort_values('Impacto_Logistico_Pct', ascending=False)))
-        plt.close(fig)
-
-    reporte.agregar_seccion('Bloque D: Análisis Geopolítico', '\n'.join(html_partes), '🌍')
+    guardar_json(tablas, 'bloque_d_paises')
+    return dataframes
 
 
 # =============================================================================
-# 8. RESUMEN EJECUTIVO
+# 8. RESUMEN EJECUTIVO → KPIs JSON
 # =============================================================================
-def resumen_ejecutivo(df: pd.DataFrame):
+def resumen_ejecutivo(df: pd.DataFrame) -> dict:
     print('\n' + '=' * 60)
     print('  📋 RESUMEN EJECUTIVO')
     print('=' * 60)
 
-    registros = f'{len(df):,}'
-    productos = f'{df["Nombre partida"].nunique():,}'
-    paises = f'{df["Pais de origen"].nunique():,}'
-    total_fob = f'USD {df["Dolares FOB"].sum():,.0f}'
-    total_cif = f'USD {df["Dolares CIF"].sum():,.0f}'
-    costo_log = f'USD {df.get("Costo_Logistico", pd.Series([0])).sum():,.0f}'
-    peso_total = f'{df["Kilogramos netos"].sum():,.0f} Kg'
+    kpis = {
+        'registros': f'{len(df):,}',
+        'productos_unicos': f'{df["Nombre partida"].nunique():,}',
+        'paises_origen': f'{df["Pais de origen"].nunique():,}',
+        'total_fob': f'USD {df["Dolares FOB"].sum():,.0f}',
+        'total_cif': f'USD {df["Dolares CIF"].sum():,.0f}',
+        'costo_logistico': f'USD {df.get("Costo_Logistico", pd.Series([0])).sum():,.0f}',
+        'peso_total': f'{df["Kilogramos netos"].sum():,.0f} Kg',
+        'generado': datetime.now().strftime('%d/%m/%Y %H:%M'),
+    }
 
-    print(f'  Registros:           {registros}')
-    print(f'  Productos únicos:    {productos}')
-    print(f'  Países de origen:    {paises}')
-    print(f'  Total FOB:           {total_fob}')
-    print(f'  Total CIF:           {total_cif}')
-    print(f'  Costo logístico:     {costo_log}')
-    print(f'  Peso total:          {peso_total}')
-    print(f'\n  📁 Gráficos: {OUTPUT_DIR}')
+    print(f'  Registros:           {kpis["registros"]}')
+    print(f'  Productos únicos:    {kpis["productos_unicos"]}')
+    print(f'  Países de origen:    {kpis["paises_origen"]}')
+    print(f'  Total FOB:           {kpis["total_fob"]}')
+    print(f'  Total CIF:           {kpis["total_cif"]}')
+    print(f'  Costo logístico:     {kpis["costo_logistico"]}')
+    print(f'  Peso total:          {kpis["peso_total"]}')
     print('=' * 60)
 
-    # KPIs para el HTML
-    reporte.resumen = {
-        'Registros': registros,
-        'Productos Únicos': productos,
-        'Países de Origen': paises,
-        'Total FOB': total_fob,
-        'Total CIF': total_cif,
-        'Costo Logístico': costo_log,
-        'Peso Total': peso_total,
-    }
+    guardar_json(kpis, 'kpis')
+    return kpis
+
+
+# =============================================================================
+# 9. REPORTE DE TEXTO — Exporta todos los DataFrames a .txt
+# =============================================================================
+def generar_reporte_texto(kpis: dict, bloques: dict):
+    """Genera un archivo de texto con todos los resultados tabulares."""
+    ruta = os.path.join(DATA_DIR, 'resultados_completos.txt')
+    ahora = datetime.now().strftime('%d/%m/%Y %H:%M')
+
+    with open(ruta, 'w', encoding='utf-8') as f:
+        f.write('=' * 80 + '\n')
+        f.write('  REPORTE COMPLETO DE IMPORTACIONES — BOGOTÁ\n')
+        f.write(f'  Generado: {ahora}\n')
+        f.write('=' * 80 + '\n\n')
+
+        # ── KPIs ──
+        f.write('─' * 80 + '\n')
+        f.write('  📋 RESUMEN EJECUTIVO (KPIs)\n')
+        f.write('─' * 80 + '\n')
+        labels = {
+            'registros': 'Registros totales',
+            'productos_unicos': 'Productos únicos',
+            'paises_origen': 'Países de origen',
+            'total_fob': 'Total FOB',
+            'total_cif': 'Total CIF',
+            'costo_logistico': 'Costo logístico total',
+            'peso_total': 'Peso total',
+        }
+        for key, label in labels.items():
+            f.write(f'  {label:.<30} {kpis.get(key, "N/A")}\n')
+        f.write('\n')
+
+        # ── Cada bloque ──
+        bloque_nombres = {
+            'A': '📦 BLOQUE A: ANÁLISIS DE PRODUCTOS',
+            'B': '🏷️ BLOQUE B: CATEGORÍAS ESTRATÉGICAS',
+            'C': '🚢 BLOQUE C: ANÁLISIS LOGÍSTICO',
+            'D': '🌍 BLOQUE D: ANÁLISIS GEOPOLÍTICO',
+        }
+
+        for bloque_id, titulo in bloque_nombres.items():
+            dfs = bloques.get(bloque_id, {})
+            if not dfs:
+                continue
+
+            f.write('\n' + '=' * 80 + '\n')
+            f.write(f'  {titulo}\n')
+            f.write('=' * 80 + '\n')
+
+            for nombre_tabla, df in dfs.items():
+                f.write('\n' + '─' * 80 + '\n')
+                f.write(f'  {nombre_tabla}\n')
+                f.write('─' * 80 + '\n')
+                f.write(df.to_string(index=False) + '\n')
+
+        f.write('\n' + '=' * 80 + '\n')
+        f.write(f'  FIN DEL REPORTE · {ahora}\n')
+        f.write('=' * 80 + '\n')
+
+    print(f'  📝 resultados_completos.txt guardado')
 
 
 # =============================================================================
 # MAIN
 # =============================================================================
 def main():
-    df = cargar_datos(ARCHIVO)
+    setup_dirs()
+
+    # Detección automática del archivo (csv o xlsx)
+    archivo = ARCHIVO
+    if not os.path.exists(archivo):
+        # Buscar alternativa xlsx
+        alt = archivo.replace('.csv', '.xlsx')
+        if os.path.exists(alt):
+            archivo = alt
+        else:
+            alt2 = archivo.replace('.csv', ' - copia.xlsx')
+            if os.path.exists(alt2):
+                archivo = alt2
+            else:
+                print(f'  ❌ No se encontró el dataset en: {archivo}')
+                print('  💡 Descárgalo de: https://www.datos.gov.co/dataset/Importaciones-Bogot-/vdw8-sjw6/about_data')
+                return
+
+    df = cargar_datos(archivo)
     df = limpiar_datos(df)
     df = crear_metricas(df)
 
-    resumen_ejecutivo(df)
+    kpis = resumen_ejecutivo(df)
 
-    bloque_a_productos(df)
-    bloque_b_categorias(df)
-    bloque_c_logistica(df)
-    bloque_d_paises(df)
+    bloques = {
+        'A': bloque_a_productos(df),
+        'B': bloque_b_categorias(df),
+        'C': bloque_c_logistica(df),
+        'D': bloque_d_paises(df),
+    }
 
-    reporte.generar(HTML_OUTPUT)
+    # Generar reporte de texto con todos los DataFrames
+    generar_reporte_texto(kpis, bloques)
 
     print('\n🎉 ¡Análisis completo!')
-    print(f'  📁 Gráficos PNG: {OUTPUT_DIR}')
-    print(f'  🌐 Reporte HTML: {HTML_OUTPUT}')
+    print(f'  📁 Gráficos PNG: {CHARTS_DIR}')
+    print(f'  📄 Datos JSON:   {DATA_DIR}')
+    print(f'  📝 Reporte TXT:  {os.path.join(DATA_DIR, "resultados_completos.txt")}')
+    print(f'  🌐 Abre dashboard.html en tu navegador para ver el reporte')
+    print(f'\n  💡 Tip: Para servir localmente, ejecuta:')
+    print(f'     python -m http.server 8000')
+    print(f'     y abre http://localhost:8000/dashboard.html')
 
 
 if __name__ == '__main__':
