@@ -1,4 +1,4 @@
-# 📦 Inteligencia Comercial: Análisis de Importaciones en Bogotá
+# 📦 TradeFlow Bogotá: Inteligencia Comercial y Análisis de Importaciones
 
 Este proyecto es una herramienta automatizada de Análisis Exploratorio de Datos (EDA) e Inteligencia Comercial, diseñada para procesar y extraer *insights* estratégicos del registro de importaciones de la ciudad de Bogotá, Colombia.
 
@@ -89,14 +89,14 @@ El script genera un análisis segmentado en 4 bloques temáticos para facilitar 
 
 ## 🆕 Novedades (Última Actualización)
 
-El proyecto ha sido refactorizado para mejorar su escalabilidad, modularidad y experiencia de usuario (UX):
-- **Arquitectura Desacoplada:** Separación del motor de procesamiento de datos (`analisis_importaciones.py`) del frontend visual (`dashboard.html`).
-- **Mejoras en el Entorno:** Migración a Python 3.12.9 utilizando un entorno virtual (`venv`) estricto para garantizar la reproducibilidad.
-- **Nuevos Insights Analíticos:** - Inclusión del Top 15 de bienes más y menos importados por cantidad.
-  - Análisis de costo unitario (FOB ÷ Cantidad).
-  - Rediseño de los gráficos de peso en distribuciones independientes.
-- **Enriquecimiento UI/UX:** Integración de *tooltips* interactivos en los KPIs del dashboard que muestran las definiciones oficiales extraídas de la metadata del gobierno.
-- **Optimización Visual:** Inclusión de etiquetas de porcentaje en barras y tablas del Bloque B para una lectura más ejecutiva.
+El proyecto ha evolucionado a **TradeFlow Bogotá**, con una refactorización completa orientada a escalar y ofrecer una experiencia B2B premium:
+- **Rediseño Premium UI/UX (SaaS B2B):** Migración a un diseño moderno y claro (esquema "slate") con tarjetas blancas elegantes, sombras sutiles, bordes redondeados y una nueva paleta de colores corporativa (acentos en índigo y esmeralda).
+- **Sistema de Tooltips Interactivo en KPIs:** Implementación de *tooltips* interactivos dinámicos para la metadata de cada KPI. Eliminamos los atributos nativos HTML obsoletos, integrando cuadros oscuros flotantes orientados por eventos (JS) que aparecen con transiciones de desvanecimiento ultra fluidas (0.3s) por encima del contenido inferior.
+- **Arquitectura Desacoplada y Organizada:** Separación más clara de los scripts de minería/limpieza de datos (`analisis_importaciones.py`) del template final visual (`index.html`).
+- **Insights Analíticos Extendidos:** 
+  - Identificación del Top 15 de bienes más y menos importados por cantidad global.
+  - Segmentaciones de costo unitario ponderado (Valor FOB ÷ Unidad).
+- **Mejoras Estructurales:** Nueva navegación adhesiva inteligente (*Sticky Nav*) con acabado tipo cristal opaco (*frosted glass effect*), animaciones fluidas (fade in / up) a medida que carga cada tarjeta y un refinado **hero banner** interactivo.
 
 ## 📄 Licencia de los Datos
 
