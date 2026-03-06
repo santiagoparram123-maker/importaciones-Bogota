@@ -42,6 +42,43 @@
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.04);
             --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.04);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --table-even: #f8fafc;
+            --table-hover: rgba(79, 70, 229, 0.03);
+            --nav-bg: rgba(255, 255, 255, 0.82);
+            --kpi-glow: none;
+        }
+
+        /* ═══════════════════════════════════════════
+           DARK THEME
+           ═══════════════════════════════════════════ */
+        [data-theme="dark"] {
+            --bg: #0f0f23;
+            --bg-subtle: #1a1a3e;
+            --surface: #1e1e3a;
+            --surface-hover: #2a2a50;
+            --surface-border: rgba(99, 102, 241, 0.12);
+            --accent: #818cf8;
+            --accent-light: #a5b4fc;
+            --accent-bg: rgba(129, 140, 248, 0.1);
+            --accent2: #34d399;
+            --accent2-bg: rgba(52, 211, 153, 0.1);
+            --accent3: #a78bfa;
+            --accent3-bg: rgba(167, 139, 250, 0.1);
+            --accent-glow: rgba(129, 140, 248, 0.15);
+            --text: #e8ecf4;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.3);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35), 0 8px 32px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4), 0 16px 48px rgba(0, 0, 0, 0.25);
+            --table-even: rgba(255, 255, 255, 0.02);
+            --table-hover: rgba(129, 140, 248, 0.05);
+            --nav-bg: rgba(15, 15, 35, 0.85);
+            --kpi-glow: 0 0 20px rgba(129, 140, 248, 0.08), inset 0 0 20px rgba(129, 140, 248, 0.03);
         }
 
         * {
@@ -177,7 +214,7 @@
             flex-wrap: wrap;
             gap: 4px;
             padding: 10px 40px;
-            background: rgba(255, 255, 255, 0.82);
+            background: var(--nav-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--surface-border);
@@ -185,6 +222,38 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            align-items: center;
+        }
+
+        .nav-spacer {
+            flex: 1;
+        }
+
+        /* ═══════════════════════════════════════════
+           THEME TOGGLE
+           ═══════════════════════════════════════════ */
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid var(--surface-border);
+            background: var(--surface);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-xs);
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-bg);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
+            transform: scale(1.05);
         }
 
         .nav-link {
@@ -214,13 +283,25 @@
            ═══════════════════════════════════════════ */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             padding: 32px 40px;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 101;
+        }
+
+        .kpi-row-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            grid-column: 1 / -1;
+        }
+
+        .kpi-row-bottom .kpi-card {
+            flex: 0 1 calc(25% - 12px);
+            min-width: 175px;
         }
 
         .kpi-card {
@@ -232,7 +313,7 @@
             transition: var(--transition);
             position: relative;
             cursor: help;
-            box-shadow: var(--shadow-xs);
+            box-shadow: var(--shadow-xs), var(--kpi-glow);
             overflow: visible;
         }
 
@@ -473,15 +554,15 @@
         }
 
         .data-table tr:hover td {
-            background: rgba(79, 70, 229, 0.03);
+            background: var(--table-hover);
         }
 
         .data-table tr:nth-child(even) td {
-            background: #f8fafc;
+            background: var(--table-even);
         }
 
         .data-table tr:nth-child(even):hover td {
-            background: rgba(79, 70, 229, 0.03);
+            background: var(--table-hover);
         }
 
         /* ═══════════════════════════════════════════
@@ -642,6 +723,15 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .kpi-row-bottom {
+                flex-wrap: wrap;
+            }
+
+            .kpi-row-bottom .kpi-card {
+                flex: 0 1 calc(50% - 8px);
+                min-width: 140px;
+            }
+
             .container {
                 padding: 12px 16px 40px;
             }
@@ -661,8 +751,8 @@
         }
 
         @media (max-width: 480px) {
-            .kpi-grid {
-                grid-template-columns: 1fr;
+            .kpi-row-bottom .kpi-card {
+                flex: 1 1 100%;
             }
         }
     </style>
@@ -691,6 +781,10 @@
         <a href="#bloque-b" class="nav-link">🏷️ Categorías</a>
         <a href="#bloque-c" class="nav-link">🚢 Logística</a>
         <a href="#bloque-d" class="nav-link">🌍 Geopolítica</a>
+        <div class="nav-spacer"></div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
+            ☀️
+        </button>
     </nav>
 
     <!-- ═══════════════ KPIs ═══════════════ -->
@@ -1015,17 +1109,24 @@
                     document.getElementById('fecha-reporte').textContent = kpis.generado || '—';
 
                     const kpiConfig = [
-                        { key: 'registros', icon: '📋', label: 'Registros', tooltip: 'Número total de registros de importación en el dataset.' },
-                        { key: 'productos_unicos', icon: '📦', label: 'Productos Únicos', tooltip: 'Cantidad de partidas arancelarias únicas según el Código del Sistema Armonizado.' },
-                        { key: 'paises_origen', icon: '🌍', label: 'Países de Origen', tooltip: 'País de origen: Nombre del país de origen de las importaciones.' },
-                        { key: 'total_fob', icon: '💵', label: 'Total FOB', tooltip: 'Dólares FOB: Precio de venta en dólares sin incluir valor de seguro y fletes.' },
-                        { key: 'total_cif', icon: '💰', label: 'Total CIF', tooltip: 'Dólares CIF: Precio de venta en dólares incluyendo valor de seguro y fletes.' },
-                        { key: 'costo_logistico', icon: '🚢', label: 'Costo Logístico', tooltip: 'Diferencia entre CIF y FOB. Representa el costo de seguro y fletes marítimos/aéreos.' },
-                        { key: 'peso_total', icon: '⚖️', label: 'Peso Total', tooltip: 'Kilogramos netos: Peso en kilogramos excluyendo empaques.' },
+                        // Row 1 (4 cards): Financial core
+                        { key: 'total_fob', icon: '💵', label: 'Total FOB', tooltip: 'Dólares FOB: Precio de venta en dólares sin incluir valor de seguro y fletes.', row: 1 },
+                        { key: 'total_cif', icon: '💰', label: 'Total CIF', tooltip: 'Dólares CIF: Precio de venta en dólares incluyendo valor de seguro y fletes.', row: 1 },
+                        { key: 'costo_logistico', icon: '🚢', label: 'Costo Logístico', tooltip: 'Diferencia entre CIF y FOB. Representa el costo de seguro y fletes marítimos/aéreos.', row: 1 },
+                        { key: 'peso_total', icon: '⚖️', label: 'Peso Total', tooltip: 'Kilogramos netos: Peso en kilogramos excluyendo empaques.', row: 1 },
+                        // Row 2 (3 cards): Metadata
+                        { key: 'registros', icon: '📋', label: 'Registros', tooltip: 'Número total de registros de importación en el dataset.', row: 2 },
+                        { key: 'productos_unicos', icon: '📦', label: 'Productos Únicos', tooltip: 'Cantidad de partidas arancelarias únicas según el Código del Sistema Armonizado.', row: 2 },
+                        { key: 'paises_origen', icon: '🌍', label: 'Países de Origen', tooltip: 'País de origen: Nombre del país de origen de las importaciones.', row: 2 },
                     ];
 
+                    const row1 = kpiConfig.filter(k => k.row === 1);
+                    const row2 = kpiConfig.filter(k => k.row === 2);
+
                     let html = '';
-                    kpiConfig.forEach(kpi => {
+
+                    // Row 1: Direct grid children
+                    row1.forEach(kpi => {
                         const value = kpis[kpi.key] || '—';
                         html += `
                         <div class="kpi-card" data-tooltip="${kpi.tooltip}">
@@ -1034,6 +1135,19 @@
                             <div class="kpi-label">${kpi.label}</div>
                         </div>`;
                     });
+
+                    // Row 2: Wrapped in centering container
+                    html += '<div class="kpi-row-bottom">';
+                    row2.forEach(kpi => {
+                        const value = kpis[kpi.key] || '—';
+                        html += `
+                        <div class="kpi-card" data-tooltip="${kpi.tooltip}">
+                            <div class="kpi-icon">${kpi.icon}</div>
+                            <div class="kpi-value">${value}</div>
+                            <div class="kpi-label">${kpi.label}</div>
+                        </div>`;
+                    });
+                    html += '</div>';
 
                     document.getElementById('kpi-grid').innerHTML = html;
 
@@ -1116,8 +1230,35 @@
                 });
             }
 
+            // ── Theme Toggle ──
+            function setupThemeToggle() {
+                const toggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                // Load saved preference
+                const saved = localStorage.getItem('theme');
+                if (saved === 'dark') {
+                    html.setAttribute('data-theme', 'dark');
+                    toggle.textContent = '🌙';
+                }
+
+                toggle.addEventListener('click', () => {
+                    const isDark = html.getAttribute('data-theme') === 'dark';
+                    if (isDark) {
+                        html.removeAttribute('data-theme');
+                        toggle.textContent = '☀️';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        html.setAttribute('data-theme', 'dark');
+                        toggle.textContent = '🌙';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            }
+
             // ── Init ──
             document.addEventListener('DOMContentLoaded', () => {
+                setupThemeToggle();
                 loadKPIs();
                 loadBloqueA();
                 loadBloqueB();
