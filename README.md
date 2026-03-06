@@ -57,6 +57,7 @@ python analisis_importaciones.py
 Al finalizar la ejecución, encontrarás:
 - **12 archivos PNG** en la carpeta `graficos_output`.
 - Un **dashboard interactivo** en `reporte_importaciones.html`, listo para abrir en cualquier navegador web.
+[![Ver Dashboard](https://img.shields.io/badge/Ver_Dashboard-En_Vivo-2ea44f?style=for-the-badge&logo=google-analytics)](https://santiagoparram123-maker.github.io/importaciones-Bogota/)
 
 ## 📊 Estructura del Análisis
 
