@@ -78,6 +78,18 @@ El script genera un análisis segmentado en 4 bloques temáticos para facilitar 
 ### Bloque D: Geopolítica
 - Principales países proveedores.
 - Comparativa de costos logísticos por región de origen.
+
+## 🆕 Novedades (Última Actualización)
+
+El proyecto ha sido refactorizado para mejorar su escalabilidad, modularidad y experiencia de usuario (UX):
+- **Arquitectura Desacoplada:** Separación del motor de procesamiento de datos (`analisis_importaciones.py`) del frontend visual (`dashboard.html`).
+- **Mejoras en el Entorno:** Migración a Python 3.12.9 utilizando un entorno virtual (`venv`) estricto para garantizar la reproducibilidad.
+- **Nuevos Insights Analíticos:** - Inclusión del Top 15 de bienes más y menos importados por cantidad.
+  - Análisis de costo unitario (FOB ÷ Cantidad).
+  - Rediseño de los gráficos de peso en distribuciones independientes.
+- **Enriquecimiento UI/UX:** Integración de *tooltips* interactivos en los KPIs del dashboard que muestran las definiciones oficiales extraídas de la metadata del gobierno.
+- **Optimización Visual:** Inclusión de etiquetas de porcentaje en barras y tablas del Bloque B para una lectura más ejecutiva.
+
 ## 📄 Licencia de los Datos
 
 El dataset oficial de *Importaciones Bogotá* referenciado y utilizado para este análisis se distribuye bajo la licencia **[Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/)**.
