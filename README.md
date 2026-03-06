@@ -1,4 +1,4 @@
-# 📦 TradeFlow Bogotá: Inteligencia Comercial y Análisis de Importaciones
+# 📦 Importaciones Bogotá 2024-2025: Inteligencia Comercial y Análisis
 
 Este proyecto es una herramienta automatizada de Análisis Exploratorio de Datos (EDA) e Inteligencia Comercial, diseñada para procesar y extraer *insights* estratégicos del registro de importaciones de la ciudad de Bogotá, Colombia.
 
