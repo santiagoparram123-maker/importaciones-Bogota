@@ -32,13 +32,20 @@ El pipeline de datos (`analisis_importaciones.py`) ejecuta de forma automática:
 
 Debido al tamaño de los registros, **el dataset original no está incluido en este repositorio**. Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
-### 1. Preparar el Entorno
-Clona este repositorio e instala las librerías necesarias:
+### ⚙️ 1. Instalación de Dependencias
+
+Asegúrate de tener activo tu entorno virtual y ejecuta el siguiente comando en tu terminal para instalar las librerías necesarias para el análisis y visualización:
+
 ```bash
 pip install pandas matplotlib seaborn calamine openpyxl
-### 2. Descargar el Dataset Oficial
-1. Ingresa al Portal de Datos Abiertos de Colombia a través de este enlace oficial: **[Importaciones Bogotá - Datos.gov.co](https://www.datos.gov.co/dataset/Importaciones-Bogot-/vdw8-sjw6/about_data)**.
-2. Descarga el dataset actualizado.
+```
+
+### 📥 2. Obtención del Dataset Oficial
+
+Para que el pipeline de datos funcione, necesitas la fuente de información cruda:
+
+1. Ingresa al portal oficial del gobierno: **[Datos Abiertos Colombia - Importaciones Bogotá](https://www.datos.gov.co/dataset/Importaciones-Bogot-/vdw8-sjw6/about_data)**.
+2. Descarga el archivo y guárdalo en la misma carpeta del proyecto (asegúrate de que el nombre coincida con el que lee el script `analisis_importaciones.py`).
 3. Coloca el archivo descargado en la carpeta raíz de este proyecto.
 
 ### 3. Configurar las Rutas
