@@ -851,39 +851,126 @@
             color: var(--text-muted);
         }
 
-        /* Mini Bar Chart */
+        /* Grouped Bar Chart & Monthly Table */
         .dash-bars {
             flex: 1;
             display: flex;
             align-items: flex-end;
-            gap: 4px;
-            height: 120px;
+            justify-content: space-around;
+            gap: 16px;
+            height: 140px;
+            padding-bottom: 24px;
+        }
+
+        .dash-bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            position: relative;
+        }
+
+        .dash-bar-pair {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 100%;
+            width: 100%;
+            max-width: 40px;
         }
 
         .dash-bar {
             flex: 1;
             border-radius: 4px 4px 0 0;
-            background: linear-gradient(180deg, var(--purple-500), var(--purple-700));
-            min-width: 20px;
-            transition: all 0.4s ease;
-            position: relative;
+            min-width: 12px;
+            transition: var(--transition);
             cursor: pointer;
         }
 
-        .dash-bar:hover {
+        .dash-bar.cif {
             background: linear-gradient(180deg, var(--purple-400), var(--purple-600));
+        }
+
+        .dash-bar.fob {
+            background: linear-gradient(180deg, var(--accent2), var(--success));
+            opacity: 0.8;
+        }
+
+        .dash-bar:hover {
+            filter: brightness(1.2);
             transform: scaleY(1.05);
             transform-origin: bottom;
         }
 
         .dash-bar-label {
             position: absolute;
-            bottom: -18px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.6rem;
-            color: var(--text-muted);
+            bottom: -24px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dim);
             white-space: nowrap;
+        }
+
+        .dash-bar-delta {
+            position: absolute;
+            top: -20px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: var(--surface-hover);
+        }
+
+        .dash-bar-delta.positive {
+            color: var(--success);
+            background: var(--accent2-bg);
+        }
+
+        .dash-bar-delta.negative {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .dash-month-table {
+            margin-top: 24px;
+            border-top: 1px solid var(--surface-border);
+            padding-top: 16px;
+        }
+
+        .dash-month-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            text-align: right;
+        }
+
+        .dash-month-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 8px 4px;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .dash-month-table td {
+            color: var(--text);
+            padding: 8px 4px;
+        }
+
+        .dash-month-table th:first-child,
+        .dash-month-table td:first-child {
+            text-align: left;
+        }
+
+        .positive {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .negative {
+            color: var(--danger);
+            font-weight: 600;
         }
 
         /* Donut Chart */
