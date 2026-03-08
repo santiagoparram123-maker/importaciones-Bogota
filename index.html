@@ -2458,32 +2458,62 @@
 
                     let html = '';
 
-                    // ── Card 1: Import Overview (left, top) ──
+                    // ── Card 1: Import Overview with Monthly Comparison ──
                     if (d.totales && d.mensual) {
                         const t = d.totales;
                         const m = d.mensual;
-                        const maxCif = Math.max(...m.cif);
+                        const maxVal = Math.max(...m.cif, ...m.fob);
 
+                        // Build grouped CIF/FOB bars per month
                         let barsHtml = '';
-                        m.cif.forEach((v, i) => {
-                            const h = maxCif > 0 ? (v / maxCif * 100) : 0;
+                        m.cif.forEach((cifVal, i) => {
+                            const fobVal = m.fob[i] || 0;
+                            const hCif = maxVal > 0 ? (cifVal / maxVal * 100) : 0;
+                            const hFob = maxVal > 0 ? (fobVal / maxVal * 100) : 0;
                             const mes = MONTH_NAMES[m.meses[i]] || m.meses[i];
-                            barsHtml += `<div class="dash-bar" style="height:${h}%" title="${mes}: ${fmtUSD(v)}">
+                            const delta = m.deltas ? m.deltas[i] : 0;
+                            const deltaClass = delta > 0 ? 'positive' : delta < 0 ? 'negative' : '';
+                            const deltaStr = i > 0 ? `<span class="dash-bar-delta ${deltaClass}">${delta > 0 ? '+' : ''}${delta}%</span>` : '';
+
+                            barsHtml += `<div class="dash-bar-group">
+                                <div class="dash-bar-pair">
+                                    <div class="dash-bar cif" style="height:${hCif}%" title="${mes} CIF: ${fmtUSD(cifVal)}"></div>
+                                    <div class="dash-bar fob" style="height:${hFob}%" title="${mes} FOB: ${fmtUSD(fobVal)}"></div>
+                                </div>
+                                ${deltaStr}
                                 <span class="dash-bar-label">${mes}</span>
                             </div>`;
                         });
 
+                        // Monthly comparison table
+                        let tableHtml = '<div class="dash-month-table"><table><thead><tr><th>Mes</th><th>CIF</th><th>FOB</th><th>Log\u00edstico</th><th>Registros</th><th>\u0394 CIF</th></tr></thead><tbody>';
+                        m.cif.forEach((cifVal, i) => {
+                            const mes = MONTH_NAMES[m.meses[i]] || m.meses[i];
+                            const delta = m.deltas ? m.deltas[i] : 0;
+                            const deltaClass = delta > 0 ? 'positive' : delta < 0 ? 'negative' : '';
+                            const deltaLabel = i === 0 ? '\u2014' : `<span class="${deltaClass}">${delta > 0 ? '+' : ''}${delta}%</span>`;
+                            tableHtml += `<tr>
+                                <td><strong>${mes}</strong></td>
+                                <td>${fmtUSD(cifVal)}</td>
+                                <td>${fmtUSD(m.fob[i] || 0)}</td>
+                                <td>${fmtUSD(m.logistico ? m.logistico[i] : 0)}</td>
+                                <td>${(m.registros ? m.registros[i] : 0).toLocaleString('es-CO')}</td>
+                                <td>${deltaLabel}</td>
+                            </tr>`;
+                        });
+                        tableHtml += '</tbody></table></div>';
+
                         html += `
-                        <div class="dash-card">
+                        <div class="dash-card" style="grid-column: 1 / -1;">
                             <div class="dash-card-title">
-                                Resumen de Importaciones
-                                <span class="dash-badge">Anual</span>
+                                Comparativa Mensual de Importaciones
+                                <span class="dash-badge">CIF vs FOB</span>
                             </div>
                             <div class="dash-overview-main">
                                 <div class="dash-total-block">
                                     <div class="dash-total-label">Total CIF Importado</div>
                                     <div class="dash-total-value">${fmtUSD(t.total_cif)}</div>
-                                    <div class="dash-total-subtitle">${t.total_registros.toLocaleString('es-CO')} registros</div>
+                                    <div class="dash-total-subtitle">${t.total_registros.toLocaleString('es-CO')} registros \u00b7 ${m.meses.length} meses</div>
                                     <div class="dash-split">
                                         <div class="dash-split-item">
                                             <span class="dash-split-dot fob"></span>
@@ -2496,14 +2526,15 @@
                                             <span class="dash-split-dot logis"></span>
                                             <div>
                                                 <div class="dash-split-val">${fmtUSD(t.total_logistico)}</div>
-                                                <div class="dash-split-label">Log\u00edstico</div>
+                                                <div class="dash-split-label">Log\u00edstico (${t.pct_logistico}%)</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="dash-bars">${barsHtml}</div>
                             </div>
-                        </div>`;
+                            ${tableHtml}
+                        </div>`
                     }
 
                     // ── Card 2: Distribución por Uso Económico (donut, right, top) ──

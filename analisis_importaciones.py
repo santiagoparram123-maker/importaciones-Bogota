@@ -559,19 +559,38 @@ def generar_dashboard_overview(df: pd.DataFrame) -> dict:
         'pct_logistico': round((total_logistico / total_fob * 100) if total_fob > 0 else 0, 1),
     }
 
-    # ── Datos mensuales para mini bar chart ──
+    # ── Datos mensuales para comparación completa ──
     if 'Mes' in df.columns:
-        mensual = df.groupby('Mes').agg({
+        agg_dict = {
             'Dolares CIF': 'sum',
             'Dolares FOB': 'sum',
-        }).reset_index()
+        }
+        if 'Kilogramos netos' in df.columns:
+            agg_dict['Kilogramos netos'] = 'sum'
+
+        mensual = df.groupby('Mes').agg(agg_dict).reset_index()
+        mensual['registros'] = df.groupby('Mes').size().values
+        mensual['logistico'] = mensual['Dolares CIF'] - mensual['Dolares FOB']
         mensual = mensual.sort_values('Mes')
+
+        # Calcular deltas mes a mes (%)
+        cif_list = mensual['Dolares CIF'].tolist()
+        deltas = [0]  # primer mes sin delta
+        for i in range(1, len(cif_list)):
+            prev = cif_list[i - 1]
+            delta = ((cif_list[i] - prev) / prev * 100) if prev > 0 else 0
+            deltas.append(round(delta, 1))
+
         overview['mensual'] = {
             'meses': mensual['Mes'].tolist(),
             'cif': [round(v, 0) for v in mensual['Dolares CIF'].tolist()],
             'fob': [round(v, 0) for v in mensual['Dolares FOB'].tolist()],
+            'logistico': [round(v, 0) for v in mensual['logistico'].tolist()],
+            'registros': mensual['registros'].tolist(),
+            'kg': [round(v, 0) for v in mensual.get('Kilogramos netos', pd.Series([0]*len(mensual))).tolist()],
+            'deltas': deltas,
         }
-        print(f'  ✅ Datos mensuales: {len(mensual)} meses')
+        print(f'  ✅ Datos mensuales: {len(mensual)} meses (con deltas)')
 
     # ── Distribución por Uso Económico (donut) ──
     if 'Uso economico' in df.columns:
