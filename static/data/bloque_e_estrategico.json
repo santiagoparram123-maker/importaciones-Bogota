@@ -1,0 +1,313 @@
+{
+  "sankey_flows": [
+    {
+      "Pais de origen": "Estados Unidos",
+      "Uso economico": "Materias primas",
+      "Dolares CIF": 2018842483.8100002
+    },
+    {
+      "Pais de origen": "China",
+      "Uso economico": "Bienes de capital",
+      "Dolares CIF": 1246617754.0500002
+    },
+    {
+      "Pais de origen": "China",
+      "Uso economico": "Materias primas",
+      "Dolares CIF": 1052535431.5600001
+    },
+    {
+      "Pais de origen": "China",
+      "Uso economico": "Bienes de consumo",
+      "Dolares CIF": 637554303.99
+    },
+    {
+      "Pais de origen": "Estados Unidos",
+      "Uso economico": "Bienes de capital",
+      "Dolares CIF": 323381544.93
+    },
+    {
+      "Pais de origen": "Estados Unidos",
+      "Uso economico": "Bienes de consumo",
+      "Dolares CIF": 283836351.68
+    },
+    {
+      "Pais de origen": "México",
+      "Uso economico": "Bienes de consumo",
+      "Dolares CIF": 278151540.68999994
+    },
+    {
+      "Pais de origen": "Brasil",
+      "Uso economico": "Materias primas",
+      "Dolares CIF": 234613189.15
+    },
+    {
+      "Pais de origen": "Brasil",
+      "Uso economico": "Bienes de consumo",
+      "Dolares CIF": 134414460.53
+    },
+    {
+      "Pais de origen": "Alemania",
+      "Uso economico": "Materias primas",
+      "Dolares CIF": 132455933.57000001
+    },
+    {
+      "Pais de origen": "Brasil",
+      "Uso economico": "Bienes de capital",
+      "Dolares CIF": 107247088.64999999
+    },
+    {
+      "Pais de origen": "México",
+      "Uso economico": "Bienes de capital",
+      "Dolares CIF": 104398059.54999998
+    },
+    {
+      "Pais de origen": "México",
+      "Uso economico": "Materias primas",
+      "Dolares CIF": 103565050.19
+    },
+    {
+      "Pais de origen": "Alemania",
+      "Uso economico": "Bienes de capital",
+      "Dolares CIF": 100085706.73
+    },
+    {
+      "Pais de origen": "Alemania",
+      "Uso economico": "Bienes de consumo",
+      "Dolares CIF": 99571890.89
+    }
+  ],
+  "heatmap_sectores": [
+    {
+      "index": "Aparatos y material eléctrico, de grabación o...",
+      "1": 566502975.1099999,
+      "2": 490496322.67
+    },
+    {
+      "index": "Cereales",
+      "1": 156325497.86999997,
+      "2": 199016223.46
+    },
+    {
+      "index": "Combustibles y aceites minerales y sus produc...",
+      "1": 440313815.2499999,
+      "2": 556242743.19
+    },
+    {
+      "index": "Fundición, hierro y acero",
+      "1": 139973275.88,
+      "2": 117624991.64999999
+    },
+    {
+      "index": "Instrumentos y aparatos de óptica, fotografía...",
+      "1": 155340145.93,
+      "2": 147688396.91000003
+    },
+    {
+      "index": "Materias plásticas y manufacturas",
+      "1": 251460415.63,
+      "2": 236972291.62
+    },
+    {
+      "index": "Productos farmacéuticos",
+      "1": 282238639.23,
+      "2": 292051732.74
+    },
+    {
+      "index": "Productos químicos orgánicos",
+      "1": 198955475.91,
+      "2": 171131622.79
+    },
+    {
+      "index": "Reactores nucleares, calderas, máquinas y par...",
+      "1": 579183064.8000001,
+      "2": 540623255.02
+    },
+    {
+      "index": "Vehículos automóviles, tractores, ciclos, par...",
+      "1": 390701991.14,
+      "2": 369222817.21000004
+    }
+  ],
+  "scatter_benchmarking": [
+    {
+      "Nombre partida": "Aceites de petróleo o de mineral bituminoso, excepto los aceites crudos; preparaciones no expresadas ni comprendidas en otra parte, con un contenido de aceites de petróleo o de mineral bituminoso superior o igual al 70 % en peso, en las que estos aceites constituyan el elemento base; desechos de aceites.",
+      "Kilogramos netos": 1165835973.37,
+      "Costo_Unitario_CIF": 566.7764422256,
+      "Dolares CIF": 875695890.3300002
+    },
+    {
+      "Nombre partida": "Automóviles de turismo y demás vehículos automóviles concebidos principalmente para el transporte de personas (excepto los de la partida 87.02), incluidos los del tipo familiar («break» o «station wagon») y los de carreras.",
+      "Kilogramos netos": 34874635.38,
+      "Costo_Unitario_CIF": 18095.295738337,
+      "Dolares CIF": 473988176.57
+    },
+    {
+      "Nombre partida": "Aparatos eléctricos de telefonía o telegrafía con hilos, incluidos los teléfonos de usuario de auricular inalámbrico combinado con micrófono y los aparatos de telecomunicación por corriente portadora o telecomunicación digital; videófonos.",
+      "Kilogramos netos": 2397290.4600000004,
+      "Costo_Unitario_CIF": 80.9033235822,
+      "Dolares CIF": 417742935.96
+    },
+    {
+      "Nombre partida": "Medicamentos (excepto los productos de las partidas 30.02, 30.05 ó 30.06) constituidos por productos mezclados o sin mezclar, preparados para usos terapéuticos o profilácticos, dosificados (incluidos los administrados por vía trans-dérmica) o acondicionados para la venta al por menor.",
+      "Kilogramos netos": 9688418.01,
+      "Costo_Unitario_CIF": 38.5602250723,
+      "Dolares CIF": 373587579.06
+    },
+    {
+      "Nombre partida": "Maíz.",
+      "Kilogramos netos": 1167927861.19,
+      "Costo_Unitario_CIF": 0.2419081159,
+      "Dolares CIF": 282531228.44
+    },
+    {
+      "Nombre partida": "Máquinas automáticas para tratamiento o procesamiento de datos y sus unidades; lectores magnéticos u ópticos, máquinas para registro de datos sobre soporte en forma codificada y máquinas para tratamiento o procesamiento de estos datos, no expresados ni comprendidos en otra parte.",
+      "Kilogramos netos": 2161312.95,
+      "Costo_Unitario_CIF": 168.9733949174,
+      "Dolares CIF": 277487940.1600001
+    },
+    {
+      "Nombre partida": "Sangre humana; sangre animal preparada para usos terapéuticos, profilácticos o de diagnóstico; antisueros (sueros con anticuerpos), demás fracciones de la sangre y productos inmunológicos modificados, incluso obtenidos por proceso biotecnológico; vacunas, toxinas, cultivos de microorganismos (excepto las levaduras) y productos similares.",
+      "Kilogramos netos": 2234199.2199999997,
+      "Costo_Unitario_CIF": 77.910417447,
+      "Dolares CIF": 174067393.89000002
+    },
+    {
+      "Nombre partida": "Gas de petróleo y demás hidrocarburos gaseosos.",
+      "Kilogramos netos": 206586204.55,
+      "Costo_Unitario_CIF": 329.9485330311,
+      "Dolares CIF": 154676826.86
+    },
+    {
+      "Nombre partida": "Motocicletas (incluso con pedales) y ciclos con motor auxiliar, con sidecar o sin él; sidecares.",
+      "Kilogramos netos": 16535584.209999999,
+      "Costo_Unitario_CIF": 1013.4582530662,
+      "Dolares CIF": 149976619.58
+    },
+    {
+      "Nombre partida": "Neumáticos (llantas neumáticas) nuevos de caucho.",
+      "Kilogramos netos": 33992201.300000004,
+      "Costo_Unitario_CIF": 33.6814228683,
+      "Dolares CIF": 121422236.75
+    },
+    {
+      "Nombre partida": "Tortas y demás residuos s olidos de la extracción del aceite de soja(soya), incluso molidos o en «pellets».",
+      "Kilogramos netos": 312546078.0,
+      "Costo_Unitario_CIF": 0.3806037442,
+      "Dolares CIF": 118956207.50999999
+    },
+    {
+      "Nombre partida": "Polímeros de etileno en formas primarias.",
+      "Kilogramos netos": 98463052.08,
+      "Costo_Unitario_CIF": 1.1330703327,
+      "Dolares CIF": 111565563.17999999
+    },
+    {
+      "Nombre partida": "Insecticidas, raticidas y demás antirroedores, fungicidas, herbicidas, inhibidores de germinación y reguladores del crecimiento de las plantas, desinfectantes y productos similares, presentados en formas o en envases para la venta al por menor, o como preparaciones o artículos tales como cintas, mechas y velas,azufradas, y papeles matamoscas.",
+      "Kilogramos netos": 21512187.08,
+      "Costo_Unitario_CIF": 4.9914803786,
+      "Dolares CIF": 107377659.71000001
+    },
+    {
+      "Nombre partida": "Instrumentos y aparatos de medicina, cirugía, odontología o veterinaria, incluidos los de centellografía y demás aparatos electromédicos, así como los aparatos para pruebas visuales.",
+      "Kilogramos netos": 2644558.409999999,
+      "Costo_Unitario_CIF": 0.4115428551,
+      "Dolares CIF": 100760190.30000003
+    },
+    {
+      "Nombre partida": "Trigo y morcajo (tranquillón).",
+      "Kilogramos netos": 345505922.0,
+      "Costo_Unitario_CIF": 0.2822854391,
+      "Dolares CIF": 97531290.9
+    },
+    {
+      "Nombre partida": "Partes y accesorios de vehículos automóviles de las partidas 87.01 a 87.05.",
+      "Kilogramos netos": 13783637.570000002,
+      "Costo_Unitario_CIF": 9.0633343722,
+      "Dolares CIF": 93930077.22
+    },
+    {
+      "Nombre partida": "Abonos minerales o químicos, con dos o tres de los elementos fertilizantes: nitrógeno, fósforo y potasio; los demás abonos; productos de este Capítulo en tabletas o formas similares o en envases de un peso bruto inferior o igual a 10 kg.",
+      "Kilogramos netos": 133324441.91,
+      "Costo_Unitario_CIF": 0.6451186987,
+      "Dolares CIF": 86010090.47
+    },
+    {
+      "Nombre partida": "Aceite de soja (soya) y sus fracciones, incluso refinado, pero sin modificar químicamente.",
+      "Kilogramos netos": 72849055.83,
+      "Costo_Unitario_CIF": 1.1346397608,
+      "Dolares CIF": 82657435.28
+    },
+    {
+      "Nombre partida": "Aparatos receptores de televisión, incluso con aparato receptor de radiodifusión o de grabación o reproducción de sonido o imagen incorporado; videomonitores y videoproyectores.",
+      "Kilogramos netos": 3857787.4600000004,
+      "Costo_Unitario_CIF": 88.5696695931,
+      "Dolares CIF": 78215255.23
+    },
+    {
+      "Nombre partida": "Vehículos automóviles para transporte de mercancías.",
+      "Kilogramos netos": 8362912.4,
+      "Costo_Unitario_CIF": 19291.4851091925,
+      "Dolares CIF": 75969868.36
+    },
+    {
+      "Nombre partida": "Carne de animales de la especie porcina, fresca, refrigerada o congelada",
+      "Kilogramos netos": 24555458.599999998,
+      "Costo_Unitario_CIF": 2.9371532654,
+      "Dolares CIF": 72123145.41
+    },
+    {
+      "Nombre partida": "Hilos, cables (incluidos los coaxiales) y demás conductores aislados para electricidad, aunque estén laqueados, anodizados o provistos de piezas de conexión; cables de fibras ópticas constituidos por fibras enfundadas individualmente, incluso con conductores eléctricos incorporados o provistos de piezas de conexión.",
+      "Kilogramos netos": 9987645.370000003,
+      "Costo_Unitario_CIF": 6.8003479746,
+      "Dolares CIF": 69107296.86
+    },
+    {
+      "Nombre partida": "Poliacetales, los demás poliéteres y resinas epoxi, en formas primarias; policarbonatos, resinas alcídicas, poliésteres alílicos y demás poliésteres, en formas primarias.",
+      "Kilogramos netos": 52306518.72,
+      "Costo_Unitario_CIF": 1.3157840348,
+      "Dolares CIF": 68824082.25
+    },
+    {
+      "Nombre partida": "Abonos minerales o químicos nitrogenados.",
+      "Kilogramos netos": 176191106.16,
+      "Costo_Unitario_CIF": 0.3743371978,
+      "Dolares CIF": 65954884.95
+    },
+    {
+      "Nombre partida": "Alambre de cobre.",
+      "Kilogramos netos": 6526833.29,
+      "Costo_Unitario_CIF": 9.726144971,
+      "Dolares CIF": 63480926.779999994
+    },
+    {
+      "Nombre partida": "Las demás placas, láminas, hojas y tiras, de plástico no celular y sin refuerzo, estratificación ni soporte o combinación similar con otras materias.",
+      "Kilogramos netos": 19876624.68,
+      "Costo_Unitario_CIF": 3.0734328264,
+      "Dolares CIF": 61089470.77
+    },
+    {
+      "Nombre partida": "Preparaciones alimenticias no expresadas ni comprendidas en otra parte.",
+      "Kilogramos netos": 8217382.37,
+      "Costo_Unitario_CIF": 6.7297946864,
+      "Dolares CIF": 55301296.21
+    },
+    {
+      "Nombre partida": "Diodos, transistores y dispositivos semiconductores similares; dispositivos semiconductores fotosensibles, incluidas las células fotovoltaicas, aunque estén ensambladas en módulos o paneles; diodos emisores de luz; cristales piezoeléctricos montados.",
+      "Kilogramos netos": 23768578.19,
+      "Costo_Unitario_CIF": 2.925435934,
+      "Dolares CIF": 54971460.000000015
+    },
+    {
+      "Nombre partida": "Artículos y aparatos de ortopedia, incluidas las fajas y vendajes medicoquirúrgicos y las muletas; tablillas, férulas u otros artículos y aparatos para fracturas; artículos y aparatos de prótesis; audífonos y demás aparatos que lleve la propia persona o se le implanten para  compensar un defecto o incapacidad.",
+      "Kilogramos netos": 185391.92,
+      "Costo_Unitario_CIF": 1.912213187,
+      "Dolares CIF": 54484675.04000001
+    },
+    {
+      "Nombre partida": "Centrifugadoras, incluidas las secadoras centrífugas; aparatos para filtrar o depurar líquidos o gases.",
+      "Kilogramos netos": 3713740.3400000003,
+      "Costo_Unitario_CIF": 5.5496100614,
+      "Dolares CIF": 52905792.37
+    }
+  ]
+}

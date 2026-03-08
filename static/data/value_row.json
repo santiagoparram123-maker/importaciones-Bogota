@@ -1,0 +1,13 @@
+{
+  "market_share_pais": "China",
+  "market_share_valor": "USD 2,936,822,517",
+  "market_share_pct": "27.5%",
+  "costo_unitario_cif": "USD 0.90",
+  "costo_unitario_cif_raw": 0.9,
+  "fletes_primer_mes": 1,
+  "fletes_ultimo_mes": 2,
+  "fletes_val_primer": "USD 323,225,375",
+  "fletes_val_ultimo": "USD 304,405,401",
+  "fletes_cambio_pct": "-5.8%",
+  "fletes_tendencia": "down"
+}

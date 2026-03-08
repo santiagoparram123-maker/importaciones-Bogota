@@ -1,7 +1,7 @@
 # =============================================================================
 # analisis_importaciones.py — Motor de Datos: Importaciones Bogotá
 # Autor: Santiago (asistido por IA)
-# Genera 12 gráficos PNG + datos JSON para el Dashboard
+# Genera 15 gráficos PNG + Sankey HTML + datos JSON para el Dashboard
 # =============================================================================
 
 import pandas as pd
@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import json
+import numpy as np
+import plotly.graph_objects as go
+import plotly.express as px
 import warnings
 from datetime import datetime
 
@@ -532,6 +535,586 @@ def resumen_ejecutivo(df: pd.DataFrame) -> dict:
 
 
 # =============================================================================
+# 8a-2. DASHBOARD OVERVIEW → Datos para el panel interactivo
+# =============================================================================
+def generar_dashboard_overview(df: pd.DataFrame) -> dict:
+    """Genera datos para el dashboard overview didáctico al inicio de la página."""
+    print('\n' + '=' * 60)
+    print('  📊 DASHBOARD OVERVIEW')
+    print('=' * 60)
+
+    overview = {}
+
+    # ── Totales generales ──
+    total_cif = float(df['Dolares CIF'].sum())
+    total_fob = float(df['Dolares FOB'].sum())
+    total_logistico = total_cif - total_fob
+    total_registros = len(df)
+
+    overview['totales'] = {
+        'total_cif': round(total_cif, 0),
+        'total_fob': round(total_fob, 0),
+        'total_logistico': round(total_logistico, 0),
+        'total_registros': total_registros,
+        'pct_logistico': round((total_logistico / total_fob * 100) if total_fob > 0 else 0, 1),
+    }
+
+    # ── Datos mensuales para mini bar chart ──
+    if 'Mes' in df.columns:
+        mensual = df.groupby('Mes').agg({
+            'Dolares CIF': 'sum',
+            'Dolares FOB': 'sum',
+        }).reset_index()
+        mensual = mensual.sort_values('Mes')
+        overview['mensual'] = {
+            'meses': mensual['Mes'].tolist(),
+            'cif': [round(v, 0) for v in mensual['Dolares CIF'].tolist()],
+            'fob': [round(v, 0) for v in mensual['Dolares FOB'].tolist()],
+        }
+        print(f'  ✅ Datos mensuales: {len(mensual)} meses')
+
+    # ── Distribución por Uso Económico (donut) ──
+    if 'Uso economico' in df.columns:
+        uso_dist = df.groupby('Uso economico')['Dolares CIF'].sum().sort_values(ascending=False)
+        uso_dist = uso_dist[uso_dist > 0]
+        total = uso_dist.sum()
+        uso_data = []
+        for nombre, valor in uso_dist.items():
+            uso_data.append({
+                'nombre': str(nombre),
+                'valor': round(float(valor), 0),
+                'pct': round(float(valor) / total * 100, 1),
+            })
+        overview['uso_economico'] = uso_data
+        print(f'  ✅ Uso económico: {len(uso_data)} categorías')
+
+    # ── Top 5 Países (barra de progreso) ──
+    if 'Pais de origen' in df.columns:
+        pais_top = df.groupby('Pais de origen').agg({
+            'Dolares CIF': 'sum',
+            'Dolares FOB': 'sum',
+        }).nlargest(5, 'Dolares CIF')
+        max_cif = pais_top['Dolares CIF'].max()
+        paises_data = []
+        for pais, row in pais_top.iterrows():
+            paises_data.append({
+                'nombre': str(pais),
+                'cif': round(float(row['Dolares CIF']), 0),
+                'fob': round(float(row['Dolares FOB']), 0),
+                'pct_bar': round(float(row['Dolares CIF']) / max_cif * 100, 1),
+            })
+        overview['top_paises'] = paises_data
+        print(f'  ✅ Top 5 países exportados')
+
+    # ── Top 5 Productos más importados ──
+    if 'Nombre partida' in df.columns:
+        prod_top = df.groupby('Nombre partida').agg({
+            'Dolares CIF': 'sum',
+            'Cantidad': 'sum',
+        }).nlargest(5, 'Dolares CIF')
+        productos_data = []
+        for prod, row in prod_top.iterrows():
+            nombre = str(prod)
+            if len(nombre) > 45:
+                nombre = nombre[:45] + '...'
+            productos_data.append({
+                'nombre': nombre,
+                'cif': round(float(row['Dolares CIF']), 0),
+                'cantidad': round(float(row['Cantidad']), 0),
+            })
+        overview['top_productos'] = productos_data
+        print(f'  ✅ Top 5 productos exportados')
+
+    # ── Nivel Tecnológico (mini resumen) ──
+    if 'Nivel tecnologico' in df.columns:
+        nivel_dist = df.groupby('Nivel tecnologico')['Dolares CIF'].sum().sort_values(ascending=False)
+        nivel_dist = nivel_dist[nivel_dist > 0]
+        total_nivel = nivel_dist.sum()
+        nivel_data = []
+        for nombre, valor in nivel_dist.items():
+            nivel_data.append({
+                'nombre': str(nombre),
+                'valor': round(float(valor), 0),
+                'pct': round(float(valor) / total_nivel * 100, 1),
+            })
+        overview['nivel_tecnologico'] = nivel_data
+        print(f'  ✅ Nivel tecnológico: {len(nivel_data)} niveles')
+
+    guardar_json(overview, 'dashboard_overview')
+    print(f'  📦 dashboard_overview.json exportado')
+    return overview
+
+
+# =============================================================================
+# 8b. VALUE ROW → Métricas financieras avanzadas
+# =============================================================================
+def calcular_value_row(df: pd.DataFrame) -> dict:
+    print('\n' + '=' * 60)
+    print('  📊 VALUE ROW: MÉTRICAS FINANCIERAS AVANZADAS')
+    print('=' * 60)
+
+    value_row = {}
+
+    # ── Market Share por País (en CIF) ──
+    if 'Pais de origen' in df.columns and 'Dolares CIF' in df.columns:
+        pais_cif = df.groupby('Pais de origen')['Dolares CIF'].sum()
+        total_cif = pais_cif.sum()
+        pais_lider = pais_cif.idxmax()
+        pais_lider_valor = pais_cif.max()
+        pais_lider_pct = (pais_lider_valor / total_cif * 100) if total_cif > 0 else 0
+
+        value_row['market_share_pais'] = pais_lider
+        value_row['market_share_valor'] = f'USD {pais_lider_valor:,.0f}'
+        value_row['market_share_pct'] = f'{pais_lider_pct:.1f}%'
+        print(f'  🏆 Market Share: {pais_lider} → {pais_lider_pct:.1f}% del CIF total')
+
+    # ── Costo Unitario CIF Promedio Global ──
+    if 'Dolares CIF' in df.columns and 'Cantidad' in df.columns:
+        total_cif = df['Dolares CIF'].sum()
+        total_cant = df[df['Cantidad'] > 0]['Cantidad'].sum()
+        costo_unitario_cif = total_cif / total_cant if total_cant > 0 else 0
+
+        value_row['costo_unitario_cif'] = f'USD {costo_unitario_cif:,.2f}'
+        value_row['costo_unitario_cif_raw'] = round(costo_unitario_cif, 2)
+        print(f'  💲 Costo Unitario CIF Global: USD {costo_unitario_cif:,.2f}')
+
+    # ── Tendencia de Fletes ──
+    if 'Costo_Logistico' in df.columns and 'Mes' in df.columns:
+        flete_por_mes = df.groupby('Mes')['Costo_Logistico'].sum().sort_index()
+        if len(flete_por_mes) >= 2:
+            primer_mes = flete_por_mes.index[0]
+            ultimo_mes = flete_por_mes.index[-1]
+            val_primer = flete_por_mes.iloc[0]
+            val_ultimo = flete_por_mes.iloc[-1]
+            cambio_pct = ((val_ultimo - val_primer) / val_primer * 100) if val_primer > 0 else 0
+
+            value_row['fletes_primer_mes'] = int(primer_mes)
+            value_row['fletes_ultimo_mes'] = int(ultimo_mes)
+            value_row['fletes_val_primer'] = f'USD {val_primer:,.0f}'
+            value_row['fletes_val_ultimo'] = f'USD {val_ultimo:,.0f}'
+            value_row['fletes_cambio_pct'] = f'{cambio_pct:+.1f}%'
+            value_row['fletes_tendencia'] = 'up' if cambio_pct > 0 else 'down'
+            print(f'  📈 Tendencia Fletes: Mes {primer_mes} ({val_primer:,.0f}) → Mes {ultimo_mes} ({val_ultimo:,.0f}) = {cambio_pct:+.1f}%')
+
+    guardar_json(value_row, 'value_row')
+    print('  ✅ value_row.json exportado')
+    return value_row
+
+
+# =============================================================================
+# 8c. BLOQUE E — VISUALIZACIONES ESTRATÉGICAS
+# =============================================================================
+def bloque_e_estrategico(df: pd.DataFrame) -> dict:
+    print('\n' + '=' * 60)
+    print('  BLOQUE E: VISUALIZACIONES ESTRATÉGICAS')
+    print('=' * 60)
+
+    tablas = {}
+    dataframes = {}
+
+    # ── Gráfico 14: Sankey (Plotly) ──
+    # Flujo: País de origen (Top 5) → Uso económico → Nivel tecnológico
+    cols_sankey = ['Pais de origen', 'Uso economico', 'Nivel tecnologico', 'Dolares CIF']
+    if all(c in df.columns for c in cols_sankey):
+        print('\n🔀 Generando Diagrama Sankey...')
+        df_sankey = df[df['Dolares CIF'] > 0].copy()
+
+        # Top 5 países por CIF
+        top5_paises = df_sankey.groupby('Pais de origen')['Dolares CIF'].sum().nlargest(5).index.tolist()
+        df_sankey = df_sankey[df_sankey['Pais de origen'].isin(top5_paises)]
+
+        # Nodos: países, usos económicos, niveles tecnológicos
+        paises = df_sankey['Pais de origen'].unique().tolist()
+        usos = df_sankey['Uso economico'].dropna().unique().tolist()
+        niveles = df_sankey['Nivel tecnologico'].dropna().unique().tolist()
+
+        all_nodes = paises + usos + niveles
+        node_idx = {name: i for i, name in enumerate(all_nodes)}
+
+        # Links: País → Uso económico
+        link_pu = df_sankey.groupby(['Pais de origen', 'Uso economico'])['Dolares CIF'].sum().reset_index()
+        link_pu = link_pu[link_pu['Dolares CIF'] > 0]
+
+        # Links: Uso económico → Nivel tecnológico
+        link_un = df_sankey.groupby(['Uso economico', 'Nivel tecnologico'])['Dolares CIF'].sum().reset_index()
+        link_un = link_un[link_un['Dolares CIF'] > 0]
+
+        sources, targets, values = [], [], []
+
+        for _, row in link_pu.iterrows():
+            if row['Pais de origen'] in node_idx and row['Uso economico'] in node_idx:
+                sources.append(node_idx[row['Pais de origen']])
+                targets.append(node_idx[row['Uso economico']])
+                values.append(row['Dolares CIF'])
+
+        for _, row in link_un.iterrows():
+            if row['Uso economico'] in node_idx and row['Nivel tecnologico'] in node_idx:
+                sources.append(node_idx[row['Uso economico']])
+                targets.append(node_idx[row['Nivel tecnologico']])
+                values.append(row['Dolares CIF'])
+
+        # Colores por tipo de nodo
+        node_colors = []
+        for node in all_nodes:
+            if node in paises:
+                node_colors.append('rgba(79, 70, 229, 0.8)')   # Índigo
+            elif node in usos:
+                node_colors.append('rgba(16, 185, 129, 0.8)')  # Esmeralda
+            else:
+                node_colors.append('rgba(139, 92, 246, 0.8)')  # Violeta
+
+        fig_sankey = go.Figure(data=[go.Sankey(
+            node=dict(
+                pad=20,
+                thickness=25,
+                line=dict(color='rgba(0,0,0,0.15)', width=0.5),
+                label=all_nodes,
+                color=node_colors,
+            ),
+            link=dict(
+                source=sources,
+                target=targets,
+                value=values,
+                color='rgba(200, 200, 220, 0.3)',
+            )
+        )])
+
+        fig_sankey.update_layout(
+            title_text='Flujo de Valor CIF: País de Origen → Uso Económico → Nivel Tecnológico',
+            font=dict(family='Inter, sans-serif', size=13),
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            height=550,
+            margin=dict(l=20, r=20, t=60, b=20),
+        )
+
+        sankey_path = os.path.join(CHARTS_DIR, 'sankey_flow.html')
+        fig_sankey.write_html(
+            sankey_path,
+            full_html=True,
+            include_plotlyjs='cdn',
+            config={'responsive': True, 'displayModeBar': False}
+        )
+        print(f'  💾 sankey_flow.html guardado')
+
+        # Datos para tabla
+        sankey_table = link_pu.sort_values('Dolares CIF', ascending=False).head(15)
+        tablas['sankey_flows'] = df_to_records(sankey_table)
+        dataframes['Flujos Sankey (País → Uso Económico)'] = sankey_table
+
+    # ── Gráfico 15: Heatmap de Crecimiento por Sector ──
+    if 'Mes' in df.columns and 'Nombre capitulo' in df.columns:
+        print('\n🔥 Generando Heatmap de Sectores...')
+
+        # Top 10 sectores por FOB total
+        top10_sectores = (
+            df.groupby('Nombre capitulo')['Dolares FOB'].sum()
+            .nlargest(10).index.tolist()
+        )
+        df_heat = df[df['Nombre capitulo'].isin(top10_sectores)].copy()
+        pivot = df_heat.pivot_table(
+            values='Dolares FOB', index='Nombre capitulo', columns='Mes',
+            aggfunc='sum', fill_value=0
+        )
+        # Truncar nombres largos para el eje Y
+        pivot.index = [n[:45] + '...' if len(n) > 45 else n for n in pivot.index]
+
+        fig, ax = plt.subplots(figsize=(14, 8))
+        sns.heatmap(
+            pivot, annot=True, fmt=',.0f', cmap='YlOrRd',
+            linewidths=0.5, linecolor='white',
+            cbar_kws={'label': 'USD FOB'},
+            ax=ax
+        )
+        ax.set_title('Mapa de Calor: FOB por Sector × Mes', fontweight='bold', pad=15)
+        ax.set_xlabel('Mes')
+        ax.set_ylabel('')
+        plt.xticks(rotation=0)
+        plt.yticks(rotation=0, fontsize=8)
+        plt.tight_layout()
+        guardar_chart(fig, '14_heatmap_sectores')
+
+        tablas['heatmap_sectores'] = df_to_records(
+            pivot.reset_index().rename(columns={'Nombre capitulo': 'Sector'})
+        )
+        dataframes['Heatmap Sectores × Mes'] = pivot.reset_index()
+
+    # ── Gráfico 16: Scatter Benchmarking ──
+    cols_scatter = ['Nombre partida', 'Kilogramos netos', 'Dolares CIF', 'Cantidad']
+    if all(c in df.columns for c in cols_scatter):
+        print('\n📊 Generando Scatter Benchmarking...')
+
+        # Top 30 productos por CIF total
+        top30 = df.groupby('Nombre partida').agg({
+            'Kilogramos netos': 'sum',
+            'Dolares CIF': 'sum',
+            'Cantidad': 'sum'
+        }).nlargest(30, 'Dolares CIF').reset_index()
+
+        # Costo unitario CIF = CIF / Cantidad
+        top30 = top30[top30['Cantidad'] > 0].copy()
+        top30['Costo_Unitario_CIF'] = top30['Dolares CIF'] / top30['Cantidad']
+
+        fig, ax = plt.subplots(figsize=(14, 9))
+
+        # Normalizar tamaño de burbujas
+        sizes = top30['Dolares CIF'] / top30['Dolares CIF'].max() * 1500 + 50
+
+        scatter = ax.scatter(
+            top30['Kilogramos netos'],
+            top30['Costo_Unitario_CIF'],
+            s=sizes,
+            alpha=0.6,
+            c=top30['Dolares CIF'],
+            cmap='viridis',
+            edgecolors='white',
+            linewidth=0.8,
+        )
+
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+        ax.set_title('Benchmarking: Top 30 Productos — Volumen vs Precio Unitario CIF',
+                     fontweight='bold', pad=15)
+        ax.set_xlabel('Volumen (Kg Netos) — escala log')
+        ax.set_ylabel('Costo Unitario CIF (USD/Unidad) — escala log')
+
+        cbar = plt.colorbar(scatter, ax=ax, shrink=0.8)
+        cbar.set_label('Total CIF (USD)')
+
+        # Anotar top 5 productos
+        for _, row in top30.nlargest(5, 'Dolares CIF').iterrows():
+            nombre_corto = row['Nombre partida'][:30] + '...' if len(row['Nombre partida']) > 30 else row['Nombre partida']
+            ax.annotate(
+                nombre_corto,
+                (row['Kilogramos netos'], row['Costo_Unitario_CIF']),
+                fontsize=7, alpha=0.85,
+                xytext=(10, 10), textcoords='offset points',
+                arrowprops=dict(arrowstyle='->', color='gray', lw=0.5)
+            )
+
+        plt.tight_layout()
+        guardar_chart(fig, '15_scatter_benchmarking')
+
+        # Datos para tabla
+        scatter_data = top30[['Nombre partida', 'Kilogramos netos', 'Costo_Unitario_CIF', 'Dolares CIF']].copy()
+        scatter_data = scatter_data.sort_values('Dolares CIF', ascending=False)
+        tablas['scatter_benchmarking'] = df_to_records(scatter_data)
+        dataframes['Scatter Benchmarking Top 30'] = scatter_data
+
+    guardar_json(tablas, 'bloque_e_estrategico')
+    return dataframes
+
+
+# =============================================================================
+# 8d. BLOQUE F — MAPA GEOGRÁFICO + CALCULADORA INTELIGENTE
+# =============================================================================
+# Mapeo de nombres de países español → inglés para plotly choropleth
+PAIS_MAP_ES_EN = {
+    'China': 'China', 'Estados Unidos': 'United States', 'Mexico': 'Mexico',
+    'México': 'Mexico', 'Alemania': 'Germany', 'Brasil': 'Brazil',
+    'Japón': 'Japan', 'Japon': 'Japan', 'Corea del Sur': 'South Korea',
+    'Corea': 'South Korea', 'Francia': 'France', 'Italia': 'Italy',
+    'Reino Unido': 'United Kingdom', 'España': 'Spain', 'India': 'India',
+    'Canadá': 'Canada', 'Canada': 'Canada', 'Colombia': 'Colombia',
+    'Argentina': 'Argentina', 'Chile': 'Chile', 'Perú': 'Peru', 'Peru': 'Peru',
+    'Ecuador': 'Ecuador', 'Turquía': 'Turkey', 'Turquia': 'Turkey',
+    'Tailandia': 'Thailand', 'Taiwan': 'Taiwan', 'Taiwán': 'Taiwan',
+    'Suiza': 'Switzerland', 'Países Bajos': 'Netherlands', 'Paises Bajos': 'Netherlands',
+    'Holanda': 'Netherlands', 'Bélgica': 'Belgium', 'Belgica': 'Belgium',
+    'Suecia': 'Sweden', 'Austria': 'Austria', 'Polonia': 'Poland',
+    'Noruega': 'Norway', 'Dinamarca': 'Denmark', 'Finlandia': 'Finland',
+    'Portugal': 'Portugal', 'Irlanda': 'Ireland', 'Rusia': 'Russia',
+    'Federacion de Rusia': 'Russia', 'Israel': 'Israel',
+    'Sudafrica': 'South Africa', 'Sudáfrica': 'South Africa',
+    'Australia': 'Australia', 'Nueva Zelanda': 'New Zealand',
+    'Indonesia': 'Indonesia', 'Malasia': 'Malaysia', 'Filipinas': 'Philippines',
+    'Vietnam': 'Vietnam', 'Viet Nam': 'Vietnam', 'Singapur': 'Singapore',
+    'Emiratos Arabes Unidos': 'United Arab Emirates',
+    'Arabia Saudita': 'Saudi Arabia', 'Egipto': 'Egypt',
+    'Venezuela': 'Venezuela', 'Paraguay': 'Paraguay', 'Uruguay': 'Uruguay',
+    'Bolivia': 'Bolivia', 'Panamá': 'Panama', 'Panama': 'Panama',
+    'Costa Rica': 'Costa Rica', 'Guatemala': 'Guatemala',
+    'Honduras': 'Honduras', 'El Salvador': 'El Salvador',
+    'República Dominicana': 'Dominican Republic',
+    'Puerto Rico': 'Puerto Rico', 'Cuba': 'Cuba', 'Trinidad y Tobago': 'Trinidad and Tobago',
+    'Jamaica': 'Jamaica', 'Nicaragua': 'Nicaragua',
+    'República Checa': 'Czech Republic', 'Republica Checa': 'Czech Republic',
+    'Hungría': 'Hungary', 'Hungria': 'Hungary', 'Rumania': 'Romania',
+    'Grecia': 'Greece', 'Pakistán': 'Pakistan', 'Pakistan': 'Pakistan',
+    'Bangladesh': 'Bangladesh', 'Sri Lanka': 'Sri Lanka',
+    'Marruecos': 'Morocco', 'Túnez': 'Tunisia', 'Nigeria': 'Nigeria',
+    'Kenia': 'Kenya', 'Ghana': 'Ghana', 'Etiopía': 'Ethiopia',
+    'Hong Kong': 'Hong Kong',
+}
+
+
+def bloque_f_mapas(df: pd.DataFrame) -> dict:
+    print('\n' + '=' * 60)
+    print('  BLOQUE F: MAPA GEOGRÁFICO + CALCULADORA INTELIGENTE')
+    print('=' * 60)
+
+    tablas = {}
+    dataframes = {}
+
+    # ── Gráfico 17: Mapa Geográfico Coroplético (Plotly) ──
+    if 'Pais de origen' in df.columns and 'Dolares CIF' in df.columns:
+        print('\n🌍 Generando Mapa Geográfico...')
+
+        pais_cif = df.groupby('Pais de origen')['Dolares CIF'].sum().reset_index()
+        pais_cif.columns = ['Pais', 'Total_CIF']
+        pais_cif = pais_cif[pais_cif['Total_CIF'] > 0].sort_values('Total_CIF', ascending=False)
+
+        # Mapear nombres al inglés para plotly
+        pais_cif['Country'] = pais_cif['Pais'].map(PAIS_MAP_ES_EN).fillna(pais_cif['Pais'])
+
+        fig_map = px.choropleth(
+            pais_cif,
+            locations='Country',
+            locationmode='country names',
+            color='Total_CIF',
+            hover_name='Pais',
+            hover_data={'Total_CIF': ':,.0f', 'Country': False},
+            color_continuous_scale='YlOrRd',
+            labels={'Total_CIF': 'USD CIF'},
+            title='Mapa de Calor Geográfico: Importaciones por País de Origen (USD CIF)',
+        )
+
+        fig_map.update_layout(
+            geo=dict(
+                showframe=False,
+                showcoastlines=True,
+                coastlinecolor='rgba(100,100,100,0.3)',
+                projection_type='natural earth',
+                landcolor='rgba(240,240,240,1)',
+                showland=True,
+                showcountries=True,
+                countrycolor='rgba(200,200,200,0.5)',
+            ),
+            font=dict(family='Inter, sans-serif', size=12),
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            height=550,
+            margin=dict(l=10, r=10, t=60, b=10),
+            coloraxis_colorbar=dict(
+                title='USD CIF',
+                tickformat=',',
+            ),
+        )
+
+        map_path = os.path.join(CHARTS_DIR, 'mapa_importaciones.html')
+        fig_map.write_html(
+            map_path,
+            full_html=True,
+            include_plotlyjs='cdn',
+            config={'responsive': True, 'displayModeBar': False}
+        )
+        print(f'  💾 mapa_importaciones.html guardado')
+
+        # Datos para tabla
+        map_table = pais_cif[['Pais', 'Total_CIF']].head(20)
+        tablas['mapa_paises'] = df_to_records(map_table)
+        dataframes['Mapa: Top 20 Países por CIF'] = map_table
+
+    # ── Gráfico 18: Top 15 Productos con Mayor Carga Impositiva (Costo Logístico) ──
+    if 'Impacto_Logistico_Pct' in df.columns and 'Nombre capitulo' in df.columns:
+        print('\n💸 Generando gráfico de carga impositiva por sector...')
+
+        carga_sector = (
+            df[df['Impacto_Logistico_Pct'].notna() & (df['Impacto_Logistico_Pct'] > 0)]
+            .groupby('Nombre capitulo').agg({
+                'Impacto_Logistico_Pct': 'median',
+                'Costo_Logistico': 'sum',
+                'Dolares CIF': 'sum'
+            }).reset_index()
+        )
+        carga_sector.columns = ['Sector', 'Impacto_Logistico_Mediana', 'Costo_Logistico_Total', 'Total_CIF']
+        carga_top = carga_sector.nlargest(15, 'Impacto_Logistico_Mediana').sort_values('Impacto_Logistico_Mediana')
+
+        # Truncar nombres para el eje
+        top_labels = [s[:40] + '...' if len(s) > 40 else s for s in carga_top['Sector']]
+
+        fig, ax = plt.subplots(figsize=(14, 9))
+        bars = ax.barh(
+            range(len(carga_top)),
+            carga_top['Impacto_Logistico_Mediana'],
+            color=plt.cm.Reds(np.linspace(0.3, 0.9, len(carga_top))),
+            edgecolor='white',
+            linewidth=0.5,
+        )
+        ax.set_yticks(range(len(carga_top)))
+        ax.set_yticklabels(top_labels, fontsize=8)
+        ax.set_title('Top 15 Sectores con Mayor Carga de Costo Logístico (% sobre FOB)',
+                     fontweight='bold', pad=15)
+        ax.set_xlabel('Impacto Logístico Mediano (%)')
+
+        for i, bar in enumerate(bars):
+            w = bar.get_width()
+            costo = carga_top.iloc[i]['Costo_Logistico_Total']
+            ax.text(w + 0.3, bar.get_y() + bar.get_height() / 2,
+                    f'{w:.1f}% (USD {costo:,.0f})',
+                    va='center', fontsize=8, color='#333')
+
+        plt.tight_layout()
+        guardar_chart(fig, '16_carga_impositiva_sectores')
+
+        tablas['carga_impositiva'] = df_to_records(
+            carga_top.sort_values('Impacto_Logistico_Mediana', ascending=False)
+        )
+        dataframes['Top 15 Sectores Mayor Carga Impositiva'] = carga_top.sort_values(
+            'Impacto_Logistico_Mediana', ascending=False
+        )
+
+    # ── Datos para Calculadora Inteligente (Lookup por Capítulo × País) ──
+    if all(c in df.columns for c in ['Nombre capitulo', 'Pais de origen', 'Impacto_Logistico_Pct', 'Dolares CIF']):
+        print('\n🧮 Generando datos para calculadora inteligente...')
+
+        # Impacto logístico mediano por sector
+        sector_impacto = (
+            df[df['Impacto_Logistico_Pct'].notna() & (df['Impacto_Logistico_Pct'] > 0)]
+            .groupby('Nombre capitulo')['Impacto_Logistico_Pct'].median()
+            .round(2).to_dict()
+        )
+
+        # Impacto logístico mediano por país
+        pais_impacto = (
+            df[df['Impacto_Logistico_Pct'].notna() & (df['Impacto_Logistico_Pct'] > 0)]
+            .groupby('Pais de origen')['Impacto_Logistico_Pct'].median()
+            .round(2).to_dict()
+        )
+
+        # CIF promedio por sector (para pre-llenar el valor CIF)
+        sector_cif_promedio = (
+            df[df['Dolares CIF'] > 0]
+            .groupby('Nombre capitulo')['Dolares CIF'].median()
+            .round(0).to_dict()
+        )
+
+        # Lista de sectores y países ordenados por frecuencia
+        sectores_list = (
+            df.groupby('Nombre capitulo')['Dolares CIF'].sum()
+            .sort_values(ascending=False).index.tolist()
+        )
+        paises_list = (
+            df.groupby('Pais de origen')['Dolares CIF'].sum()
+            .sort_values(ascending=False).index.tolist()
+        )
+
+        calc_data = {
+            'sectores': sectores_list,
+            'paises': paises_list,
+            'sector_impacto': sector_impacto,
+            'pais_impacto': pais_impacto,
+            'sector_cif_promedio': {k: int(v) for k, v in sector_cif_promedio.items()},
+        }
+
+        guardar_json(calc_data, 'calculadora_data')
+        print(f'  ✅ calculadora_data.json exportado ({len(sectores_list)} sectores, {len(paises_list)} países)')
+
+    guardar_json(tablas, 'bloque_f_mapas')
+    return dataframes
+
+
+# =============================================================================
 # 9. REPORTE DE TEXTO — Exporta todos los DataFrames a .txt
 # =============================================================================
 def generar_reporte_texto(kpis: dict, bloques: dict):
@@ -568,6 +1151,8 @@ def generar_reporte_texto(kpis: dict, bloques: dict):
             'B': '🏷️ BLOQUE B: CATEGORÍAS ESTRATÉGICAS',
             'C': '🚢 BLOQUE C: ANÁLISIS LOGÍSTICO',
             'D': '🌍 BLOQUE D: ANÁLISIS GEOPOLÍTICO',
+            'E': '🔬 BLOQUE E: VISUALIZACIONES ESTRATÉGICAS',
+            'F': '🌎 BLOQUE F: MAPA GEOGRÁFICO + CALCULADORA',
         }
 
         for bloque_id, titulo in bloque_nombres.items():
@@ -619,12 +1204,16 @@ def main():
     df = crear_metricas(df)
 
     kpis = resumen_ejecutivo(df)
+    dashboard_ov = generar_dashboard_overview(df)
+    value_row = calcular_value_row(df)
 
     bloques = {
         'A': bloque_a_productos(df),
         'B': bloque_b_categorias(df),
         'C': bloque_c_logistica(df),
         'D': bloque_d_paises(df),
+        'E': bloque_e_estrategico(df),
+        'F': bloque_f_mapas(df),
     }
 
     # Generar reporte de texto con todos los DataFrames
@@ -634,10 +1223,10 @@ def main():
     print(f'  📁 Gráficos PNG: {CHARTS_DIR}')
     print(f'  📄 Datos JSON:   {DATA_DIR}')
     print(f'  📝 Reporte TXT:  {os.path.join(DATA_DIR, "resultados_completos.txt")}')
-    print(f'  🌐 Abre dashboard.html en tu navegador para ver el reporte')
+    print(f'  🌐 Abre index.html en tu navegador para ver el reporte')
     print(f'\n  💡 Tip: Para servir localmente, ejecuta:')
     print(f'     python -m http.server 8000')
-    print(f'     y abre http://localhost:8000/dashboard.html')
+    print(f'     y abre http://localhost:8000/index.html')
 
 
 if __name__ == '__main__':

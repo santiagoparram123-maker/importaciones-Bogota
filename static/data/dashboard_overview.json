@@ -1,0 +1,141 @@
+{
+  "totales": {
+    "total_cif": 10689870845.0,
+    "total_fob": 10062240070.0,
+    "total_logistico": 627630776.0,
+    "total_registros": 65535,
+    "pct_logistico": 6.2
+  },
+  "mensual": {
+    "meses": [
+      1,
+      2
+    ],
+    "cif": [
+      5378870756.0,
+      5311000090.0
+    ],
+    "fob": [
+      5055645381.0,
+      5006594688.0
+    ]
+  },
+  "uso_economico": [
+    {
+      "nombre": "Materias primas",
+      "valor": 5319397971.0,
+      "pct": 49.8
+    },
+    {
+      "nombre": "Bienes de capital",
+      "valor": 2740215446.0,
+      "pct": 25.6
+    },
+    {
+      "nombre": "Bienes de consumo",
+      "valor": 2628614232.0,
+      "pct": 24.6
+    },
+    {
+      "nombre": "Sin Información",
+      "valor": 1643196.0,
+      "pct": 0.0
+    }
+  ],
+  "top_paises": [
+    {
+      "nombre": "China",
+      "cif": 2936822517.0,
+      "fob": 2732600020.0,
+      "pct_bar": 100.0
+    },
+    {
+      "nombre": "Estados Unidos",
+      "cif": 2626829066.0,
+      "fob": 2478900317.0,
+      "pct_bar": 89.4
+    },
+    {
+      "nombre": "México",
+      "cif": 486159255.0,
+      "fob": 468958433.0,
+      "pct_bar": 16.6
+    },
+    {
+      "nombre": "Brasil",
+      "cif": 476311600.0,
+      "fob": 440343561.0,
+      "pct_bar": 16.2
+    },
+    {
+      "nombre": "Alemania",
+      "cif": 332125942.0,
+      "fob": 320818881.0,
+      "pct_bar": 11.3
+    }
+  ],
+  "top_productos": [
+    {
+      "nombre": "Aceites de petróleo o de mineral bituminoso, ...",
+      "cif": 875695890.0,
+      "cantidad": 1545046.0
+    },
+    {
+      "nombre": "Automóviles de turismo y demás vehículos auto...",
+      "cif": 473988177.0,
+      "cantidad": 26194.0
+    },
+    {
+      "nombre": "Aparatos eléctricos de telefonía o telegrafía...",
+      "cif": 417742936.0,
+      "cantidad": 5163483.0
+    },
+    {
+      "nombre": "Medicamentos (excepto los productos de las pa...",
+      "cif": 373587579.0,
+      "cantidad": 9688418.0
+    },
+    {
+      "nombre": "Maíz.",
+      "cif": 282531228.0,
+      "cantidad": 1167927861.0
+    }
+  ],
+  "nivel_tecnologico": [
+    {
+      "nombre": "Manufacturas de tecnología media",
+      "valor": 3347769332.0,
+      "pct": 31.3
+    },
+    {
+      "nombre": "Manufacturas basadas en recursos naturales",
+      "valor": 2484978845.0,
+      "pct": 23.2
+    },
+    {
+      "nombre": "Manufacturas de alta tecnología",
+      "valor": 1995891077.0,
+      "pct": 18.7
+    },
+    {
+      "nombre": "Manufacturas de baja tecnología",
+      "valor": 1380510984.0,
+      "pct": 12.9
+    },
+    {
+      "nombre": "Bienes primarios",
+      "valor": 1248759032.0,
+      "pct": 11.7
+    },
+    {
+      "nombre": "Sin información",
+      "valor": 206938265.0,
+      "pct": 1.9
+    },
+    {
+      "nombre": "Otras transacciones",
+      "valor": 25023312.0,
+      "pct": 0.2
+    }
+  ]
+}

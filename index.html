@@ -16,69 +16,82 @@
            DESIGN TOKENS — Light SaaS B2B
            ═══════════════════════════════════════════ */
         :root {
-            --bg: #f1f5f9;
-            --bg-subtle: #e2e8f0;
+            --bg: #f8f7fa;
+            --bg-subtle: #ede9fe;
             --surface: #ffffff;
-            --surface-hover: #f8fafc;
-            --surface-border: rgba(0, 0, 0, 0.06);
-            --accent: #4f46e5;
-            --accent-light: #6366f1;
-            --accent-bg: rgba(79, 70, 229, 0.08);
+            --surface-hover: #faf5ff;
+            --surface-border: rgba(124, 58, 237, 0.08);
+            --accent: #7C3AED;
+            --accent-light: #8B5CF6;
+            --accent-bg: rgba(124, 58, 237, 0.08);
             --accent2: #10b981;
             --accent2-bg: rgba(16, 185, 129, 0.08);
-            --accent3: #8b5cf6;
-            --accent3-bg: rgba(139, 92, 246, 0.08);
-            --accent-glow: rgba(79, 70, 229, 0.12);
-            --text: #1e293b;
-            --text-dim: #64748b;
-            --text-muted: #94a3b8;
+            --accent3: #A78BFA;
+            --accent3-bg: rgba(167, 139, 250, 0.08);
+            --accent-glow: rgba(124, 58, 237, 0.12);
+            --text: #1e1b4b;
+            --text-dim: #4c1d95;
+            --text-muted: #6d28d9;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --radius: 16px;
             --radius-sm: 10px;
-            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.04);
+            --shadow-xs: 0 1px 2px rgba(124, 58, 237, 0.04);
+            --shadow: 0 1px 3px rgba(124, 58, 237, 0.06), 0 4px 16px rgba(124, 58, 237, 0.04);
+            --shadow-md: 0 4px 12px rgba(124, 58, 237, 0.08), 0 8px 32px rgba(124, 58, 237, 0.05);
+            --shadow-lg: 0 8px 24px rgba(124, 58, 237, 0.1), 0 16px 48px rgba(124, 58, 237, 0.06);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --table-even: #f8fafc;
-            --table-hover: rgba(79, 70, 229, 0.03);
-            --nav-bg: rgba(255, 255, 255, 0.82);
+            --table-even: #faf5ff;
+            --table-hover: rgba(124, 58, 237, 0.04);
+            --nav-bg: rgba(255, 255, 255, 0.88);
             --kpi-glow: none;
+            /* Purple Dashboard Palette */
+            --purple-50: #faf5ff;
+            --purple-100: #f3e8ff;
+            --purple-200: #DDD6FE;
+            --purple-300: #C4B5FD;
+            --purple-400: #A78BFA;
+            --purple-500: #8B5CF6;
+            --purple-600: #7C3AED;
+            --purple-700: #6D28D9;
+            --purple-800: #5B21B6;
+            --purple-900: #4C1D95;
+            --dash-surface: #ffffff;
         }
 
         /* ═══════════════════════════════════════════
            DARK THEME
            ═══════════════════════════════════════════ */
         [data-theme="dark"] {
-            --bg: #0f0f23;
-            --bg-subtle: #1a1a3e;
-            --surface: #1e1e3a;
-            --surface-hover: #2a2a50;
-            --surface-border: rgba(99, 102, 241, 0.12);
-            --accent: #818cf8;
-            --accent-light: #a5b4fc;
-            --accent-bg: rgba(129, 140, 248, 0.1);
-            --accent2: #34d399;
-            --accent2-bg: rgba(52, 211, 153, 0.1);
-            --accent3: #a78bfa;
-            --accent3-bg: rgba(167, 139, 250, 0.1);
-            --accent-glow: rgba(129, 140, 248, 0.15);
-            --text: #e8ecf4;
-            --text-dim: #94a3b8;
-            --text-muted: #64748b;
-            --success: #34d399;
-            --warning: #fbbf24;
-            --danger: #f87171;
-            --shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.3);
-            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35), 0 8px 32px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4), 0 16px 48px rgba(0, 0, 0, 0.25);
-            --table-even: rgba(255, 255, 255, 0.02);
-            --table-hover: rgba(129, 140, 248, 0.05);
-            --nav-bg: rgba(15, 15, 35, 0.85);
-            --kpi-glow: 0 0 20px rgba(129, 140, 248, 0.08), inset 0 0 20px rgba(129, 140, 248, 0.03);
+            --bg: #0d0a1a;
+            --bg-subtle: #1a1333;
+            --surface: #1e1838;
+            --surface-hover: #2a2248;
+            --surface-border: rgba(167, 139, 250, 0.15);
+            --accent: #C4B5FD;
+            --accent-light: #DDD6FE;
+            --accent-bg: rgba(167, 139, 250, 0.12);
+            --accent2: #6ee7b7;
+            --accent2-bg: rgba(110, 231, 183, 0.1);
+            --accent3: #DDD6FE;
+            --accent3-bg: rgba(221, 214, 254, 0.1);
+            --accent-glow: rgba(167, 139, 250, 0.18);
+            --text: #f5f3ff;
+            --text-dim: #DDD6FE;
+            --text-muted: #A78BFA;
+            --success: #6ee7b7;
+            --warning: #fcd34d;
+            --danger: #fca5a5;
+            --shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.4);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45), 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.3);
+            --table-even: rgba(167, 139, 250, 0.04);
+            --table-hover: rgba(167, 139, 250, 0.08);
+            --nav-bg: rgba(13, 10, 26, 0.92);
+            --kpi-glow: 0 0 20px rgba(167, 139, 250, 0.1), inset 0 0 20px rgba(167, 139, 250, 0.04);
+            --dash-surface: #1e1838;
         }
 
         * {
@@ -707,6 +720,753 @@
         }
 
         /* ═══════════════════════════════════════════
+           DASHBOARD OVERVIEW — Purple Interactive Panel
+           ═══════════════════════════════════════════ */
+        .dash-overview {
+            padding: 32px 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dash-overview .section-header {
+            margin: 0 0 20px;
+        }
+
+        .dash-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .dash-card {
+            background: var(--dash-surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .dash-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .dash-card-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dash-card-title .dash-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--purple-100);
+            color: var(--purple-700);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        [data-theme="dark"] .dash-card-title .dash-badge {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple-300);
+        }
+
+        /* Import Overview Card */
+        .dash-overview-main {
+            display: flex;
+            gap: 24px;
+            align-items: flex-end;
+        }
+
+        .dash-total-block {
+            flex: 0 0 200px;
+        }
+
+        .dash-total-label {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .dash-total-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--purple-700);
+            line-height: 1.2;
+        }
+
+        [data-theme="dark"] .dash-total-value {
+            color: var(--purple-400);
+        }
+
+        .dash-total-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .dash-split {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .dash-split-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dash-split-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dash-split-dot.fob {
+            background: var(--purple-500);
+        }
+
+        .dash-split-dot.logis {
+            background: var(--purple-300);
+        }
+
+        .dash-split-val {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .dash-split-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Mini Bar Chart */
+        .dash-bars {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 120px;
+        }
+
+        .dash-bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            background: linear-gradient(180deg, var(--purple-500), var(--purple-700));
+            min-width: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dash-bar:hover {
+            background: linear-gradient(180deg, var(--purple-400), var(--purple-600));
+            transform: scaleY(1.05);
+            transform-origin: bottom;
+        }
+
+        .dash-bar-label {
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Donut Chart */
+        .dash-donut-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dash-donut {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .dash-donut-hole {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--dash-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .dash-donut-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .dash-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+        }
+
+        .dash-legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .dash-legend-name {
+            flex: 1;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .dash-legend-pct {
+            font-weight: 700;
+            color: var(--purple-600);
+            font-size: 0.78rem;
+        }
+
+        [data-theme="dark"] .dash-legend-pct {
+            color: var(--purple-400);
+        }
+
+        /* Countries List */
+        .dash-country-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dash-country-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dash-country-flag {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--purple-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        [data-theme="dark"] .dash-country-flag {
+            background: rgba(139, 92, 246, 0.15);
+        }
+
+        .dash-country-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dash-country-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dash-country-bar {
+            height: 6px;
+            background: var(--purple-100);
+            border-radius: 3px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .dash-country-bar {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .dash-country-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple-500), var(--purple-400));
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+
+        .dash-country-val {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        /* Products List */
+        .dash-product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dash-product-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--purple-50);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .dash-product-item {
+            background: rgba(139, 92, 246, 0.06);
+        }
+
+        .dash-product-item:hover {
+            background: var(--purple-100);
+        }
+
+        [data-theme="dark"] .dash-product-item:hover {
+            background: rgba(139, 92, 246, 0.12);
+        }
+
+        .dash-product-rank {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--purple-600);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .dash-product-name {
+            flex: 1;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.3;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .dash-product-val {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--purple-700);
+            white-space: nowrap;
+        }
+
+        [data-theme="dark"] .dash-product-val {
+            color: var(--purple-400);
+        }
+
+        /* Bottom row: full width */
+        .dash-grid .dash-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Nivel tecnológico mini bars */
+        .dash-nivel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+        }
+
+        .dash-nivel-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .dash-nivel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dash-nivel-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .dash-nivel-pct {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--purple-600);
+        }
+
+        [data-theme="dark"] .dash-nivel-pct {
+            color: var(--purple-400);
+        }
+
+        .dash-nivel-bar {
+            height: 8px;
+            background: var(--purple-100);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .dash-nivel-bar {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .dash-nivel-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        /* ═══════════════════════════════════════════
+           VALUE ROW — Premium Financial Metrics
+           ═══════════════════════════════════════════ */
+        .value-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0 40px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .value-card:nth-child(1)::before {
+            background: linear-gradient(90deg, #f59e0b, #f97316);
+        }
+
+        .value-card:nth-child(2)::before {
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+        }
+
+        .value-card:nth-child(3)::before {
+            background: linear-gradient(90deg, #10b981, #14b8a6);
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .value-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .value-card-icon {
+            font-size: 1.4rem;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .value-card:nth-child(1) .value-card-icon {
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .value-card:nth-child(2) .value-card-icon {
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .value-card:nth-child(3) .value-card-icon {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .value-card-title {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+        }
+
+        .value-card-main {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .value-card-sub {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .value-card-sub .trend-up {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .value-card-sub .trend-down {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* ═══════════════════════════════════════════
+           SANKEY WRAPPER
+           ═══════════════════════════════════════════ */
+        .sankey-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--surface-border);
+            box-shadow: var(--shadow);
+        }
+
+        .sankey-wrapper iframe {
+            width: 100%;
+            height: 550px;
+            border: none;
+        }
+
+        /* ═══════════════════════════════════════════
+           CALCULATOR — Micro-SaaS
+           ═══════════════════════════════════════════ */
+        .calc-section {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 24px;
+        }
+
+        .calc-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .calc-group label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calc-group input {
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--surface-border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1.05rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .calc-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-bg);
+        }
+
+        .calc-group input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .calc-results {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .calc-result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--surface-border);
+            font-size: 0.92rem;
+        }
+
+        .calc-result-row .label {
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        .calc-result-row .value {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .calc-total {
+            background: linear-gradient(135deg, var(--accent), var(--accent3));
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            margin-top: 8px;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.25);
+        }
+
+        .calc-total-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 6px;
+        }
+
+        .calc-total-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ═══════════════════════════════════════════
+           SMART CALCULATOR EXTENSIONS
+           ═══════════════════════════════════════════ */
+        .calc-group select {
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--surface-border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: var(--transition);
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        .calc-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-bg);
+        }
+
+        .smart-calc-info {
+            background: var(--accent-bg);
+            border: 1px solid rgba(79, 70, 229, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        .smart-calc-info strong {
+            color: var(--accent);
+        }
+
+        .calc-divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--surface-border), transparent);
+            margin: 40px 0;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--surface-border);
+            box-shadow: var(--shadow);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 550px;
+            border: none;
+        }
+
+        /* ═══════════════════════════════════════════
            RESPONSIVE
            ═══════════════════════════════════════════ */
         @media (max-width: 768px) {
@@ -732,6 +1492,37 @@
                 min-width: 140px;
             }
 
+            .value-row {
+                grid-template-columns: 1fr;
+                padding: 0 16px 20px;
+            }
+
+            .dash-overview {
+                padding: 20px 16px 12px;
+            }
+
+            .dash-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dash-overview-main {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dash-total-block {
+                flex: auto;
+            }
+
+            .dash-bars {
+                height: 80px;
+            }
+
+            .dash-donut-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
             .container {
                 padding: 12px 16px 40px;
             }
@@ -747,6 +1538,23 @@
             .tooltip-box {
                 max-width: 200px;
                 font-size: 0.72rem;
+            }
+
+            .calc-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .calc-section {
+                padding: 24px;
+            }
+
+            .sankey-wrapper iframe {
+                height: 400px;
+            }
+
+            .map-wrapper iframe {
+                height: 350px;
             }
         }
 
@@ -776,22 +1584,50 @@
 
     <!-- ═══════════════ NAV ═══════════════ -->
     <nav class="nav" id="main-nav">
+        <a href="#dashboard-overview" class="nav-link">📊 Dashboard</a>
         <a href="#kpis" class="nav-link">📊 KPIs</a>
         <a href="#bloque-a" class="nav-link">📦 Productos</a>
         <a href="#bloque-b" class="nav-link">🏷️ Categorías</a>
         <a href="#bloque-c" class="nav-link">🚢 Logística</a>
         <a href="#bloque-d" class="nav-link">🌍 Geopolítica</a>
+        <a href="#bloque-e" class="nav-link">🔬 Estratégico</a>
+        <a href="#bloque-f" class="nav-link">🌎 Mapa</a>
+        <a href="#calculadora" class="nav-link">🧮 Calculadora</a>
         <div class="nav-spacer"></div>
         <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
             ☀️
         </button>
     </nav>
 
+    <!-- ═══════════════ DASHBOARD OVERVIEW ═══════════════ -->
+    <section id="dashboard-overview">
+        <div class="dash-overview">
+            <div class="section-header">
+                <h2>📊 Dashboard Ejecutivo</h2>
+                <span class="badge badge-purple">vista rápida</span>
+            </div>
+            <div class="dash-grid" id="dash-grid">
+                <div class="loading" style="grid-column:1/-1;">
+                    <div class="spinner"></div> Cargando dashboard...
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══════════════ KPIs ═══════════════ -->
     <section id="kpis">
         <div class="kpi-grid" id="kpi-grid">
             <div class="loading">
                 <div class="spinner"></div> Cargando KPIs...
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ VALUE ROW ═══════════════ -->
+    <section id="value-row">
+        <div class="value-row" id="value-row-grid">
+            <div class="loading">
+                <div class="spinner"></div> Cargando métricas avanzadas...
             </div>
         </div>
     </section>
@@ -1005,6 +1841,194 @@
             </div>
         </div>
 
+        <!-- ── BLOQUE E: ESTRATÉGICO ── -->
+        <div id="bloque-e">
+            <div class="section-header">
+                <h2>🔬 Bloque E: Visualizaciones Estratégicas</h2>
+                <span class="badge badge-purple">3 gráficos</span>
+            </div>
+
+            <div class="card" id="sankey-chart">
+                <h3>14. 🔀 Flujo de Valor CIF: País → Uso Económico → Nivel Tecnológico</h3>
+                <p class="card-description">Diagrama Sankey que visualiza cómo fluyen los dólares CIF desde los 5
+                    principales países de origen, pasando por el uso económico asignado, hasta el nivel tecnológico del
+                    producto. Permite identificar concentraciones y dependencias en la cadena de importación.</p>
+                <div class="sankey-wrapper">
+                    <iframe src="static/charts/sankey_flow.html" title="Diagrama Sankey" loading="lazy"></iframe>
+                </div>
+                <div class="table-wrapper" id="tabla-sankey"></div>
+            </div>
+
+            <div class="card" id="heatmap-chart">
+                <h3>15. 🔥 Mapa de Calor: Estacionalidad por Sector</h3>
+                <p class="card-description">Heatmap que cruza los Top 10 sectores (capítulos arancelarios) con los meses
+                    del año. El color intenso indica mayor concentración de importaciones FOB. Ideal para detectar
+                    estacionalidad y oportunidades de compra.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/14_heatmap_sectores.png" alt="Heatmap de sectores" loading="lazy">
+                </div>
+            </div>
+
+            <div class="card" id="scatter-chart">
+                <h3>16. 🎯 Benchmarking: Volumen vs Precio Unitario (Top 30 Productos)</h3>
+                <p class="card-description">Gráfico de dispersión que posiciona los 30 productos más importados según
+                    su volumen en kilogramos (eje X) y su costo unitario CIF (eje Y). El tamaño de cada burbuja
+                    representa el total CIF. Productos en la esquina superior-derecha son de alto valor y alto volumen.
+                </p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/15_scatter_benchmarking.png" alt="Scatter benchmarking" loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-scatter"></div>
+            </div>
+        </div>
+
+        <!-- ── BLOQUE F: MAPA GEOGRÁFICO ── -->
+        <div id="bloque-f">
+            <div class="section-header">
+                <h2>🌎 Bloque F: Mapa Geográfico + Análisis Impositivo</h2>
+                <span class="badge badge-orange">2 gráficos</span>
+            </div>
+
+            <div class="card" id="mapa-chart">
+                <h3>17. 🌍 Mapa de Calor Geográfico: Importaciones por País</h3>
+                <p class="card-description">Mapa coroplético mundial que visualiza la concentración de importaciones
+                    CIF por país de origen. Los colores más intensos indican mayor volumen de importaciones.
+                    Pasa el cursor sobre cada país para ver el valor exacto en USD.</p>
+                <div class="map-wrapper">
+                    <iframe src="static/charts/mapa_importaciones.html" title="Mapa de Importaciones"
+                        loading="lazy"></iframe>
+                </div>
+                <div class="table-wrapper" id="tabla-mapa"></div>
+            </div>
+
+            <div class="card" id="carga-impositiva-chart">
+                <h3>18. 💸 Top 15 Sectores con Mayor Carga de Costo Logístico</h3>
+                <p class="card-description">Sectores arancelarios con mayor impacto porcentual del costo logístico
+                    sobre el valor FOB. Un alto porcentaje indica que el flete y seguro representan una parte
+                    significativa del precio final del producto.</p>
+                <div class="chart-wrapper">
+                    <img src="static/charts/16_carga_impositiva_sectores.png" alt="Carga impositiva por sector"
+                        loading="lazy">
+                </div>
+                <div class="table-wrapper" id="tabla-carga-impositiva"></div>
+            </div>
+        </div>
+
+        <!-- ── CALCULADORA DE COSTO ── -->
+        <div id="calculadora">
+            <div class="section-header">
+                <h2>🧮 Calculadora de Costo Puesto en Bodega</h2>
+                <span class="badge badge-green">herramienta</span>
+            </div>
+
+            <!-- Calculadora Manual -->
+            <div class="calc-section">
+                <h3>💼 Calculadora Manual</h3>
+                <p class="card-description">Ingresa manualmente el valor CIF, arancel e IVA para calcular el costo
+                    total.
+                    Fórmula: <strong>CIF + Arancel + IVA sobre (CIF + Arancel)</strong>.</p>
+
+                <div class="calc-grid">
+                    <div class="calc-inputs">
+                        <div class="calc-group">
+                            <label for="calc-cif">💵 Valor CIF (USD)</label>
+                            <input type="number" id="calc-cif" placeholder="Ej: 10,000" min="0" step="0.01">
+                        </div>
+                        <div class="calc-group">
+                            <label for="calc-arancel">📋 Arancel del Producto (%)</label>
+                            <input type="number" id="calc-arancel" placeholder="Ej: 5" min="0" max="100" step="0.1">
+                        </div>
+                        <div class="calc-group">
+                            <label for="calc-iva">🏛️ IVA del País (%)</label>
+                            <input type="number" id="calc-iva" placeholder="Ej: 19" min="0" max="100" step="0.1"
+                                value="19">
+                        </div>
+                    </div>
+
+                    <div class="calc-results">
+                        <div class="calc-result-row">
+                            <span class="label">Valor CIF Base</span>
+                            <span class="value" id="res-cif">$ 0.00</span>
+                        </div>
+                        <div class="calc-result-row">
+                            <span class="label">+ Arancel</span>
+                            <span class="value" id="res-arancel">$ 0.00</span>
+                        </div>
+                        <div class="calc-result-row">
+                            <span class="label">+ IVA (sobre CIF + Arancel)</span>
+                            <span class="value" id="res-iva">$ 0.00</span>
+                        </div>
+                        <div class="calc-total">
+                            <div class="calc-total-label">Costo Final Puesto en Bodega</div>
+                            <div class="calc-total-value" id="res-total">$ 0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="calc-divider">
+
+            <!-- Calculadora Inteligente por Tipo de Bien y País -->
+            <div class="calc-section" id="smart-calc-section">
+                <h3>🧠 Calculadora Inteligente por Tipo de Bien y País</h3>
+                <p class="card-description">Selecciona el tipo de bien (capítulo arancelario) y el país de origen
+                    para calcular automáticamente el costo estimado. El sistema usa el <strong>impacto
+                        logístico mediano real</strong> de cada combinación según los datos históricos.</p>
+
+                <div class="calc-grid">
+                    <div class="calc-inputs">
+                        <div class="calc-group">
+                            <label for="smart-sector">📦 Tipo de Bien (Capítulo Arancelario)</label>
+                            <select id="smart-sector">
+                                <option value="">Cargando sectores...</option>
+                            </select>
+                        </div>
+                        <div class="calc-group">
+                            <label for="smart-pais">🌍 País de Origen</label>
+                            <select id="smart-pais">
+                                <option value="">Cargando países...</option>
+                            </select>
+                        </div>
+                        <div class="calc-group">
+                            <label for="smart-cif">💵 Valor CIF (USD)</label>
+                            <input type="number" id="smart-cif" placeholder="Se auto-sugiere al elegir el sector"
+                                min="0" step="0.01">
+                        </div>
+                        <div class="calc-group">
+                            <label for="smart-iva">🏛️ IVA del País (%)</label>
+                            <input type="number" id="smart-iva" placeholder="19" min="0" max="100" step="0.1"
+                                value="19">
+                        </div>
+                    </div>
+
+                    <div class="calc-results">
+                        <div class="calc-result-row">
+                            <span class="label">Valor CIF Base</span>
+                            <span class="value" id="smart-res-cif">$ 0.00</span>
+                        </div>
+                        <div class="calc-result-row">
+                            <span class="label">+ Costo Logístico Estimado (Sector)</span>
+                            <span class="value" id="smart-res-logistica-sector">$ 0.00</span>
+                        </div>
+                        <div class="calc-result-row">
+                            <span class="label">+ Costo Logístico Estimado (País)</span>
+                            <span class="value" id="smart-res-logistica-pais">$ 0.00</span>
+                        </div>
+                        <div class="calc-result-row">
+                            <span class="label">+ IVA</span>
+                            <span class="value" id="smart-res-iva">$ 0.00</span>
+                        </div>
+                        <div class="calc-total">
+                            <div class="calc-total-label">Costo Estimado Puesto en Bodega</div>
+                            <div class="calc-total-value" id="smart-res-total">$ 0.00</div>
+                        </div>
+                        <div class="smart-calc-info" id="smart-info">Selecciona un tipo de bien y país para ver el
+                            cálculo automático.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- ═══════════════ FOOTER ═══════════════ -->
@@ -1211,9 +2235,416 @@
                 }
             }
 
+            // ── Bloque E ──
+            async function loadBloqueE() {
+                try {
+                    const data = await loadJSON('static/data/bloque_e_estrategico.json');
+                    if (data.sankey_flows) renderTable('tabla-sankey', data.sankey_flows);
+                    if (data.scatter_benchmarking) renderTable('tabla-scatter', data.scatter_benchmarking);
+                } catch (e) {
+                    console.warn('Bloque E data not available:', e.message);
+                }
+            }
+
+            // ── Value Row ──
+            async function loadValueRow() {
+                try {
+                    const vr = await loadJSON('static/data/value_row.json');
+                    const grid = document.getElementById('value-row-grid');
+                    if (!grid) return;
+
+                    // Market Share card
+                    const pais = vr.market_share_pais || '—';
+                    const pct = vr.market_share_pct || '—';
+                    const mVal = vr.market_share_valor || '';
+
+                    // Costo Unitario CIF
+                    const unitCif = vr.costo_unitario_cif || '—';
+
+                    // Tendencia Fletes
+                    const fPrimer = vr.fletes_val_primer || '—';
+                    const fUltimo = vr.fletes_val_ultimo || '—';
+                    const fCambio = vr.fletes_cambio_pct || '—';
+                    const fTrend = vr.fletes_tendencia || 'up';
+                    const fMes1 = vr.fletes_primer_mes || '?';
+                    const fMes2 = vr.fletes_ultimo_mes || '?';
+                    const trendClass = fTrend === 'up' ? 'trend-up' : 'trend-down';
+                    const trendIcon = fTrend === 'up' ? '📈' : '📉';
+
+                    grid.innerHTML = `
+                        <div class="value-card">
+                            <div class="value-card-header">
+                                <div class="value-card-icon">🏆</div>
+                                <div class="value-card-title">Market Share por País</div>
+                            </div>
+                            <div class="value-card-main">${pais}</div>
+                            <div class="value-card-sub">Domina con el <strong>${pct}</strong> del CIF total<br>${mVal}</div>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card-header">
+                                <div class="value-card-icon">💲</div>
+                                <div class="value-card-title">Costo Unitario CIF Global</div>
+                            </div>
+                            <div class="value-card-main">${unitCif}</div>
+                            <div class="value-card-sub">Promedio ponderado: Total CIF ÷ Unidades totales</div>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card-header">
+                                <div class="value-card-icon">${trendIcon}</div>
+                                <div class="value-card-title">Tendencia de Fletes</div>
+                            </div>
+                            <div class="value-card-main"><span class="${trendClass}">${fCambio}</span></div>
+                            <div class="value-card-sub">Mes ${fMes1}: ${fPrimer} → Mes ${fMes2}: ${fUltimo}</div>
+                        </div>
+                    `;
+                } catch (e) {
+                    const grid = document.getElementById('value-row-grid');
+                    if (grid) grid.innerHTML = '<div class="error-msg" style="grid-column:1/-1;">⚠️ No se pudieron cargar las métricas avanzadas.</div>';
+                }
+            }
+
+            // ── Calculator ──
+            function setupCalculator() {
+                const cifInput = document.getElementById('calc-cif');
+                const arancelInput = document.getElementById('calc-arancel');
+                const ivaInput = document.getElementById('calc-iva');
+                const resCif = document.getElementById('res-cif');
+                const resArancel = document.getElementById('res-arancel');
+                const resIva = document.getElementById('res-iva');
+                const resTotal = document.getElementById('res-total');
+
+                if (!cifInput || !arancelInput || !ivaInput) return;
+
+                function formatUSD(n) {
+                    return '$ ' + n.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+
+                function calculate() {
+                    const cif = parseFloat(cifInput.value) || 0;
+                    const arancelPct = parseFloat(arancelInput.value) || 0;
+                    const ivaPct = parseFloat(ivaInput.value) || 0;
+
+                    const arancelVal = cif * (arancelPct / 100);
+                    const baseIva = cif + arancelVal;
+                    const ivaVal = baseIva * (ivaPct / 100);
+                    const total = cif + arancelVal + ivaVal;
+
+                    resCif.textContent = formatUSD(cif);
+                    resArancel.textContent = formatUSD(arancelVal);
+                    resIva.textContent = formatUSD(ivaVal);
+                    resTotal.textContent = formatUSD(total);
+                }
+
+                cifInput.addEventListener('input', calculate);
+                arancelInput.addEventListener('input', calculate);
+                ivaInput.addEventListener('input', calculate);
+            }
+
+            // ── Bloque F ──
+            async function loadBloqueF() {
+                try {
+                    const data = await loadJSON('static/data/bloque_f_mapas.json');
+                    if (data.mapa_paises) renderTable('tabla-mapa', data.mapa_paises);
+                    if (data.carga_impositiva) renderTable('tabla-carga-impositiva', data.carga_impositiva);
+                } catch (e) {
+                    console.warn('Bloque F data not available:', e.message);
+                }
+            }
+
+            // ── Smart Calculator ──
+            let smartCalcData = null;
+
+            async function setupSmartCalculator() {
+                try {
+                    smartCalcData = await loadJSON('static/data/calculadora_data.json');
+                } catch (e) {
+                    console.warn('Calculator data not available:', e.message);
+                    return;
+                }
+
+                const sectorSelect = document.getElementById('smart-sector');
+                const paisSelect = document.getElementById('smart-pais');
+                const cifInput = document.getElementById('smart-cif');
+                const ivaInput = document.getElementById('smart-iva');
+
+                if (!sectorSelect || !paisSelect) return;
+
+                // Populate selects
+                sectorSelect.innerHTML = '<option value="">-- Seleccionar tipo de bien --</option>';
+                smartCalcData.sectores.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s;
+                    opt.textContent = s.length > 60 ? s.substring(0, 60) + '...' : s;
+                    sectorSelect.appendChild(opt);
+                });
+
+                paisSelect.innerHTML = '<option value="">-- Seleccionar pa\u00eds --</option>';
+                smartCalcData.paises.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p;
+                    opt.textContent = p;
+                    paisSelect.appendChild(opt);
+                });
+
+                // Auto-suggest CIF when sector is selected
+                sectorSelect.addEventListener('change', () => {
+                    const sector = sectorSelect.value;
+                    if (sector && smartCalcData.sector_cif_promedio[sector]) {
+                        cifInput.value = smartCalcData.sector_cif_promedio[sector];
+                        cifInput.placeholder = 'Mediana CIF del sector';
+                    }
+                    smartCalculate();
+                });
+
+                paisSelect.addEventListener('change', smartCalculate);
+                cifInput.addEventListener('input', smartCalculate);
+                ivaInput.addEventListener('input', smartCalculate);
+
+                function formatUSD(n) {
+                    return '$ ' + n.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+
+                function smartCalculate() {
+                    const sector = sectorSelect.value;
+                    const pais = paisSelect.value;
+                    const cif = parseFloat(cifInput.value) || 0;
+                    const ivaPct = parseFloat(ivaInput.value) || 0;
+
+                    const sectorPct = sector && smartCalcData.sector_impacto[sector]
+                        ? smartCalcData.sector_impacto[sector] : 0;
+                    const paisPct = pais && smartCalcData.pais_impacto[pais]
+                        ? smartCalcData.pais_impacto[pais] : 0;
+
+                    const costoLogSector = cif * (sectorPct / 100);
+                    const costoLogPais = cif * (paisPct / 100);
+                    const baseIva = cif + costoLogSector + costoLogPais;
+                    const ivaVal = baseIva * (ivaPct / 100);
+                    const total = baseIva + ivaVal;
+
+                    document.getElementById('smart-res-cif').textContent = formatUSD(cif);
+                    document.getElementById('smart-res-logistica-sector').textContent =
+                        formatUSD(costoLogSector) + ` (${sectorPct}%)`;
+                    document.getElementById('smart-res-logistica-pais').textContent =
+                        formatUSD(costoLogPais) + ` (${paisPct}%)`;
+                    document.getElementById('smart-res-iva').textContent = formatUSD(ivaVal);
+                    document.getElementById('smart-res-total').textContent = formatUSD(total);
+
+                    // Info panel
+                    let info = '';
+                    if (sector) info += `<strong>Sector:</strong> Impacto log\u00edstico mediano = ${sectorPct}%<br>`;
+                    if (pais) info += `<strong>Pa\u00eds:</strong> Impacto log\u00edstico mediano = ${paisPct}%<br>`;
+                    if (!sector && !pais) info = 'Selecciona un tipo de bien y pa\u00eds para ver el c\u00e1lculo.';
+                    document.getElementById('smart-info').innerHTML = info || 'Datos cargados.';
+                }
+            }
+
+            // ── Dashboard Overview ──
+            async function loadDashboardOverview() {
+                try {
+                    const d = await loadJSON('static/data/dashboard_overview.json');
+                    const grid = document.getElementById('dash-grid');
+                    if (!grid) return;
+
+                    const DONUT_COLORS = ['#7C3AED', '#A78BFA', '#C4B5FD', '#DDD6FE', '#EDE9FE', '#F3E8FF', '#d4d4d8'];
+                    const NIVEL_COLORS = ['#7C3AED', '#8B5CF6', '#A78BFA', '#C4B5FD', '#DDD6FE'];
+                    const MONTH_NAMES = ['', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+                    function fmtUSD(n) {
+                        if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
+                        if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+                        if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
+                        return '$' + n.toLocaleString('es-CO');
+                    }
+
+                    let html = '';
+
+                    // ── Card 1: Import Overview (left, top) ──
+                    if (d.totales && d.mensual) {
+                        const t = d.totales;
+                        const m = d.mensual;
+                        const maxCif = Math.max(...m.cif);
+
+                        let barsHtml = '';
+                        m.cif.forEach((v, i) => {
+                            const h = maxCif > 0 ? (v / maxCif * 100) : 0;
+                            const mes = MONTH_NAMES[m.meses[i]] || m.meses[i];
+                            barsHtml += `<div class="dash-bar" style="height:${h}%" title="${mes}: ${fmtUSD(v)}">
+                                <span class="dash-bar-label">${mes}</span>
+                            </div>`;
+                        });
+
+                        html += `
+                        <div class="dash-card">
+                            <div class="dash-card-title">
+                                Resumen de Importaciones
+                                <span class="dash-badge">Anual</span>
+                            </div>
+                            <div class="dash-overview-main">
+                                <div class="dash-total-block">
+                                    <div class="dash-total-label">Total CIF Importado</div>
+                                    <div class="dash-total-value">${fmtUSD(t.total_cif)}</div>
+                                    <div class="dash-total-subtitle">${t.total_registros.toLocaleString('es-CO')} registros</div>
+                                    <div class="dash-split">
+                                        <div class="dash-split-item">
+                                            <span class="dash-split-dot fob"></span>
+                                            <div>
+                                                <div class="dash-split-val">${fmtUSD(t.total_fob)}</div>
+                                                <div class="dash-split-label">FOB</div>
+                                            </div>
+                                        </div>
+                                        <div class="dash-split-item">
+                                            <span class="dash-split-dot logis"></span>
+                                            <div>
+                                                <div class="dash-split-val">${fmtUSD(t.total_logistico)}</div>
+                                                <div class="dash-split-label">Log\u00edstico</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dash-bars">${barsHtml}</div>
+                            </div>
+                        </div>`;
+                    }
+
+                    // ── Card 2: Distribución por Uso Económico (donut, right, top) ──
+                    if (d.uso_economico) {
+                        let gradientParts = [];
+                        let angle = 0;
+                        const usoData = d.uso_economico.slice(0, 6);
+                        usoData.forEach((u, i) => {
+                            const start = angle;
+                            angle += u.pct * 3.6;
+                            gradientParts.push(`${DONUT_COLORS[i]} ${start}deg ${angle}deg`);
+                        });
+                        // Rest
+                        if (angle < 360) {
+                            gradientParts.push(`${DONUT_COLORS[6]} ${angle}deg 360deg`);
+                        }
+
+                        let legendHtml = '';
+                        usoData.forEach((u, i) => {
+                            const name = u.nombre.length > 30 ? u.nombre.substring(0, 30) + '...' : u.nombre;
+                            legendHtml += `
+                            <div class="dash-legend-item">
+                                <span class="dash-legend-dot" style="background:${DONUT_COLORS[i]}"></span>
+                                <span class="dash-legend-name">${name}</span>
+                                <span class="dash-legend-pct">${u.pct}%</span>
+                            </div>`;
+                        });
+
+                        html += `
+                        <div class="dash-card">
+                            <div class="dash-card-title">
+                                Uso Econ\u00f3mico
+                                <span class="dash-badge">Distribuci\u00f3n</span>
+                            </div>
+                            <div class="dash-donut-wrapper">
+                                <div class="dash-donut" style="background:conic-gradient(${gradientParts.join(',')})">
+                                    <div class="dash-donut-hole">Uso<br>Econ.</div>
+                                </div>
+                                <div class="dash-donut-legend">${legendHtml}</div>
+                            </div>
+                        </div>`;
+                    }
+
+                    // ── Card 3: Top 5 Países (left, bottom) ──
+                    if (d.top_paises) {
+                        const FLAGS = {
+                            'China': '🇨🇳', 'Estados Unidos': '🇺🇸', 'Mexico': '🇲🇽', 'M\u00e9xico': '🇲🇽', 'Alemania': '🇩🇪',
+                            'Brasil': '🇧🇷', 'Jap\u00f3n': '🇯🇵', 'Corea del Sur': '🇰🇷', 'Francia': '🇫🇷', 'Italia': '🇮🇹',
+                            'India': '🇮🇳', 'Canad\u00e1': '🇨🇦', 'Espa\u00f1a': '🇪🇸', 'Chile': '🇨🇱', 'Per\u00fa': '🇵🇪',
+                            'Ecuador': '🇪🇨', 'Argentina': '🇦🇷', 'Colombia': '🇨🇴', 'Tailandia': '🇹🇭',
+                            'Taiwan': '🇹🇼', 'Taiw\u00e1n': '🇹🇼', 'Suiza': '🇨🇭', 'Pa\u00edses Bajos': '🇳🇱',
+                            'Reino Unido': '🇬🇧', 'Turqu\u00eda': '🇹🇷', 'Vietnam': '🇻🇳'
+                        };
+
+                        let countriesHtml = '';
+                        d.top_paises.forEach(p => {
+                            const flag = FLAGS[p.nombre] || '🌐';
+                            countriesHtml += `
+                            <div class="dash-country-item">
+                                <div class="dash-country-flag">${flag}</div>
+                                <div class="dash-country-info">
+                                    <div class="dash-country-name">${p.nombre}</div>
+                                    <div class="dash-country-bar">
+                                        <div class="dash-country-bar-fill" style="width:${p.pct_bar}%"></div>
+                                    </div>
+                                </div>
+                                <div class="dash-country-val">${fmtUSD(p.cif)}</div>
+                            </div>`;
+                        });
+
+                        html += `
+                        <div class="dash-card">
+                            <div class="dash-card-title">
+                                Top Pa\u00edses Importadores
+                                <span class="dash-badge">Top 5</span>
+                            </div>
+                            <div class="dash-country-list">${countriesHtml}</div>
+                        </div>`;
+                    }
+
+                    // ── Card 4: Top 5 Productos (right, bottom) ──
+                    if (d.top_productos) {
+                        let prodsHtml = '';
+                        d.top_productos.forEach((p, i) => {
+                            prodsHtml += `
+                            <div class="dash-product-item">
+                                <div class="dash-product-rank">${i + 1}</div>
+                                <div class="dash-product-name">${p.nombre}</div>
+                                <div class="dash-product-val">${fmtUSD(p.cif)}</div>
+                            </div>`;
+                        });
+
+                        html += `
+                        <div class="dash-card">
+                            <div class="dash-card-title">
+                                Productos M\u00e1s Importados
+                                <span class="dash-badge">Top 5</span>
+                            </div>
+                            <div class="dash-product-list">${prodsHtml}</div>
+                        </div>`;
+                    }
+
+                    // ── Card 5: Nivel Tecnológico (full width) ──
+                    if (d.nivel_tecnologico) {
+                        let nivelHtml = '';
+                        d.nivel_tecnologico.forEach((n, i) => {
+                            const color = NIVEL_COLORS[i % NIVEL_COLORS.length];
+                            nivelHtml += `
+                            <div class="dash-nivel-item">
+                                <div class="dash-nivel-header">
+                                    <span class="dash-nivel-name">${n.nombre}</span>
+                                    <span class="dash-nivel-pct">${n.pct}%</span>
+                                </div>
+                                <div class="dash-nivel-bar">
+                                    <div class="dash-nivel-fill" style="width:${n.pct}%;background:${color}"></div>
+                                </div>
+                            </div>`;
+                        });
+
+                        html += `
+                        <div class="dash-card full-width">
+                            <div class="dash-card-title">
+                                Nivel Tecnol\u00f3gico
+                                <span class="dash-badge">Distribuci\u00f3n</span>
+                            </div>
+                            <div class="dash-nivel-grid">${nivelHtml}</div>
+                        </div>`;
+                    }
+
+                    grid.innerHTML = html;
+
+                } catch (e) {
+                    const grid = document.getElementById('dash-grid');
+                    if (grid) grid.innerHTML = '<div class="error-msg" style="grid-column:1/-1;">⚠️ Dashboard no disponible.</div>';
+                    console.warn('Dashboard overview not available:', e.message);
+                }
+            }
+
             // ── Active nav on scroll ──
             function setupScrollSpy() {
-                const sections = ['kpis', 'bloque-a', 'bloque-b', 'bloque-c', 'bloque-d'];
+                const sections = ['dashboard-overview', 'kpis', 'bloque-a', 'bloque-b', 'bloque-c', 'bloque-d', 'bloque-e', 'bloque-f', 'calculadora'];
                 const links = document.querySelectorAll('.nav-link');
 
                 window.addEventListener('scroll', () => {
@@ -1259,11 +2690,17 @@
             // ── Init ──
             document.addEventListener('DOMContentLoaded', () => {
                 setupThemeToggle();
+                loadDashboardOverview();
                 loadKPIs();
+                loadValueRow();
                 loadBloqueA();
                 loadBloqueB();
                 loadBloqueC();
                 loadBloqueD();
+                loadBloqueE();
+                loadBloqueF();
+                setupCalculator();
+                setupSmartCalculator();
                 setupScrollSpy();
             });
         })();

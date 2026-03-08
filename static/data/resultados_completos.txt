@@ -1,6 +1,6 @@
 ================================================================================
   REPORTE COMPLETO DE IMPORTACIONES — BOGOTÁ
-  Generado: 06/03/2026 18:07
+  Generado: 08/03/2026 00:06
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
@@ -273,5 +273,128 @@ San Vicente Y Las Granadinas             117.920193
       Emiratos Árabes Unidos             116.773517
 
 ================================================================================
-  FIN DEL REPORTE · 06/03/2026 18:07
+  🔬 BLOQUE E: VISUALIZACIONES ESTRATÉGICAS
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  Flujos Sankey (País → Uso Económico)
+────────────────────────────────────────────────────────────────────────────────
+Pais de origen     Uso economico  Dolares CIF
+Estados Unidos   Materias primas 2.018842e+09
+         China Bienes de capital 1.246618e+09
+         China   Materias primas 1.052535e+09
+         China Bienes de consumo 6.375543e+08
+Estados Unidos Bienes de capital 3.233815e+08
+Estados Unidos Bienes de consumo 2.838364e+08
+        México Bienes de consumo 2.781515e+08
+        Brasil   Materias primas 2.346132e+08
+        Brasil Bienes de consumo 1.344145e+08
+      Alemania   Materias primas 1.324559e+08
+        Brasil Bienes de capital 1.072471e+08
+        México Bienes de capital 1.043981e+08
+        México   Materias primas 1.035651e+08
+      Alemania Bienes de capital 1.000857e+08
+      Alemania Bienes de consumo 9.957189e+07
+
+────────────────────────────────────────────────────────────────────────────────
+  Heatmap Sectores × Mes
+────────────────────────────────────────────────────────────────────────────────
+                                           index            1            2
+Aparatos y material eléctrico, de grabación o... 566502975.11 490496322.67
+                                        Cereales 156325497.87 199016223.46
+Combustibles y aceites minerales y sus produc... 440313815.25 556242743.19
+                       Fundición, hierro y acero 139973275.88 117624991.65
+Instrumentos y aparatos de óptica, fotografía... 155340145.93 147688396.91
+               Materias plásticas y manufacturas 251460415.63 236972291.62
+                         Productos farmacéuticos 282238639.23 292051732.74
+                    Productos químicos orgánicos 198955475.91 171131622.79
+Reactores nucleares, calderas, máquinas y par... 579183064.80 540623255.02
+Vehículos automóviles, tractores, ciclos, par... 390701991.14 369222817.21
+
+────────────────────────────────────────────────────────────────────────────────
+  Scatter Benchmarking Top 30
+────────────────────────────────────────────────────────────────────────────────
+                                                                                                                                                                                                                                                                                                                                          Nombre partida  Kilogramos netos  Costo_Unitario_CIF  Dolares CIF
+                                       Aceites de petróleo o de mineral bituminoso, excepto los aceites crudos; preparaciones no expresadas ni comprendidas en otra parte, con un contenido de aceites de petróleo o de mineral bituminoso superior o igual al 70 % en peso, en las que estos aceites constituyan el elemento base; desechos de aceites.      1.165836e+09          566.776442 875695890.33
+                                                                                                                         Automóviles de turismo y demás vehículos automóviles concebidos principalmente para el transporte de personas (excepto los de la partida 87.02), incluidos los del tipo familiar («break» o «station wagon») y los de carreras.      3.487464e+07        18095.295738 473988176.57
+                                                                                                         Aparatos eléctricos de telefonía o telegrafía con hilos, incluidos los teléfonos de usuario de auricular inalámbrico combinado con micrófono y los aparatos de telecomunicación por corriente portadora o telecomunicación digital; videófonos.      2.397290e+06           80.903324 417742935.96
+                                                           Medicamentos (excepto los productos de las partidas 30.02, 30.05 ó 30.06) constituidos por productos mezclados o sin mezclar, preparados para usos terapéuticos o profilácticos, dosificados (incluidos los administrados por vía trans-dérmica) o acondicionados para la venta al por menor.      9.688418e+06           38.560225 373587579.06
+                                                                                                                                                                                                                                                                                                                                                   Maíz.      1.167928e+09            0.241908 282531228.44
+                                                                Máquinas automáticas para tratamiento o procesamiento de datos y sus unidades; lectores magnéticos u ópticos, máquinas para registro de datos sobre soporte en forma codificada y máquinas para tratamiento o procesamiento de estos datos, no expresados ni comprendidos en otra parte.      2.161313e+06          168.973395 277487940.16
+     Sangre humana; sangre animal preparada para usos terapéuticos, profilácticos o de diagnóstico; antisueros (sueros con anticuerpos), demás fracciones de la sangre y productos inmunológicos modificados, incluso obtenidos por proceso biotecnológico; vacunas, toxinas, cultivos de microorganismos (excepto las levaduras) y productos similares.      2.234199e+06           77.910417 174067393.89
+                                                                                                                                                                                                                                                                                                         Gas de petróleo y demás hidrocarburos gaseosos.      2.065862e+08          329.948533 154676826.86
+                                                                                                                                                                                                                                                        Motocicletas (incluso con pedales) y ciclos con motor auxiliar, con sidecar o sin él; sidecares.      1.653558e+07         1013.458253 149976619.58
+                                                                                                                                                                                                                                                                                                       Neumáticos (llantas neumáticas) nuevos de caucho.      3.399220e+07           33.681423 121422236.75
+                                                                                                                                                                                                                                             Tortas y demás residuos s olidos de la extracción del aceite de soja(soya), incluso molidos o en «pellets».      3.125461e+08            0.380604 118956207.51
+                                                                                                                                                                                                                                                                                                               Polímeros de etileno en formas primarias.      9.846305e+07            1.133070 111565563.18
+Insecticidas, raticidas y demás antirroedores, fungicidas, herbicidas, inhibidores de germinación y reguladores del crecimiento de las plantas, desinfectantes y productos similares, presentados en formas o en envases para la venta al por menor, o como preparaciones o artículos tales como cintas, mechas y velas,azufradas, y papeles matamoscas.      2.151219e+07            4.991480 107377659.71
+                                                                                                                                                                  Instrumentos y aparatos de medicina, cirugía, odontología o veterinaria, incluidos los de centellografía y demás aparatos electromédicos, así como los aparatos para pruebas visuales.      2.644558e+06            0.411543 100760190.30
+                                                                                                                                                                                                                                                                                                                          Trigo y morcajo (tranquillón).      3.455059e+08            0.282285  97531290.90
+                                                                                                                                                                                                                                                                             Partes y accesorios de vehículos automóviles de las partidas 87.01 a 87.05.      1.378364e+07            9.063334  93930077.22
+                                                                                                           Abonos minerales o químicos, con dos o tres de los elementos fertilizantes: nitrógeno, fósforo y potasio; los demás abonos; productos de este Capítulo en tabletas o formas similares o en envases de un peso bruto inferior o igual a 10 kg.      1.333244e+08            0.645119  86010090.47
+                                                                                                                                                                                                                                                              Aceite de soja (soya) y sus fracciones, incluso refinado, pero sin modificar químicamente.      7.284906e+07            1.134640  82657435.28
+                                                                                                                                                                       Aparatos receptores de televisión, incluso con aparato receptor de radiodifusión o de grabación o reproducción de sonido o imagen incorporado; videomonitores y videoproyectores.      3.857787e+06           88.569670  78215255.23
+                                                                                                                                                                                                                                                                                                    Vehículos automóviles para transporte de mercancías.      8.362912e+06        19291.485109  75969868.36
+                                                                                                                                                                                                                                                                                Carne de animales de la especie porcina, fresca, refrigerada o congelada      2.455546e+07            2.937153  72123145.41
+                           Hilos, cables (incluidos los coaxiales) y demás conductores aislados para electricidad, aunque estén laqueados, anodizados o provistos de piezas de conexión; cables de fibras ópticas constituidos por fibras enfundadas individualmente, incluso con conductores eléctricos incorporados o provistos de piezas de conexión.      9.987645e+06            6.800348  69107296.86
+                                                                                                                                                                              Poliacetales, los demás poliéteres y resinas epoxi, en formas primarias; policarbonatos, resinas alcídicas, poliésteres alílicos y demás poliésteres, en formas primarias.      5.230652e+07            1.315784  68824082.25
+                                                                                                                                                                                                                                                                                                               Abonos minerales o químicos nitrogenados.      1.761911e+08            0.374337  65954884.95
+                                                                                                                                                                                                                                                                                                                                       Alambre de cobre.      6.526833e+06            9.726145  63480926.78
+                                                                                                                                                                                                   Las demás placas, láminas, hojas y tiras, de plástico no celular y sin refuerzo, estratificación ni soporte o combinación similar con otras materias.      1.987662e+07            3.073433  61089470.77
+                                                                                                                                                                                                                                                                                 Preparaciones alimenticias no expresadas ni comprendidas en otra parte.      8.217382e+06            6.729795  55301296.21
+                                                                                              Diodos, transistores y dispositivos semiconductores similares; dispositivos semiconductores fotosensibles, incluidas las células fotovoltaicas, aunque estén ensambladas en módulos o paneles; diodos emisores de luz; cristales piezoeléctricos montados.      2.376858e+07            2.925436  54971460.00
+                                 Artículos y aparatos de ortopedia, incluidas las fajas y vendajes medicoquirúrgicos y las muletas; tablillas, férulas u otros artículos y aparatos para fracturas; artículos y aparatos de prótesis; audífonos y demás aparatos que lleve la propia persona o se le implanten para  compensar un defecto o incapacidad.      1.853919e+05            1.912213  54484675.04
+                                                                                                                                                                                                                                                 Centrifugadoras, incluidas las secadoras centrífugas; aparatos para filtrar o depurar líquidos o gases.      3.713740e+06            5.549610  52905792.37
+
+================================================================================
+  🌎 BLOQUE F: MAPA GEOGRÁFICO + CALCULADORA
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+  Mapa: Top 20 Países por CIF
+────────────────────────────────────────────────────────────────────────────────
+                                                  Pais    Total_CIF
+                                                 China 2.936823e+09
+                                        Estados Unidos 2.626829e+09
+                                                México 4.861593e+08
+                                                Brasil 4.763116e+08
+                                              Alemania 3.321259e+08
+                                                 India 2.753653e+08
+                                                 Japón 2.340957e+08
+                                         Corea del Sur 2.077767e+08
+                                                Italia 1.934157e+08
+                                                España 1.772515e+08
+                                                Canadá 1.766471e+08
+                                                  Perú 1.718981e+08
+                                     Trinidad Y Tobago 1.662649e+08
+                                               Vietnam 1.602750e+08
+                                                 Chile 1.443420e+08
+                                               Ecuador 1.364169e+08
+Zona Franca permanente Especial Refineria de Cartagena 1.315116e+08
+                                             Argentina 1.302736e+08
+                                               Francia 1.257418e+08
+                                             Tailandia 8.932148e+07
+
+────────────────────────────────────────────────────────────────────────────────
+  Top 15 Sectores Mayor Carga Impositiva
+────────────────────────────────────────────────────────────────────────────────
+                                                        Sector  Impacto_Logistico_Mediana  Costo_Logistico_Total    Total_CIF
+                                                Animales vivos                 142.686308              296207.80   4943080.86
+                                 Minerales, escorias y cenizas                  23.960750             1555030.91   3475645.35
+                         Disposiciones de tratamiento especial                  23.440096             8172009.31 151412298.88
+       Sal; azufre; tierras y piedras; yesos, cales y cementos                  20.921787             8396715.64  32898481.54
+Vehículos y material para vía férrea, aparatos de señalización                  15.741668              766344.07   6167583.65
+               Materias trenzables y demás productos vegetales                  14.607918               48404.79    465762.87
+                  Plantas vivas y productos de la floricultura                  14.015898              892218.81  13463687.83
+                 Objetos de arte, de colección o de antigüedad                  13.486771               22492.87    147958.30
+                          Manufactura de espartería y cestería                  12.960562               64714.03    683018.28
+                      Tabaco, sucedáneos del tabaco elaborados                  11.940923             2258454.51  10176352.13
+              Pastas de madera, desperdicios de papel o cartón                  11.673764             2717410.80  33451308.52
+                                           Productos cerámicos                  11.338356             9199151.23  43373822.11
+          Legumbres y hortalizas, plantas, raíces y tubérculos                  11.085070             6137980.63  58637603.21
+               Madera, carbón vegetal y manufacturas de madera                  11.064091             5531223.38  45884374.87
+                                                      Cereales                  10.984054            39544220.76 394885942.09
+
+================================================================================
+  FIN DEL REPORTE · 08/03/2026 00:06
 ================================================================================

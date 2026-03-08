@@ -1,0 +1,176 @@
+{
+  "mapa_paises": [
+    {
+      "Pais": "China",
+      "Total_CIF": 2936822517.4100003
+    },
+    {
+      "Pais": "Estados Unidos",
+      "Total_CIF": 2626829066.4300003
+    },
+    {
+      "Pais": "México",
+      "Total_CIF": 486159254.56999993
+    },
+    {
+      "Pais": "Brasil",
+      "Total_CIF": 476311600.21
+    },
+    {
+      "Pais": "Alemania",
+      "Total_CIF": 332125942.42
+    },
+    {
+      "Pais": "India",
+      "Total_CIF": 275365297.42
+    },
+    {
+      "Pais": "Japón",
+      "Total_CIF": 234095745.66000003
+    },
+    {
+      "Pais": "Corea del Sur",
+      "Total_CIF": 207776707.78
+    },
+    {
+      "Pais": "Italia",
+      "Total_CIF": 193415689.84
+    },
+    {
+      "Pais": "España",
+      "Total_CIF": 177251491.92
+    },
+    {
+      "Pais": "Canadá",
+      "Total_CIF": 176647122.05
+    },
+    {
+      "Pais": "Perú",
+      "Total_CIF": 171898070.07
+    },
+    {
+      "Pais": "Trinidad Y Tobago",
+      "Total_CIF": 166264865.44000003
+    },
+    {
+      "Pais": "Vietnam",
+      "Total_CIF": 160274966.84999996
+    },
+    {
+      "Pais": "Chile",
+      "Total_CIF": 144342026.91
+    },
+    {
+      "Pais": "Ecuador",
+      "Total_CIF": 136416942.02
+    },
+    {
+      "Pais": "Zona Franca permanente Especial Refineria de Cartagena",
+      "Total_CIF": 131511581.67999999
+    },
+    {
+      "Pais": "Argentina",
+      "Total_CIF": 130273575.12
+    },
+    {
+      "Pais": "Francia",
+      "Total_CIF": 125741804.24
+    },
+    {
+      "Pais": "Tailandia",
+      "Total_CIF": 89321483.63
+    }
+  ],
+  "carga_impositiva": [
+    {
+      "Sector": "Animales vivos",
+      "Impacto_Logistico_Mediana": 142.6863076923,
+      "Costo_Logistico_Total": 296207.7999999999,
+      "Total_CIF": 4943080.86
+    },
+    {
+      "Sector": "Minerales, escorias y cenizas",
+      "Impacto_Logistico_Mediana": 23.9607503184,
+      "Costo_Logistico_Total": 1555030.9100000001,
+      "Total_CIF": 3475645.35
+    },
+    {
+      "Sector": "Disposiciones de tratamiento especial",
+      "Impacto_Logistico_Mediana": 23.440096231,
+      "Costo_Logistico_Total": 8172009.310000022,
+      "Total_CIF": 151412298.88
+    },
+    {
+      "Sector": "Sal; azufre; tierras y piedras; yesos, cales y cementos",
+      "Impacto_Logistico_Mediana": 20.9217865478,
+      "Costo_Logistico_Total": 8396715.64,
+      "Total_CIF": 32898481.54
+    },
+    {
+      "Sector": "Vehículos y material para vía férrea, aparatos de señalización",
+      "Impacto_Logistico_Mediana": 15.7416681057,
+      "Costo_Logistico_Total": 766344.0700000013,
+      "Total_CIF": 6167583.650000001
+    },
+    {
+      "Sector": "Materias trenzables y demás productos vegetales",
+      "Impacto_Logistico_Mediana": 14.6079178674,
+      "Costo_Logistico_Total": 48404.79,
+      "Total_CIF": 465762.87
+    },
+    {
+      "Sector": "Plantas vivas y productos de la floricultura",
+      "Impacto_Logistico_Mediana": 14.0158975744,
+      "Costo_Logistico_Total": 892218.8100000023,
+      "Total_CIF": 13463687.830000002
+    },
+    {
+      "Sector": "Objetos de arte, de colección o de antigüedad",
+      "Impacto_Logistico_Mediana": 13.4867707447,
+      "Costo_Logistico_Total": 22492.87,
+      "Total_CIF": 147958.3
+    },
+    {
+      "Sector": "Manufactura de espartería y cestería",
+      "Impacto_Logistico_Mediana": 12.9605618585,
+      "Costo_Logistico_Total": 64714.03,
+      "Total_CIF": 683018.2799999999
+    },
+    {
+      "Sector": "Tabaco, sucedáneos del tabaco elaborados",
+      "Impacto_Logistico_Mediana": 11.9409230484,
+      "Costo_Logistico_Total": 2258454.5100000002,
+      "Total_CIF": 10176352.129999999
+    },
+    {
+      "Sector": "Pastas de madera, desperdicios de papel o cartón",
+      "Impacto_Logistico_Mediana": 11.6737639141,
+      "Costo_Logistico_Total": 2717410.799999997,
+      "Total_CIF": 33451308.52
+    },
+    {
+      "Sector": "Productos cerámicos",
+      "Impacto_Logistico_Mediana": 11.3383559063,
+      "Costo_Logistico_Total": 9199151.229999999,
+      "Total_CIF": 43373822.11
+    },
+    {
+      "Sector": "Legumbres y hortalizas, plantas, raíces y tubérculos",
+      "Impacto_Logistico_Mediana": 11.0850699108,
+      "Costo_Logistico_Total": 6137980.629999998,
+      "Total_CIF": 58637603.20999999
+    },
+    {
+      "Sector": "Madera, carbón vegetal y manufacturas de madera",
+      "Impacto_Logistico_Mediana": 11.0640909615,
+      "Costo_Logistico_Total": 5531223.3800000055,
+      "Total_CIF": 45884374.870000005
+    },
+    {
+      "Sector": "Cereales",
+      "Impacto_Logistico_Mediana": 10.9840539257,
+      "Costo_Logistico_Total": 39544220.76000005,
+      "Total_CIF": 394885942.09000003
+    }
+  ]
+}
