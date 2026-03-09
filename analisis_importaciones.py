@@ -1134,6 +1134,52 @@ def bloque_f_mapas(df: pd.DataFrame) -> dict:
 
 
 # =============================================================================
+# 8e. BLOQUE G — TIMELINE INTERACTIVO (BUSCADOR DE NICHO)
+# =============================================================================
+def bloque_g_timeline_interactivo(df: pd.DataFrame) -> dict:
+    print('\n' + '=' * 60)
+    print('  BLOQUE G: DATOS PARA TIMELINE INTERACTIVO')
+    print('=' * 60)
+
+    if 'Mes' not in df.columns or 'Nombre partida' not in df.columns:
+        print('  ❌ Columnas necesarias no encontradas')
+        return {}
+
+    # Agrupar por Mes, Partida y Pais
+    cols_group = ['Mes', 'Nombre partida']
+    if 'Pais de origen' in df.columns:
+        cols_group.append('Pais de origen')
+
+    agrupado = df.groupby(cols_group, as_index=False).agg({
+        'Dolares FOB': 'sum'
+    })
+    
+    # Agregar Costo Logistico si existe
+    if 'Costo_Logistico' in df.columns:
+        agrupado_c = df.groupby(cols_group, as_index=False).agg({'Costo_Logistico': 'sum'})
+        agrupado = pd.merge(agrupado, agrupado_c, on=cols_group, how='left')
+
+    agrupado = agrupado[agrupado['Dolares FOB'] > 0]
+
+    # Formatear para JSON (llaves cortas para optimizar peso: m=Mes, p=Partida, o=Origen, f=FOB, c=Costo)
+    datos = []
+    for _, row in agrupado.iterrows():
+        item = {
+            'm': str(row['Mes']),
+            'p': str(row['Nombre partida']),
+            'f': round(row['Dolares FOB'], 2),
+            'c': round(row.get('Costo_Logistico', 0), 2)
+        }
+        if 'Pais de origen' in row.index:
+            item['o'] = str(row['Pais de origen'])
+        datos.append(item)
+
+    guardar_json({'dataset': datos}, 'timeline_interactivo')
+    print(f'  ✅ timeline_interactivo.json guardado ({len(datos)} registros)')
+    return {}
+
+
+# =============================================================================
 # 9. REPORTE DE TEXTO — Exporta todos los DataFrames a .txt
 # =============================================================================
 def generar_reporte_texto(kpis: dict, bloques: dict):
@@ -1233,6 +1279,7 @@ def main():
         'D': bloque_d_paises(df),
         'E': bloque_e_estrategico(df),
         'F': bloque_f_mapas(df),
+        'G': bloque_g_timeline_interactivo(df),
     }
 
     # Generar reporte de texto con todos los DataFrames
