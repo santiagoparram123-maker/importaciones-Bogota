@@ -1687,6 +1687,7 @@
         <a href="#bloque-f" class="nav-link">🌎 Mapa</a>
         <a href="#buscador-interactivo" class="nav-link">🔎 Buscador</a>
         <a href="#calculadora" class="nav-link">🧮 Calculadora</a>
+        <a href="#ai-auditor" class="nav-link">🤖 Auditor IA</a>
         <div class="nav-spacer"></div>
         <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">
             ☀️
@@ -2144,6 +2145,62 @@
                         </div>
                         <div class="smart-calc-info" id="smart-info">Selecciona un tipo de bien y país para ver el
                             cálculo automático.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── AGENTE AUDITOR DE ADUANAS (IA) ── -->
+        <div id="ai-auditor">
+            <div class="section-header">
+                <h2>🤖 Agente Auditor de Aduanas (IA)</h2>
+                <span class="badge badge-purple">modelo inteligente</span>
+            </div>
+
+            <div class="calc-section" id="ai-risk-section">
+                <h3>🔍 Detección de Riesgo de Subfacturación</h3>
+                <p class="card-description">Este Asistente de IA evalúa en tiempo real si el valor declarado de tus
+                    importaciones levantará una "bandera roja" frente a la DIAN. Utiliza un modelo base construido con
+                    Machine Learning (Isolation Forest y Z-Score) entrenado con más de 65,000 registros aduaneros
+                    históricos.</p>
+
+                <div class="calc-grid">
+                    <div class="calc-inputs">
+                        <div class="calc-group">
+                            <label for="ai-partida">📦 Partida Arancelaria (HS Code)</label>
+                            <input type="text" id="ai-partida" placeholder="Ej: 851712">
+                        </div>
+                        <div class="calc-group">
+                            <label for="ai-peso">⚖️ Kilogramos Netos</label>
+                            <input type="number" id="ai-peso" placeholder="Ej: 150" min="0" step="0.1">
+                        </div>
+                        <div class="calc-group">
+                            <label for="ai-fob">💵 Valor Declarado (USD FOB)</label>
+                            <input type="number" id="ai-fob" placeholder="Ej: 500" min="0" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="calc-results">
+                        <div class="calc-result-row">
+                            <span class="label">Precio Ingresado por Kg</span>
+                            <span class="value" id="ai-res-precio-kg">$ 0.00</span>
+                        </div>
+                        <div class="calc-result-row" style="color:var(--text-dim); border-bottom:none;">
+                            <span class="label" style="font-size:0.8rem">💡 Precio Medio Histórico en Aduana:</span>
+                            <span class="value" id="ai-res-media" style="font-size:0.8rem">-</span>
+                        </div>
+                        <div class="calc-result-row" style="color:var(--text-dim);">
+                            <span class="label" style="font-size:0.8rem">🛡️ Umbral Mínimo de Alerta (IA):</span>
+                            <span class="value" id="ai-res-umbral" style="font-size:0.8rem">-</span>
+                        </div>
+
+                        <div class="calc-total" id="ai-alerta-box"
+                            style="background:var(--surface-border); box-shadow:none;">
+                            <div class="calc-total-label" id="ai-alerta-titulo" style="color:var(--text-dim)">Estado de
+                                Riesgo</div>
+                            <div class="calc-total-value" id="ai-alerta-mensaje"
+                                style="color:var(--text); font-size:1.4rem;">Ingresa los datos</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2900,7 +2957,7 @@
 
             // ── Active nav on scroll ──
             function setupScrollSpy() {
-                const sections = ['dashboard-overview', 'buscador-interactivo', 'kpis', 'bloque-a', 'bloque-b', 'bloque-c', 'bloque-d', 'bloque-e', 'bloque-f', 'calculadora'];
+                const sections = ['dashboard-overview', 'buscador-interactivo', 'kpis', 'bloque-a', 'bloque-b', 'bloque-c', 'bloque-d', 'bloque-e', 'bloque-f', 'calculadora', 'ai-auditor'];
                 const links = document.querySelectorAll('.nav-link');
 
                 window.addEventListener('scroll', () => {
@@ -2959,8 +3016,79 @@
                 loadDashboardOverview();
                 setupSmartCalculator();
                 setupTimelineInteractiva();
+                setupAIAuditor();
                 setupScrollSpy();
             });
+
+            // ── Agente Auditor IA ──
+            let riskBaselines = null;
+            async function setupAIAuditor() {
+                try {
+                    // Cargar el JSON generado por el script de predicción en Python
+                    riskBaselines = await loadJSON('risk_baselines.json');
+                } catch (e) {
+                    console.warn('El archivo del modelo (risk_baselines.json) no se ha generado o no está en la raíz:', e.message);
+                    return;
+                }
+
+                const inputPartida = document.getElementById('ai-partida');
+                const inputPeso = document.getElementById('ai-peso');
+                const inputFob = document.getElementById('ai-fob');
+
+                function formatUSD(n) {
+                    return '$ ' + n.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
+
+                function evaluarRiesgo() {
+                    const partida = inputPartida.value.trim();
+                    const peso = parseFloat(inputPeso.value) || 0;
+                    const fob = parseFloat(inputFob.value) || 0;
+
+                    if (!partida || peso <= 0 || fob <= 0) {
+                        document.getElementById('ai-alerta-box').style.background = 'var(--surface-border)';
+                        document.getElementById('ai-alerta-titulo').style.color = 'var(--text-dim)';
+                        document.getElementById('ai-alerta-mensaje').style.color = 'var(--text)';
+                        document.getElementById('ai-alerta-mensaje').textContent = 'Ingresa los datos';
+                        return;
+                    }
+
+                    const precioIngresado = fob / peso;
+                    document.getElementById('ai-res-precio-kg').textContent = formatUSD(precioIngresado);
+
+                    const modelo = riskBaselines[partida];
+                    if (!modelo) {
+                        document.getElementById('ai-res-media').textContent = 'No hay datos históricos para esta partida';
+                        document.getElementById('ai-res-umbral').textContent = '-';
+                        document.getElementById('ai-alerta-box').style.background = 'var(--surface-border)';
+                        document.getElementById('ai-alerta-titulo').style.color = 'var(--text-dim)';
+                        document.getElementById('ai-alerta-mensaje').style.color = 'var(--text)';
+                        document.getElementById('ai-alerta-mensaje').textContent = 'Sin Modelo';
+                        return;
+                    }
+
+                    document.getElementById('ai-res-media').textContent = formatUSD(modelo.precio_medio_hist_usd);
+                    document.getElementById('ai-res-umbral').textContent = formatUSD(modelo.umbral_riesgo_usd);
+
+                    // IA Mínimo Histórico
+                    if (precioIngresado < modelo.umbral_riesgo_usd) {
+                        // Alto riesgo alert
+                        document.getElementById('ai-alerta-box').style.background = 'linear-gradient(135deg, var(--danger), #b91c1c)';
+                        document.getElementById('ai-alerta-titulo').style.color = 'rgba(255,255,255,0.9)';
+                        document.getElementById('ai-alerta-mensaje').style.color = '#ffffff';
+                        document.getElementById('ai-alerta-mensaje').textContent = '¡BANDERA ROJA!';
+                    } else {
+                        // Riesgo Bajo (Precio Ok)
+                        document.getElementById('ai-alerta-box').style.background = 'linear-gradient(135deg, var(--success), #059669)';
+                        document.getElementById('ai-alerta-titulo').style.color = 'rgba(255,255,255,0.9)';
+                        document.getElementById('ai-alerta-mensaje').style.color = '#ffffff';
+                        document.getElementById('ai-alerta-mensaje').textContent = 'RIESGO BAJO';
+                    }
+                }
+
+                inputPartida.addEventListener('input', evaluarRiesgo);
+                inputPeso.addEventListener('input', evaluarRiesgo);
+                inputFob.addEventListener('input', evaluarRiesgo);
+            }
         })();
     </script>
 </body>
