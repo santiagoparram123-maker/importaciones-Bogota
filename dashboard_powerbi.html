@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Intelligence & Import Analysis - Colombia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            /* Palette: Deep blues, oranges, greens, grays */
+            --bg-color: #f3f4f6; /* Clean light gray */
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --blue-primary: #1e3a8a; /* Deep blue */
+            --blue-light: #3b82f6;
+            --orange-primary: #ea580c; /* Orange */
+            --green-primary: #16a34a; /* Green */
+            --gray-border: #e5e7eb;
+            --font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --transitions: all 0.2s ease-in-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Nav / Header */
+        .dashboard-header {
+            background-color: var(--blue-primary);
+            color: white;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-titles h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .header-titles h2 {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: #93c5fd;
+        }
+
+        /* Controls / Filters */
+        .header-controls {
+            display: flex;
+            gap: 16px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .control-group label {
+            font-size: 0.75rem;
+            color: #bfdbfe;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .control-group select {
+            padding: 6px 32px 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.875rem;
+            font-family: var(--font-family);
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 10px auto;
+        }
+
+        .control-group select option {
+            background-color: var(--blue-primary);
+            color: white;
+        }
+
+        .control-group select:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Dashboard Area */
+        .dashboard-main {
+            padding: 24px 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* KPIs */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-border);
+            border-left: 4px solid var(--blue-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transitions);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .kpi-card.kpi-green { border-left-color: var(--green-primary); }
+        .kpi-card.kpi-orange { border-left-color: var(--orange-primary); }
+        .kpi-card.kpi-blue-dark { border-left-color: var(--blue-primary); }
+
+        .kpi-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kpi-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value-row {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .kpi-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .kpi-change.positive { color: var(--green-primary); }
+        .kpi-change.neutral { color: var(--text-muted); }
+
+        .kpi-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue-light);
+            font-size: 1.5rem;
+        }
+
+        .kpi-green .kpi-icon { color: var(--green-primary); background-color: #dcfce7; }
+        .kpi-orange .kpi-icon { color: var(--orange-primary); background-color: #ffedd5; }
+        .kpi-blue-dark .kpi-icon { color: var(--blue-primary); background-color: #dbeafe; }
+        .kpi-card:first-child .kpi-icon { background-color: #dbeafe; color: var(--blue-primary); }
+
+
+        /* Charts Grid */
+        .charts-row-major {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        
+        .charts-row-minor {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        .chart-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-header {
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .chart-actions {
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .chart-body {
+            flex: 1;
+            position: relative;
+            min-height: 280px;
+        }
+
+        /* Insights Card styling */
+        .insights-card {
+            background: linear-gradient(135deg, var(--blue-primary) 0%, #1e40af 100%);
+            color: white;
+            border: none;
+        }
+        .insights-card .chart-title {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .insights-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .insight-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .insight-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+        .insight-text h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .insight-text p {
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        /* Footer */
+        .dashboard-footer {
+            padding: 16px 32px;
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-border);
+            background-color: white;
+            margin-top: auto;
+        }
+
+        /* Map specific styles */
+        .country-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        .country-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .country-flag {
+            font-size: 1.75rem;
+            width: 32px;
+            text-align: center;
+        }
+        .country-info {
+            flex: 1;
+        }
+        .country-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+        }
+        .country-value {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .country-bar-bg {
+            height: 6px;
+            background-color: var(--bg-color);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .country-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-titles">
+            <h1>COMMERCIAL INTELLIGENCE & IMPORT ANALYSIS - COLOMBIA</h1>
+            <h2>Python-Automated Data Pipeline - AT-A-GLANCE OVERVIEW</h2>
+        </div>
+        <div class="header-controls">
+            <div class="control-group">
+                <label>Date Range</label>
+                <select>
+                    <option>Year to Date (2024)</option>
+                    <option>Last 12 Months</option>
+                    <option>2024 - 2025</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Country of Origin</label>
+                <select>
+                    <option>All Countries</option>
+                    <option>China</option>
+                    <option>United States</option>
+                    <option>Germany</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Product Category</label>
+                <select>
+                    <option>All Categories</option>
+                    <option>Industrial Machinery</option>
+                    <option>Consumer Electronics</option>
+                    <option>Raw Materials</option>
+                </select>
+            </div>
+        <div class="control-group" style="align-items:center; justify-content:center;"><button id="lang-toggle-btn" class="lang-btn" data-lang="en" onclick="toggleLang()">🌐 ENG</button></div>
+        </div>
+    <div class="control-group" style="align-items:center; justify-content:center;"><button id="lang-toggle-btn" class="lang-btn" data-lang="en" onclick="toggleLang()">🌐 ENG</button></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        
+        <!-- KPIs Row -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="kpi-content">
+                    <span class="kpi-title">Total Import Value (USD)</span>
+                    <div class="kpi-value-row">
+                        <span class="kpi-value">$1.2B</span>
+                        <span class="kpi-change positive">▲ 12%</span>
+                    </div>
+                </div>
+                <div class="kpi-icon">💰</div>
+            </div>
+
+            <div class="kpi-card kpi-blue-dark">
+                <div class="kpi-content">
+                    <span class="kpi-title">Total Weight (KG)</span>
+                    <div class="kpi-value-row">
+                        <span class="kpi-value">850M</span>
+                        <span class="kpi-change neutral">- 2.4%</span>
+                    </div>
+                </div>
+                <div class="kpi-icon">⚖️</div>
+            </div>
+
+            <div class="kpi-card kpi-orange">
+                <div class="kpi-content">
+                    <span class="kpi-title">Active Import Companies</span>
+                    <div class="kpi-value-row">
+                        <span class="kpi-value">4,500</span>
+                        <span class="kpi-change positive">▲ 315</span>
+                    </div>
+                </div>
+                <div class="kpi-icon">🏢</div>
+            </div>
+
+            <div class="kpi-card kpi-green">
+                <div class="kpi-content">
+                    <span class="kpi-title">New Opportunities Identified</span>
+                    <div class="kpi-value-row">
+                        <span class="kpi-value">18</span>
+                        <span class="kpi-change positive" style="font-weight: 500; font-size: 0.8rem;">This Week</span>
+                    </div>
+                </div>
+                <div class="kpi-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Major Charts Row -->
+        <div class="charts-row-major">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span class="chart-title">MONTHLY IMPORT VALUE (USD)</span>
+                    <span class="chart-actions">⋮</span>
+                </div>
+                <div class="chart-body notranslate">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span class="chart-title">TOP IMPORTING COMPANIES BY VALUE</span>
+                    <span class="chart-actions">⋮</span>
+                </div>
+                <div class="chart-body notranslate">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minor Charts Row -->
+        <div class="charts-row-minor">
+            
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span class="chart-title">TOP COUNTRIES OF ORIGIN</span>
+                    <span class="chart-actions">⋮</span>
+                </div>
+                <div class="chart-body notranslate">
+                    <div class="country-list">
+                        <div class="country-item">
+                            <div class="country-flag">🇨🇳</div>
+                            <div class="country-info">
+                                <div class="country-name">
+                                    <span>China</span>
+                                    <span class="country-value">$420M</span>
+                                </div>
+                                <div class="country-bar-bg"><div class="country-bar-fill" style="width: 85%; background-color: var(--blue-primary);"></div></div>
+                            </div>
+                        </div>
+                        <div class="country-item">
+                            <div class="country-flag">🇺🇸</div>
+                            <div class="country-info">
+                                <div class="country-name">
+                                    <span>United States</span>
+                                    <span class="country-value">$315M</span>
+                                </div>
+                                <div class="country-bar-bg"><div class="country-bar-fill" style="width: 65%; background-color: var(--blue-light);"></div></div>
+                            </div>
+                        </div>
+                        <div class="country-item">
+                            <div class="country-flag">🇩🇪</div>
+                            <div class="country-info">
+                                <div class="country-name">
+                                    <span>Germany</span>
+                                    <span class="country-value">$150M</span>
+                                </div>
+                                <div class="country-bar-bg"><div class="country-bar-fill" style="width: 35%; background-color: var(--orange-primary);"></div></div>
+                            </div>
+                        </div>
+                        <div class="country-item">
+                            <div class="country-flag">🇧🇷</div>
+                            <div class="country-info">
+                                <div class="country-name">
+                                    <span>Brazil</span>
+                                    <span class="country-value">$95M</span>
+                                </div>
+                                <div class="country-bar-bg"><div class="country-bar-fill" style="width: 20%; background-color: var(--green-primary);"></div></div>
+                            </div>
+                        </div>
+                         <div class="country-item">
+                            <div class="country-flag">🇲🇽</div>
+                            <div class="country-info">
+                                <div class="country-name">
+                                    <span>Mexico</span>
+                                    <span class="country-value">$60M</span>
+                                </div>
+                                <div class="country-bar-bg"><div class="country-bar-fill" style="width: 12%; background-color: #f59e0b;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card insights-card">
+                <div class="chart-header">
+                    <span class="chart-title">✨ SUMMARY INSIGHTS</span>
+                </div>
+                <div class="chart-body notranslate" style="min-height: auto;">
+                    <ul class="insights-list">
+                        <li class="insight-item">
+                            <div class="insight-icon">🔍</div>
+                            <div class="insight-text">
+                                <h4>Supply Chain Shift</h4>
+                                <p>15% deviation in raw material sourcing from China towards domestic LatAm partners in Q3.</p>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-icon">⚠️</div>
+                            <div class="insight-text">
+                                <h4>Anomaly Detected</h4>
+                                <p>Unusual spike (+40%) in industrial machinery imports by Competitor 2 during October.</p>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-icon">💡</div>
+                            <div class="insight-text">
+                                <h4>Market Opportunity</h4>
+                                <p>Low saturation in HS Code 8544 (Insulated Wire); only 3 active importers currently supplying the grid.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span class="chart-title">CATEGORY BREAKDOWN (HS CODE)</span>
+                    <span class="chart-actions">⋮</span>
+                </div>
+                <div class="chart-body notranslate">
+                    <canvas id="donutChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        Data Source: Govt API | Backend: Custom Python ETL Pipeline | Last Updated: <span id="currentDate"></span>
+    </footer>
+
+    <!-- Chart Configuration -->
+    <script>
+        // Set Current Date in Footer
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+        // Common Chart Defaults
+        Chart.defaults.font.family = "'Inter', 'Segoe UI', sans-serif";
+        Chart.defaults.color = '#6b7280';
+        Chart.defaults.plugins.tooltip.backgroundColor = '#1f2937';
+        Chart.defaults.plugins.tooltip.padding = 12;
+        Chart.defaults.plugins.tooltip.cornerRadius = 8;
+        Chart.defaults.plugins.tooltip.titleFont = { size: 13, weight: 'bold' };
+        Chart.defaults.plugins.tooltip.bodyFont = { size: 13 };
+        
+        // 1. Line Chart (Monthly Import Value)
+        const ctxLine = document.getElementById('lineChart').getContext('2d');
+        const gradientLine = ctxLine.createLinearGradient(0, 0, 0, 300);
+        gradientLine.addColorStop(0, 'rgba(30, 58, 138, 0.4)'); // Blue primary transparent
+        gradientLine.addColorStop(1, 'rgba(30, 58, 138, 0.0)');
+
+        new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Import Value (USD M)',
+                    data: [85, 90, 88, 105, 110, 108, 125, 120, 140, 135, 150, 165],
+                    borderColor: '#1e3a8a',
+                    backgroundColor: gradientLine,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#1e3a8a',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [4, 4], color: '#f3f4f6' },
+                        ticks: { callback: function(value) { return '$' + value + 'M'; } }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 2. Horizontal Bar Chart (Top Importing Companies)
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Competitor 1', 'Competitor 2', 'Competitor 3', 'Competitor 4', 'Competitor 5'],
+                datasets: [{
+                    label: 'Value (USD M)',
+                    data: [210, 185, 150, 120, 95],
+                    backgroundColor: [
+                        '#1e3a8a', // Deep Blue
+                        '#3b82f6', // Light Blue
+                        '#ea580c', // Orange
+                        '#16a34a', // Green
+                        '#9ca3af'  // Gray
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { borderDash: [4, 4], color: '#f3f4f6' },
+                        ticks: { callback: function(value) { return '$' + value + 'M'; } }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 3. Donut Chart (Category Breakdown)
+        const ctxDonut = document.getElementById('donutChart').getContext('2d');
+        new Chart(ctxDonut, {
+            type: 'doughnut',
+            data: {
+                labels: ['Industrial', 'Consumer', 'Raw Materials', 'Automotive', 'Other'],
+                datasets: [{
+                    data: [35, 25, 20, 12, 8],
+                    backgroundColor: [
+                        '#1e3a8a',
+                        '#3b82f6',
+                        '#ea580c',
+                        '#16a34a',
+                        '#e5e7eb'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: { size: 12, family: "'Inter', sans-serif" }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+<!-- Google Translate Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es', autoDisplay: false}, 'google_translate_element');
+}
+function changeLanguage(lang) {
+  var select = document.querySelector('.goog-te-combo');
+  if(select) {
+    select.value = lang;
+    select.dispatchEvent(new Event('change'));
+  }
+}
+function toggleLang() {
+    var btn = document.getElementById("lang-toggle-btn");
+    var isEs = btn.getAttribute("data-lang") === "es";
+    if(isEs) {
+        changeLanguage('en');
+        btn.setAttribute("data-lang", "en");
+        btn.innerHTML = "🌐 ENG";
+    } else {
+        changeLanguage('es');
+        btn.setAttribute("data-lang", "es");
+        btn.innerHTML = "🌐 ESP";
+    }
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<style>
+  .goog-te-banner-frame.skiptranslate { display: none !important; }
+  body { top: 0px !important; }
+  #google_translate_element { display: none; }
+  .lang-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 10px;
+      line-height: inherit;
+  }
+  .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+  }
+</style>
+<div id="google_translate_element"></div>
+</body>
+
+</html>

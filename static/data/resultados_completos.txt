@@ -1,6 +1,6 @@
 ================================================================================
   REPORTE COMPLETO DE IMPORTACIONES — BOGOTÁ
-  Generado: 08/03/2026 20:04
+  Generado: 21/04/2026 19:17
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
@@ -120,7 +120,7 @@ Aceites de petróleo o de mineral bituminoso, excepto los aceites crudos; prepar
                                                                                                                                                     Gas de hulla, gas de agua, gas pobre y gases similares, excepto el gas de petróleo y demás hidrocarburos gaseosos.              2.00
 
 ────────────────────────────────────────────────────────────────────────────────
-  Más Caros por Kg (Mediana USD/Kg)
+  Most Expensive per Kg (Median USD/Kg)
 ────────────────────────────────────────────────────────────────────────────────
                                                                                                                                                                                                                  Nombre partida  Precio_Unitario_Peso
                                                                                                                                                                          Diamantes, incluso trabajados, sin montar ni engarzar.         117010.108696
@@ -135,7 +135,7 @@ Hormonas, prostaglandinas, tromboxanos y leucotrienos, naturales o reproducidos 
                                                                                           Manufacturas de perlas finas (naturales) o cultivadas, de piedras preciosas o semipreciosas (naturales, sintéticas o reconstituidas).           2190.666667
 
 ────────────────────────────────────────────────────────────────────────────────
-  Más Baratos por Kg (Mediana USD/Kg)
+  Cheapest per Kg (Median USD/Kg)
 ────────────────────────────────────────────────────────────────────────────────
                                                                                                                                                                                                                    Nombre partida  Precio_Unitario_Peso
                                                                                                                                                                         Escorias granuladas (arena de escorias) de la siderurgia.              0.010100
@@ -209,7 +209,7 @@ Bienes de consumo 2.487166e+09       24.7
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
-  🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)
+  🚢 Top 10 Highest Logistics Impact (% over FOB)
 ────────────────────────────────────────────────────────────────────────────────
                                                                                                                                                                                                                                                                                   Nombre partida  Impacto_Logistico_Pct
                                                                                                                                                                                                                                              Aceites crudos de petróleo o de mineral bituminoso.            4022.851562
@@ -224,7 +224,7 @@ Planos y dibujos originales hechos a mano, de arquitectura, ingeniería, industr
                                                                                                                                                                                                              Escorias (excepto las granuladas), batiduras y demás desperdicios de la siderurgia.              87.488987
 
 ────────────────────────────────────────────────────────────────────────────────
-  ✈️ Top 10 Menor Impacto Logístico (% sobre FOB)
+  ✈️ Top 10 Lowest Logistics Impact (% over FOB)
 ────────────────────────────────────────────────────────────────────────────────
                                                                                                                                                       Nombre partida  Impacto_Logistico_Pct
                                                                                                                            Energía eléctrica (partida discrecional).               0.060816
@@ -243,7 +243,7 @@ Transatlánticos, barcos para excursiones (de cruceros), transbordadores, cargue
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
-  🌍 Top 10 Países Proveedores (USD FOB)
+  🌍 Top 10 Supplier Countries (USD FOB)
 ────────────────────────────────────────────────────────────────────────────────
 Pais de origen  Dolares FOB
          China 2.732600e+09
@@ -396,5 +396,5 @@ Vehículos y material para vía férrea, aparatos de señalización             
                                                       Cereales                  10.984054            39544220.76 394885942.09
 
 ================================================================================
-  FIN DEL REPORTE · 08/03/2026 20:04
+  FIN DEL REPORTE · 21/04/2026 19:17
 ================================================================================

@@ -1,79 +1,79 @@
-# 📦 TradeFlow Bogotá 2024-2025: Inteligencia Comercial B2B
+# 📦 TradeFlow Bogotá 2024-2025: B2B Commercial Intelligence
 
-Este proyecto ha evolucionado de un simple script de Análisis Exploratorio de Datos (EDA) a una completa **Plataforma de Inteligencia Comercial B2B** (TradeFlow Bogotá). Está diseñada para procesar, limpiar y extraer *insights* estratégicos del registro oficial de importaciones de la ciudad de Bogotá, Colombia, convirtiendo datos crudos en inteligencia accionable, ideal para el modelado de Micro-SaaS.
+This project has evolved from a simple Exploratory Data Analysis (EDA) script into a comprehensive **B2B Commercial Intelligence Platform** (TradeFlow Bogotá). It is designed to process, clean, and extract strategic *insights* from the official import records of Bogotá, Colombia, converting raw data into actionable intelligence, ideal for Micro-SaaS modeling.
 
-A partir de un conjunto masivo de transacciones aduaneras, el orquestador en Python construye un **Dashboard Interactivo y Premium en HTML** completamente autónomo, junto con una suite analítica de visualizaciones avanzadas.
+From a massive dataset of customs transactions, the Python orchestrator builds a completely autonomous **Interactive and Premium HTML Dashboard**, along with an analytical suite of advanced visualizations.
 
-## 🤖 Enfoque de Desarrollo y Evolución B2B
+## 🤖 Development Approach & B2B Evolution
 
-Escribir scripts de minería de datos con IA es una ventaja, pero crear verdaderos productos de datos requiere integrar fundamentos de arquitectura, análisis financiero y experiencia de usuario comercial (B2B UI/UX). 
+Writing AI data mining scripts is an advantage, but creating true data products requires integrating fundamentals of architecture, financial analysis, and commercial user experience (B2B UI/UX).
 
-Esta herramienta delega la ejecución algorítmica y el renderizado mecánico a la automatización, permitiendo a los estrategas centrarse en el diseño de **arquitecturas de valor monetizables**: calculadoras interactivas, mapas de calor geopolíticos, métricas de *Market Share* derivadas y análisis de estructuras de costos logísticos a nivel país y sector tecnológico.
+This tool delegates algorithmic execution and mechanical rendering to automation, allowing strategists to focus on designing **monetizable value architectures**: interactive calculators, geopolitical heat maps, derived *Market Share* metrics, and logistical cost structure analysis at the country and technological sector levels.
 
-## 🚀 Innovaciones B2B Destacadas
+## 🚀 Key B2B Innovations
 
-La última iteración transforma por completo el análisis estático en una herramienta analítica inmersiva:
+The latest iteration completely transforms static analysis into an immersive analytical tool:
 
-- 🟣 **Global Purple Aesthetic & Dark Mode:** Una interfaz unificada con una paleta de colores corporativa "deep purple", diseñada para altos contrastes, lectura prolongada y una apariencia ejecutiva "premium", con animaciones fluidas, *glassmorphism* y total adaptabilidad entre modos de luz.
-- 🧮 **Calculadora Inteligente de Costos de Importación (B2B):** Una herramienta financiera interactiva (Javascript Nativo) que predice costos de flete por kilogramo basándose en el historial real (Benchmarking), calcula automáticamente impuestos (Aranceles e IVA según el capítulo arancelario) e inyecta la carga tributaria en tiempo real para cotizaciones precisas.
-- 📊 **"The Value Row" (Métricas Clave):** KPIs financieros en la cabecera:
-  - *Market Share* de los países líderes.
-  - *Benchmarking* del Unit CIF Price por Kilogramo (Arena vs. Diamantes).
-  - *Freight Trend Analyzer* que expone porcentajes de encarecimiento logístico de principio a fin de año.
-- 🗺️ **Módulo Geopolítico Avanzado:** Implementación de mapas coropléticos de calor dinámicos (via Plotly) e diagramas Sankey para auditar los flujos de mercancía desde las potencias globales hacia sus usos económicos en Colombia.
+- 🟣 **Global Purple Aesthetic & Dark Mode:** A unified interface with a corporate "deep purple" color palette, designed for high contrast, prolonged reading, and a "premium" executive appearance, featuring fluid animations, *glassmorphism*, and full adaptability between light and dark modes.
+- 🧮 **Smart Import Cost Calculator (B2B):** An interactive financial tool (Native Javascript) that predicts freight costs per kilogram based on actual history (Benchmarking), automatically calculates taxes (Tariffs and VAT according to the tariff chapter), and injects the tax burden in real time for precise quotes.
+- 📊 **"The Value Row" (Key Metrics):** Financial KPIs in the header:
+  - *Market Share* of leading countries.
+  - *Benchmarking* of Unit CIF Price per Kilogram (Sand vs. Diamonds).
+  - *Freight Trend Analyzer* that exposes percentages of logistics cost increases from the beginning to the end of the year.
+- 🗺️ **Advanced Geopolitical Module:** Implementation of dynamic choropleth heat maps (via Plotly) and Sankey diagrams to audit the flows of merchandise from global powers to their economic uses in Colombia.
 
-## 🛠️ Tecnologías y Arquitectura Desacoplada
+## 🛠️ Technologies and Decoupled Architecture
 
-La plataforma mantiene una lógica estrictamente separada entre Backend ETL (Python) y Rendering (Frontend):
+The platform maintains strictly separated logic between Backend ETL (Python) and Rendering (Frontend):
 
-- **Backend ETL & Data Science:** `Python 3`, `Pandas` (extracción, limpieza, agregación y cálculos de Unit Economics).
-- **Motores Gráficos:** `Plotly Express` (Mapas HTML interactivos), `Matplotlib`, y `Seaborn` (Gráficos estáticos PNG alta densidad).
-- **Procesamiento de Archivos:** `Calamine` (rendimiento extremo para archivos Excel) y `OpenPyXL`.
-- **Frontend App:** Vanilla `HTML/CSS/JS` (Carga asíncrona, Tooltips con eventos nativos, Scrollspy para navegación, sin dependencias de frameworks externos pesados).
-- **Interoperabilidad:** JSON embebido o generado (*dashboard_overview.json*) para una rehidratación del dashboard totalmente "stateless" en el cliente.
+- **Backend ETL & Data Science:** `Python 3`, `Pandas` (extraction, cleaning, aggregation, and Unit Economics calculations).
+- **Graphics Engines:** `Plotly Express` (Interactive HTML Maps), `Matplotlib`, and `Seaborn` (High-density static PNG charts).
+- **File Processing:** `Calamine` (extreme performance for Excel files) and `OpenPyXL`.
+- **Frontend App:** Vanilla `HTML/CSS/JS` (Asynchronous loading, Tooltips with native events, Scrollspy for navigation, no heavy external framework dependencies).
+- **Interoperability:** Embedded or generated JSON (*dashboard_overview.json*) for fully "stateless" dashboard rehydration on the client.
 
-## ⚙️ Instrucciones de Uso (Reproducción Local)
+## ⚙️ Usage Instructions (Local Reproduction)
 
-Debido al tamaño de los registros aduaneros, **el dataset original no está incluido en este repositorio**.
+Due to the size of the customs records, **the original dataset is not included in this repository**.
 
-### 1. Instalación de Dependencias
+### 1. Install Dependencies
 
-Asegúrate de preparar tu entorno de desarrollo (`.venv`) e instalar:
+Make sure to prepare your development environment (`.venv`) and install:
 
 ```bash
 pip install pandas matplotlib seaborn plotly calamine openpyxl
 ```
 
-### 2. Obtención del Dataset Base
+### 2. Obtain the Base Dataset
 
-1. Ingresa a **[Datos Abiertos Colombia - Importaciones Bogotá](https://www.datos.gov.co/dataset/Importaciones-Bogot-/vdw8-sjw6/about_data)**.
-2. Descarga el CSV y guárdalo en la raíz de este proyecto (ej. `conjunto-importaciones-bogota-21102025.csv`).
+1. Visit **[Datos Abiertos Colombia - Importaciones Bogotá](https://www.datos.gov.co/dataset/Importaciones-Bogot-/vdw8-sjw6/about_data)**.
+2. Download the CSV and save it in the root of this project (e.g., `conjunto-importaciones-bogota-21102025.csv`).
 
-### 3. Configurar y Ejecutar Backend
+### 3. Configure and Run Backend
 
-Abre `analisis_importaciones.py`, verifica la constante `ARCHIVO` y lanza la canalización:
+Open `analisis_importaciones.py`, check the `ARCHIVO` constant and launch the pipeline:
 
 ```bash
 python analisis_importaciones.py
 ```
 
-### 4. Visualización del Dashboard
+### 4. View Dashboard
 
-El script exportará el modelo de datos en JSON, gráficos en `graficos_output` y compilará la plantilla final.
-Abre **`index.html`** localmente (doble clic o mediante un live-server si es posible) y explora el modo oscuro y la calculadora.
+The script will export the data model in JSON, charts to `graficos_output`, and compile the final template.
+Open **`index.html`** locally (double click or via a live-server if possible) and explore the dark mode and calculator.
 
-## 📊 Estructura Analítica del Pipeline
+## 📊 Analytical Pipeline Structure
 
-El Backend divide su ejecución en bloques temáticos modulares:
+The Backend divides its execution into modular thematic blocks:
 
-- **Dashboard Overview:** Resumen ejecutivo comparativo, barras agrupadas CIF/FOB mes tras mes con calculadoras delta.
-- **Bloque A - Productos & Precios Unitarios:** Diamantes vs. Arena.
-- **Bloque B - Uso Económico & Niveles Tecnológicos (High-Tech VS Low-Tech).**
-- **Bloque C - Impacto Logístico:** Identificadores de ineficiencia de flete.
-- **Bloque D - Proveedores Globales.**
-- **Bloque E - Visión Estratégica Espacial:** Flujos interactivos (Sankey), Correlaciones de precios (Scatter Plots) y Mapas de Calor Sector-Mes.
-- **Bloque F - Impuestos & Geografía:** Distribución de cargas tributarias e impactos geopolíticos mundiales.
+- **Dashboard Overview:** Executive comparative summary, grouped CIF/FOB bars month over month with delta calculators.
+- **Block A - Products & Unit Prices:** Diamonds vs. Sand.
+- **Block B - Economic Use & Technological Levels (High-Tech VS Low-Tech).**
+- **Block C - Logistics Impact:** Freight inefficiency identifiers.
+- **Block D - Global Suppliers.**
+- **Block E - Spatial Strategic Vision:** Interactive flows (Sankey), Price correlations (Scatter Plots), and Sector-Month Heat Maps.
+- **Block F - Taxes & Geography:** Distribution of tax burdens and global geopolitical impacts.
 
-## 📄 Licencia
+## 📄 License
 
-El dataset oficial sobre el que operan estos scripts se distribuye bajo **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**. El código de este pipeline de análisis y las interfaces HTML/CSS generadas son para fines educativos y de inteligencia de producto.
+The official dataset upon which these scripts operate is distributed under **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**. The code of this analysis pipeline and the generated HTML/CSS interfaces are for educational and product intelligence purposes.

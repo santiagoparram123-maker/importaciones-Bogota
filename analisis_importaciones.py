@@ -228,7 +228,7 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
     print('\n📊 Top 10 Productos Más Valiosos (USD FOB):')
     print(top_fob.to_string(index=False))
     barplot_horizontal(top_fob, 'Dolares FOB', 'Nombre partida',
-                       'Top 10 Productos Más Valiosos (Total USD FOB)',
+                       'Top 10 Most Valuable Products (Total USD FOB)',
                        '01_top10_productos_valiosos')
     tablas['top_valiosos'] = df_to_records(top_fob.sort_values('Dolares FOB', ascending=False))
     dataframes['Top 10 Productos Más Valiosos (USD FOB)'] = top_fob.sort_values('Dolares FOB', ascending=False)
@@ -242,7 +242,7 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
     print('\n📊 Top 10 Productos Menos Valiosos:')
     print(bottom_fob.to_string(index=False))
     barplot_horizontal(bottom_fob, 'Dolares FOB', 'Nombre partida',
-                       'Top 10 Productos Menos Valiosos (Total USD FOB)',
+                       'Top 10 Least Valuable Products (Total USD FOB)',
                        '02_bottom10_productos_valiosos', color_palette='rocket')
     tablas['bottom_valiosos'] = df_to_records(bottom_fob.sort_values('Dolares FOB'))
     dataframes['Top 10 Productos Menos Valiosos (FOB > 0)'] = bottom_fob.sort_values('Dolares FOB')
@@ -251,7 +251,7 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
     peso_grupo = df.groupby('Nombre partida', as_index=False)['Kilogramos netos'].sum()
     top_peso = peso_grupo.nlargest(TOP_N, 'Kilogramos netos').sort_values('Kilogramos netos')
     barplot_horizontal(top_peso, 'Kilogramos netos', 'Nombre partida',
-                       'Top 10 Productos Más Pesados (Kg Netos)',
+                       'Top 10 Heaviest Products (Net Kg)',
                        '03a_top10_mas_pesados', color_palette='mako')
     tablas['top_pesados'] = df_to_records(top_peso.sort_values('Kilogramos netos', ascending=False))
     dataframes['Top 10 Más Pesados (Kg)'] = top_peso.sort_values('Kilogramos netos', ascending=False)
@@ -259,7 +259,7 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
     # ── Gráfico 3b: Top 10 Menos Pesados ──
     bottom_peso = peso_grupo[peso_grupo['Kilogramos netos'] > 0].nsmallest(TOP_N, 'Kilogramos netos').sort_values('Kilogramos netos')
     barplot_horizontal(bottom_peso, 'Kilogramos netos', 'Nombre partida',
-                       'Top 10 Productos Menos Pesados (Kg Netos)',
+                       'Top 10 Lightest Products (Net Kg)',
                        '03b_top10_menos_pesados', color_palette='flare')
     tablas['bottom_pesados'] = df_to_records(bottom_peso.sort_values('Kilogramos netos'))
     dataframes['Top 10 Menos Pesados (Kg)'] = bottom_peso.sort_values('Kilogramos netos')
@@ -274,10 +274,10 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
         print('\nTop 10 Más Caros por Kg:')
         print(precio_kg.to_string(index=False))
         barplot_horizontal(precio_kg, 'Precio_Unitario_Peso', 'Nombre partida',
-                           'Más Caros por Kg (Mediana USD/Kg)',
+                           'Most Expensive per Kg (Median USD/Kg)',
                            '04_top10_diamantes', fmt=',.2f')
         tablas['diamantes'] = df_to_records(precio_kg.sort_values('Precio_Unitario_Peso', ascending=False))
-        dataframes['Más Caros por Kg (Mediana USD/Kg)'] = precio_kg.sort_values('Precio_Unitario_Peso', ascending=False)
+        dataframes['Most Expensive per Kg (Median USD/Kg)'] = precio_kg.sort_values('Precio_Unitario_Peso', ascending=False)
 
     # ── Gráfico 5: Arena (más baratos por kg) ──
     if 'Precio_Unitario_Peso' in df.columns:
@@ -289,10 +289,10 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
         print('\nTop 10 Más Baratos por Kg:')
         print(precio_kg_bajo.to_string(index=False))
         barplot_horizontal(precio_kg_bajo, 'Precio_Unitario_Peso', 'Nombre partida',
-                           'Más Baratos por Kg (Mediana USD/Kg)',
+                           'Cheapest per Kg (Median USD/Kg)',
                            '05_top10_arena', color_palette='crest', fmt=',.4f')
         tablas['arena'] = df_to_records(precio_kg_bajo.sort_values('Precio_Unitario_Peso'))
-        dataframes['Más Baratos por Kg (Mediana USD/Kg)'] = precio_kg_bajo.sort_values('Precio_Unitario_Peso')
+        dataframes['Cheapest per Kg (Median USD/Kg)'] = precio_kg_bajo.sort_values('Precio_Unitario_Peso')
 
 
 
@@ -308,13 +308,13 @@ def bloque_a_productos(df: pd.DataFrame) -> dict:
         print('\n💲 Top 10 Mayor Costo Unitario por Cantidad:')
         print(top_cuc.to_string(index=False))
         barplot_horizontal(top_cuc, 'Precio_Unitario_Cant', 'Nombre partida',
-                           'Top 10 Mayor Costo Unitario (FOB / Cantidad)',
+                           'Top 10 Highest Unit Cost (FOB / Quantity)',
                            '07a_costo_unitario_alto', fmt=',.0f')
 
         print('\n💲 Top 10 Menor Costo Unitario por Cantidad:')
         print(bottom_cuc.to_string(index=False))
         barplot_horizontal(bottom_cuc, 'Precio_Unitario_Cant', 'Nombre partida',
-                           'Top 10 Menor Costo Unitario (FOB / Cantidad)',
+                           'Top 10 Lowest Unit Cost (FOB / Quantity)',
                            '07b_costo_unitario_bajo', color_palette='crest', fmt=',.4f')
 
         tablas['costo_unitario_alto'] = df_to_records(top_cuc.sort_values('Precio_Unitario_Cant', ascending=False))
@@ -343,8 +343,8 @@ def bloque_b_categorias(df: pd.DataFrame) -> dict:
         fig, ax = plt.subplots(figsize=(14, 8))
         sns.boxplot(data=df_box, x='Nivel tecnologico', y='Dolares FOB',
                     palette='Set2', showfliers=False, ax=ax)
-        ax.set_title('Distribución de USD FOB según Nivel Tecnológico', fontweight='bold', pad=15)
-        ax.set_ylabel('Dolares FOB (USD)'); ax.set_xlabel('Nivel Tecnológico')
+        ax.set_title('Distribution of USD FOB by Technological Level', fontweight='bold', pad=15)
+        ax.set_ylabel('FOB Dollars (USD)'); ax.set_xlabel('Technological Level')
         plt.xticks(rotation=30, ha='right'); plt.tight_layout()
         guardar_chart(fig, '08_boxplot_nivel_tecnologico')
 
@@ -359,7 +359,7 @@ def bloque_b_categorias(df: pd.DataFrame) -> dict:
         resumen_sorted = resumen.sort_values('Total_FOB')
         sns.barplot(data=resumen_sorted, x='Total_FOB', y='Nivel tecnologico',
                     palette='Set2', ax=ax2, hue='Nivel tecnologico', legend=False)
-        ax2.set_title('Total FOB por Nivel Tecnológico (con %)', fontweight='bold', pad=15)
+        ax2.set_title('Total FOB by Technological Level (with %)', fontweight='bold', pad=15)
         ax2.set_xlabel('Total FOB (USD)'); ax2.set_ylabel('')
         for i, bar in enumerate(ax2.patches):
             w = bar.get_width()
@@ -385,8 +385,8 @@ def bloque_b_categorias(df: pd.DataFrame) -> dict:
 
         fig, ax = plt.subplots(figsize=(12, 7))
         sns.barplot(data=uso, x='Dolares FOB', y='Uso economico', palette='coolwarm', ax=ax, hue='Uso economico', legend=False)
-        ax.set_title('Total Importado (USD FOB) por Uso Económico', fontweight='bold', pad=15)
-        ax.set_xlabel('Dolares FOB (USD)'); ax.set_ylabel('')
+        ax.set_title('Total Imported (USD FOB) by Economic Use', fontweight='bold', pad=15)
+        ax.set_xlabel('FOB Dollars (USD)'); ax.set_ylabel('')
         for i, bar in enumerate(ax.patches):
             w = bar.get_width()
             if w > 0:
@@ -426,20 +426,20 @@ def bloque_c_logistica(df: pd.DataFrame) -> dict:
     print('\n🚢 Top 10 Mayor Impacto Logístico:')
     print(top_log.to_string(index=False))
     barplot_horizontal(top_log, 'Impacto_Logistico_Pct', 'Nombre partida',
-                       '🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)',
+                       '🚢 Top 10 Highest Logistics Impact (% over FOB)',
                        '10_top10_mayor_impacto_logistico', color_palette='Reds_r', fmt='.1f')
     tablas['mayor_impacto'] = df_to_records(top_log.sort_values('Impacto_Logistico_Pct', ascending=False))
-    dataframes['🚢 Top 10 Mayor Impacto Logístico (% sobre FOB)'] = top_log.sort_values('Impacto_Logistico_Pct', ascending=False)
+    dataframes['🚢 Top 10 Highest Logistics Impact (% over FOB)'] = top_log.sort_values('Impacto_Logistico_Pct', ascending=False)
 
     # ── Gráfico 10: Menor impacto ──
     bot_log = logistica.nsmallest(TOP_N, 'Impacto_Logistico_Pct').sort_values('Impacto_Logistico_Pct')
     print('\n✈️ Top 10 Menor Impacto Logístico:')
     print(bot_log.to_string(index=False))
     barplot_horizontal(bot_log, 'Impacto_Logistico_Pct', 'Nombre partida',
-                       '✈️ Top 10 Menor Impacto Logístico (% sobre FOB)',
+                       '✈️ Top 10 Lowest Logistics Impact (% over FOB)',
                        '11_top10_menor_impacto_logistico', color_palette='Greens_r', fmt='.2f')
     tablas['menor_impacto'] = df_to_records(bot_log.sort_values('Impacto_Logistico_Pct'))
-    dataframes['✈️ Top 10 Menor Impacto Logístico (% sobre FOB)'] = bot_log.sort_values('Impacto_Logistico_Pct')
+    dataframes['✈️ Top 10 Lowest Logistics Impact (% over FOB)'] = bot_log.sort_values('Impacto_Logistico_Pct')
 
     guardar_json(tablas, 'bloque_c_logistica')
     return dataframes
@@ -468,10 +468,10 @@ def bloque_d_paises(df: pd.DataFrame) -> dict:
     print('\n🌍 Top 10 Países Proveedores:')
     print(paises_fob.to_string(index=False))
     barplot_horizontal(paises_fob, 'Dolares FOB', 'Pais de origen',
-                       '🌍 Top 10 Países Proveedores (USD FOB)',
+                       '🌍 Top 10 Supplier Countries (USD FOB)',
                        '12_top10_paises_fob')
     tablas['paises_fob'] = df_to_records(paises_fob.sort_values('Dolares FOB', ascending=False))
-    dataframes['🌍 Top 10 Países Proveedores (USD FOB)'] = paises_fob.sort_values('Dolares FOB', ascending=False)
+    dataframes['🌍 Top 10 Supplier Countries (USD FOB)'] = paises_fob.sort_values('Dolares FOB', ascending=False)
 
     # ── Gráfico 12: Países flete caro ──
     if 'Impacto_Logistico_Pct' in df.columns:
@@ -487,8 +487,8 @@ def bloque_d_paises(df: pd.DataFrame) -> dict:
         fig, ax = plt.subplots(figsize=(12, 7))
         sns.barplot(data=paises_flete, x='Impacto_Logistico_Pct', y='Pais de origen',
                     palette='OrRd', ax=ax, hue='Pais de origen', legend=False)
-        ax.set_title('💸 Top 10 Países con Mayor Costo Logístico (% sobre FOB)', fontweight='bold', pad=15)
-        ax.set_xlabel('Impacto Logístico Promedio (%)'); ax.set_ylabel('')
+        ax.set_title('💸 Top 10 Countries with Highest Logistics Cost (% over FOB)', fontweight='bold', pad=15)
+        ax.set_xlabel('Average Logistics Impact (%)'); ax.set_ylabel('')
         for bar in ax.patches:
             w = bar.get_width()
             if w > 0:
